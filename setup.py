@@ -40,13 +40,13 @@ extras = {
 }
 
 setup(
-    name='project_name',
-    version=__version__,
-    description='KG hub for project_name',
+    name='eco-kg',
+    version=__0.1__,
+    description='KG hub for eco-kg',
     long_description=long_description,
-    url='https://github.com/Knowledge-Graph-Hub/project_name',
-    author='Harshad Hegde',
-    author_email='hhegde@lbl.gov',
+    url='https://github.com/Knowledge-Graph-Hub/eco-kg',
+    author='Anne E Thessen',
+    author_email='annethessen@gmail.com',
     python_requires='>=3.7',
 
     # choose your license
