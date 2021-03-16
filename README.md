@@ -1,11 +1,11 @@
-Download-Transform-Merge Template
+eco-KG
 ================================================
-KG hub template for tools to generate knowledge graphs for projects
+experimenting with the Knowledge-Graph-Hub dtm template for the moment
 
 Documentation
 ------------------------------------------------
 
-This template could be used for data ingestion for varied sources.
+Starting with Monarch, Planteome, and EOL
 
 **Components**
 
