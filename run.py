@@ -3,12 +3,12 @@
 import os
 
 import click
-from project_name import download as kg_download
-from project_name import transform as kg_transform
-#from project_name.make_holdouts import make_holdouts
-from project_name.merge_utils.merge_kg import load_and_merge
-from project_name.query import run_query, parse_query_yaml, result_dict_to_tsv
-from project_name.transform import DATA_SOURCES
+from eco_kg import download as kg_download
+from eco_kg import transform as kg_transform
+#from eco_kg.make_holdouts import make_holdouts
+from eco_kg.merge_utils.merge_kg import load_and_merge
+from eco_kg.query import run_query, parse_query_yaml, result_dict_to_tsv
+from eco_kg.transform import DATA_SOURCES
 
 
 @click.group()
@@ -47,7 +47,7 @@ def download(*args, **kwargs) -> None:
 @click.option("sources", "-s", default=None, multiple=True,
               type=click.Choice(DATA_SOURCES.keys()))
 def transform(*args, **kwargs) -> None:
-    """Calls scripts in project_name/transform/[source name]/ to transform each source
+    """Calls scripts in eco_kg/transform/[source name]/ to transform each source
     into nodes and edges.
 
     Args:
