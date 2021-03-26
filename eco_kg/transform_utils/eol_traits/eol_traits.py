@@ -26,7 +26,7 @@ And extracts the following columns:
     - isolation_source
 """
 
-class TraitsTransform(Transform):
+class EOLTraitsTransform(Transform):
 
     def __init__(self, input_dir: str = None, output_dir: str = None, nlp = True) -> None:
         source_name = "condensed_traits_NCBI"

@@ -25,7 +25,7 @@ And extracts Drug -> Protein interactions
 """
 
 
-class DrugCentralTransform(Transform):
+class EOLheirarchyTransform(Transform):
 
     def __init__(self, input_dir: str = None, output_dir: str = None) -> None:
         source_name = "drug_central"

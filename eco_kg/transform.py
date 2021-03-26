@@ -3,25 +3,25 @@
 import logging
 from typing import List
 
-from project_name.transform_utils.drug_central.drug_central import DrugCentralTransform
-from project_name.transform_utils.ontology import OntologyTransform
-from project_name.transform_utils.ontology.ontology_transform import ONTOLOGIES
-from project_name.transform_utils.traits.traits import TraitsTransform
+from eco_kg.transform_utils.eol_hierarchy.eol_hierarchy import EOLheirarchyTransform
+from eco_kg.transform_utils.ontology import OntologyTransform
+from eco_kg.transform_utils.ontology.ontology_transform import ONTOLOGIES
+from eco_kg.transform_utils.eol_traits.eol_traits import EOLTraitsTransform
 
 
 DATA_SOURCES = {
-    'DrugCentralTransform': DrugCentralTransform,
+    'EOLheirarchyTransform': EOLheirarchyTransform,
     #'GoTransform': OntologyTransform,
     #'HpTransform': OntologyTransform,
     'NCBITransform': OntologyTransform,
     'ChebiTransform': OntologyTransform,
     'EnvoTransform' : OntologyTransform,
-    'TraitsTransform': TraitsTransform
+    'EOLTraitsTransform': TraitsTransform
 }
 
 
 def transform(input_dir: str, output_dir: str, sources: List[str] = None) -> None:
-    """Call scripts in project_name/transform/[source name]/ to transform each source into a graph format that
+    """Call scripts in eco_kg/transform/[source name]/ to transform each source into a graph format that
     KGX can ingest directly, in either TSV or JSON format:
     https://github.com/NCATS-Tangerine/kgx/blob/master/data-preparation.md
 

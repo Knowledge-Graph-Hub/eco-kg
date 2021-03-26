@@ -19,43 +19,18 @@
 #
 ---
 
-#
-# Drug Central
-#
--
-  # drug - target interactions from Drug Central
-  url: http://unmtid-shinyapps.net/download/drug.target.interaction.tsv.gz
-  local_name: drug.target.interaction.tsv.gz
-s
-# #
-# # Most of the data is extracted from the 'bacteria-archaea-traits' github repository
-# # link: https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/tree/master/output
-# #
 # # ******Output Data*******
-# Condensed-species
-# - GTDB
-#   link: https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/blob/master/output/condensed_species_GTDB.csv
+# Lifewide-traits
+#   link: https://opendata.eol.org/dataset/all-trait-data-large
 -
-  #url: https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/blob/master/output/condensed_species_GTDB.csv?raw=true
-  #local_name: condensed_species_GTDB.csv
-# - NCBI
-#   link: https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/blob/master/output/condensed_species_NCBI.csv
--
-  #url: https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/blob/master/output/condensed_species_NCBI.csv?raw=true
-  #local_name: condensed_species_NCBI.csv
+  url: https://editors.eol.org/other_files/SDR/traits_all.zip
+  local_name: EOLTraitbank.zip
 
-# Condensed-traits
-# - GTDB
-#   link: https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/blob/master/output/condensed_traits_GTDB.csv
+# Lifewide-hierarchy
+#   link: https://opendata.eol.org/dataset/identifier-map
 -
-  #url: https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/blob/master/output/condensed_traits_GTDB.csv?raw=true
-  #local_name: condensed_traits_GTDB.csv
-# - NCBI
-#   link: https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/tree/master/output
--
-  url: https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/blob/master/output/condensed_traits_NCBI.csv?raw=true
-  local_name: condensed_traits_NCBI.csv
-
+  url: https://eol.org/data/provider_ids.csv.gz
+  local_name: EOLhierarchy.tsv.gz
 #
 # #**** ROBOT ****
 #
