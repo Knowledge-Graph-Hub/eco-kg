@@ -1,21 +1,23 @@
 import csv
 import re
 import os
+import gzip
 from typing import Dict, List, Optional
 from collections import defaultdict
+from zipfile import ZipFile
 
-from project_name.transform_utils.transform import Transform
-from project_name.utils.transform_utils import parse_header, parse_line, write_node_edge_item
-from project_name.utils import biohub_converter as bc
-from project_name.utils.nlp_utils import *
-from project_name.utils.robot_utils import *
-
+from eco_kg.transform_utils.transform import Transform
+from eco_kg.utils.transform_utils import parse_header, parse_line, write_node_edge_item
+from eco_kg.utils import biohub_converter as bc
+from eco_kg.utils.nlp_utils import *
+from eco_kg.utils.robot_utils import *
+from eco_kg.utils.transform_utils import unzip_to_tempdir
 from kgx.cli.cli_utils import transform
 """
-Ingest traits dataset (NCBI/GTDB)
+Ingest traits dataset (EOL TraitBank)
 
 Essentially just ingests and transforms this file:
-https://github.com/bacteria-archaea-traits/bacteria-archaea-traits/blob/master/output/condensed_traits_NCBI.csv
+https://editors.eol.org/other_files/SDR/traits_all.zip
 
 And extracts the following columns:
     - tax_id
@@ -28,27 +30,195 @@ And extracts the following columns:
 
 class EOLTraitsTransform(Transform):
 
-    def __init__(self, input_dir: str = None, output_dir: str = None, nlp = True) -> None:
-        source_name = "condensed_traits_NCBI"
-        super().__init__(source_name, input_dir, output_dir, nlp)  # set some variables
+    def __init__(self, input_dir: str = None, output_dir: str = None) -> None:
+        source_name = "EOL_TraitBank"
+        super().__init__(source_name, input_dir, output_dir)  # set some variables
 
-        self.node_header = ['id', 'name', 'category', 'curie']
-        self.edge_header = ['subject', 'edge_label', 'object', 'relation']
-        self.nlp = nlp
-
-    def run(self, data_file: Optional[str] = None):
+    def run(self, EOL_TraitBank: Optional[str] = None) -> None:
         """Method is called and performs needed transformations to process the 
-        trait data (NCBI/GTDB), additional information on this data can be found in the comment 
-        at the top of this script"""
+        trait data (EOL TraitBank)
         
-        if data_file is None:
-            data_file = self.source_name + ".csv"
-        
-        input_file = os.path.join(
-            self.input_base_dir, data_file)
+        Args:
+        	EOL_TraitBank: entire contents of EOL TraitBank [traits_all.zip]
+        """
+        if not EOL_TraitBank:
+            EOL_TraitBank = os.path.join(self.input_base_dir, "traits_all.zip")
 
-        # make directory in data/transformed
-        os.makedirs(self.output_dir, exist_ok=True)
+        self.node_header = ['id', 'name', 'category', 'description', 'provided_by']
+        self.edge_header = ['subject', 'edge_label', 'object', 'relation', 'provided_by', 'type']
+        node_handle = open(self.output_node_file, 'w')
+        edge_handle = open(self.output_edge_file, 'w')
+        node_handle.write("\t".join(self.node_header) + "\n")
+        edge_handle.write("\t".join(self.edge_header) + "\n")
+        self.parse_annotations(node_handle, edge_handle, EOL_TraitBank)
+
+        node_handle = open(os.path.join(self.output_dir, "eol_traits_nodes.tsv"), 'w')
+        edge_handle = open(os.path.join(self.output_dir, "eol_traits_edges.tsv"), 'w')
+        node_handle.write("\t".join(self.node_header) + "\n")
+        edge_handle.write("\t".join(self.edge_header) + "\n")
+        self.parse_cooccurrence(node_handle, edge_handle, co_occur_zipfile)
+
+    def parse_annotations(self, node_handle: IO, edge_handle: IO,
+                          data_file1: str,
+                          ) -> None:
+        """Parse annotations from CORD-19_1_5.zip.
+        Args:
+            node_handle: File handle for nodes.csv.
+            edge_handle: File handle for edges.csv.
+            data_file1: Path to traits_all.zip
+        Returns:
+             None.
+        """
+        pbar = tqdm(total=3, desc="Unzipping files")
+
+        # unzip to tmpdir, remove after use, to avoid cluttering raw/ with processed
+        # data
+        with tempfile.TemporaryDirectory(dir=self.input_base_dir) as tmpdir:
+            unzip_to_tempdir(data_file1, tmpdir)
+            pbar.update(1)
+            pbar.close()
+
+            subsets = ['EOL_TraitBank']
+            for subset in subsets:
+                subset_dir = os.path.join(tmpdir, subset)
+                for filename in tqdm(os.listdir(subset_dir)):
+                    if filename.startswith('.'):
+                        print(f"skipping file {filename}")
+                        continue
+                    file = os.path.join(subset_dir, filename)
+                    doc = json.load(open(file))
+                    df = pd.read_csv(file, sep=',', low_memory=False)
+                    if filename = 'pages':
+                    	self.parse_pages(node_handle, edge_handle, df)
+                    if filename = 'traits':
+                    	self.parse_traits(node_handle, edge_handle, df)
+                    if filename = 'metadata':
+                    	self.parse_metadata(node_handle, edge_handle, df)
+                    if filename = 'inferred':
+                    	self.parse_inferred(node_handle, edge_handle, df)
+                    if filename = 'terms':
+                    	self.parse_terms(node_handle, edge_handle, df)
+
+    def parse_pages(self, node_handle, edge_handle, df) -> None:
+        """Parse a pandas dataframe.
+        Args:
+            node_handle: File handle for nodes.csv.
+            edge_handle: File handle for edges.csv.
+            df: pandas dataframe
+            subset: The subset name for this dataset.
+        Returns:
+            None.
+        """
+        pages_df = df['page_id','canonical','rank','parent','trait','inferred_trait']
+
+    def parse_traits(self, node_handle, edge_handle, df) -> None:
+        """Parse a pandas dataframe.
+        Args:
+            node_handle: File handle for nodes.csv.
+            edge_handle: File handle for edges.csv.
+            df: pandas dataframe
+            subset: The subset name for this dataset.
+        Returns:
+            None.
+        """
+        traits_df = df['eol_pk','resource_pk','citation','source','predicate','object_term','object_page']
+        
+    def parse_metadata(self, node_handle, edge_handle, df) -> None:
+        """Parse a pandas dataframe.
+        Args:
+            node_handle: File handle for nodes.csv.
+            edge_handle: File handle for edges.csv.
+            df: pandas dataframe
+            subset: The subset name for this dataset.
+        Returns:
+            None.
+        """
+        metadata_df = df['columns']
+        
+    def parse_inferred(self, node_handle, edge_handle, df) -> None:
+        """Parse a pandas dataframe.
+        Args:
+            node_handle: File handle for nodes.csv.
+            edge_handle: File handle for edges.csv.
+            df: pandas dataframe
+            subset: The subset name for this dataset.
+        Returns:
+            None.
+        """
+        inferred_df = df['columns']
+        
+    def parse_terms(self, node_handle, edge_handle, df) -> None:
+        """Parse a pandas dataframe.
+        Args:
+            node_handle: File handle for nodes.csv.
+            edge_handle: File handle for edges.csv.
+            df: pandas dataframe
+            subset: The subset name for this dataset.
+        Returns:
+            None.
+        """
+        terms_df = df['columns']
+        
+        # add a biolink:Publication for each paper
+        write_node_edge_item(
+            fh=node_handle,
+            header=self.node_header,
+            data=[
+                f"CORD:{paper_id}",
+                f"{title}",
+                "biolink:Publication",
+                "",
+                self.source_name
+            ]
+        )
+        self.seen.add(paper_id)
+
+        for t in terms:
+            if len(t) == 2:
+                # country code
+                if t in self.country_code_map:
+                    mapped_t = self.country_code_map[t][0]
+                    name = self.country_code_map[t][1]
+                    curie = self.contract_uri(mapped_t)
+                else:
+                    name = ""
+                    curie = self.contract_uri(t)
+                category = 'biolink:NamedThing'
+            else:
+                category = 'biolink:OntologyClass'
+                curie = self.contract_uri(t)
+                name = self.concept_name_map[t] if t in self.concept_name_map else "",
+
+            if t not in self.seen:
+                # add a biolink:OntologyClass node for each term
+                write_node_edge_item(
+                    fh=node_handle,
+                    header=self.node_header,
+                    data=[
+                        f"{curie}",
+                        name if isinstance(name, str) else "",
+                        category,
+                        "",
+                        self.source_name
+                    ]
+                )
+                self.seen.add(curie)
+
+            # add has_annotation edge between OntologyClass and Publication
+            write_node_edge_item(
+                fh=edge_handle,
+                header=self.edge_header,
+                data=[
+                    f"{curie}",
+                    f"biolink:related_to",
+                    f"CORD:{paper_id}",
+                    "SIO:000255",
+                    provided_by,
+                    "biolink:Association"
+                ]
+            )
+
+
 
         """
         Implement ROBOT 
@@ -113,21 +283,21 @@ class EOLTraitsTransform(Transform):
 
             # Nodes
             org_node_type = "biolink:OrganismTaxon" # [org_name]
-            chem_node_type = "biolink:ChemicalSubstance" # [carbon_substrate]
+            trait_node_type = "biolink:" # [carbon_substrate]
             shape_node_type = "biolink:AbstractEntity" # [cell_shape]
             #metabolism_node_type = "biolink:ActivityAndBehavior" # [metabolism]
             curie = 'NEED_CURIE'
             
             #Prefixes
-            org_prefix = "NCBITaxon:"
-            chem_prefix = "Carbon:"
+            org_prefix = "EOL:"
+            trait_prefix = "Carbon:"
             shape_prefix = "Shape:"
             #activity_prefix = "Metab:"
             source_prefix = "Env:"
 
             # Edges
-            org_to_shape_edge_label = "biolink:has_phenotype" #  [org_name -> cell_shape, metabolism]
-            org_to_shape_edge_relation = "RO:0002200" #  [org_name -> has phenotype -> cell_shape, metabolism]
+            org_to_trait_edge_label = "biolink:has_phenotype" #  [org_name -> cell_shape, metabolism]
+            org_to_trait_edge_relation = "RO:0002200" #  [org_name -> has phenotype -> cell_shape, metabolism]
             org_to_chem_edge_label = "biolink:interacts_with" # [org_name -> carbon_substrate]
             org_to_chem_edge_relation = "RO:0002438" # [org_name -> 'trophically interacts with' -> carbon_substrate]
             org_to_source_edge_label = "biolink:location_of" # [org -> isolation_source]
