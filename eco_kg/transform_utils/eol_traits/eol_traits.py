@@ -2,6 +2,7 @@ import csv
 import re
 import os
 import gzip
+import pandas as pd
 from typing import Dict, List, Optional
 from collections import defaultdict
 from zipfile import ZipFile

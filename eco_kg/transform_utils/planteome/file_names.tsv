@@ -244,8 +244,8 @@ po_gene_Z.mays_PPPP.assoc
 po_gene_model_li_Zea_POC.assoc
 po_germplasm_S.chmielewskii_sgn.assoc
 po_germplasm_S.lycopersicum_sgn.assoc
-po_germplasm_S.melongena_sgn.assoc	 835
-po_germplasm_S.pennellii_sgn.assoc	 835
+po_germplasm_S.melongena_sgn.assoc
+po_germplasm_S.pennellii_sgn.assoc
 po_growth_gene_Arabidopsis_TAIR.assoc
 po_growth_gene_fragaria_jaiswallab.assoc
 po_growth_gene_model_zea_MaizeGDB.assoc
@@ -254,3 +254,25 @@ po_growth_gene_oryza_poc.assoc
 po_growth_gene_vitis_poc.assoc
 po_growth_protein_Gossypium_AgBase.assoc
 po_qtl_glycine_SoyBase.assoc
+to_gene_G.max_PPPP.assoc
+to_gene_M.truncatula_PPPP.assoc
+to_gene_O.sativa_PPPP.assoc
+to_gene_Oryza_Gramene.assoc
+to_gene_S.lycopersicum_PPPP.assoc
+to_gene_Z.mays_PPPP.assoc
+to_germplasm_L.culinaris_GRIN.assoc
+to_germplasm_M.esculenta_Genesys.assoc
+to_germplasm_O.sativa_IRRI3K.assoc
+to_germplasm_O.sativa_IRRI_GRIMS_A-traits.assoc
+to_germplasm_O.sativa_IRRI_GRIMS_B-traits.assoc
+to_germplasm_O.sativa_IRRI_GRIMS_C-traits.assoc
+to_germplasm_O.sativa_IRRI_GRIMS_FG-traits.assoc
+to_germplasm_O.sativa_IRRI_GRIMS_L-traits.assoc
+to_germplasm_O.sativa_IRRI_GRIMS_PR-traits.assoc
+to_germplasm_O.sativa_IRRI_GRIMS_S-traits.assoc
+to_germplasm_Sorghum_GRIN.assoc
+to_germplasm_maize_GRIN.assoc
+to_germplasm_rice_GRIN.assoc
+to_germplasm_wheat_GRIN.assoc
+to_protein_Oryza_Gramene.assoc
+to_qtl_Gramene.assoc

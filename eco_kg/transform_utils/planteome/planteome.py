@@ -1,303 +1,102 @@
-import csv
 import re
 import os
-import gzip
 from typing import Dict, List, Optional
 from collections import defaultdict
-from zipfile import ZipFile
 
 from eco_kg.transform_utils.transform import Transform
 from eco_kg.utils.transform_utils import parse_header, parse_line, write_node_edge_item
 from eco_kg.utils import biohub_converter as bc
-from eco_kg.utils.nlp_utils import *
+#from eco_kg.utils.nlp_utils import *
 from eco_kg.utils.robot_utils import *
-from eco_kg.utils.transform_utils import unzip_to_tempdir
 from kgx.cli.cli_utils import transform
 """
 Ingest plant annotations from Planteome
 
-Essentially just ingests and transforms GAF files:
-
+Essentially just ingests and transforms GAF files in file_names.tsv
 
 And extracts the following columns:
     - 
 """
 
-class EOLTraitsTransform(Transform):
+class PlanteomeTransform(Transform):
 
     def __init__(self, input_dir: str = None, output_dir: str = None) -> None:
         source_name = "Planteome"
         super().__init__(source_name, input_dir, output_dir)  # set some variables
+        self.node_header = ['id', 'name', 'category', 'description', 'provided_by']
+        self.edge_header = ['subject', 'edge_label', 'object', 'relation', 'provided_by', 'type']
 
-    def run(self, Planteome: Optional[str] = None) -> None:
+    def run(self, data_file: Optional[str] = None) -> None:
         """Method is called and performs needed transformations to process the 
         plant data (Planteome)
         
         Args:
         	Planteome: entire contents of Planteome []
         """
-        if not Planteome:
-            Planteome = os.path.join(self.input_base_dir, "file name")
+        if data_file is None:
+            data_file = self.source_name + '.csv')
+        input_file = os.path.join(self.input_base_dir, data_file)
+        
+        #make directory in data/transformed
+        os.makedirs(self.output_dir, data_file)
 
-        self.node_header = ['id', 'name', 'category', 'description', 'provided_by']
-        self.edge_header = ['subject', 'edge_label', 'object', 'relation', 'provided_by', 'type']
-        node_handle = open(self.output_node_file, 'w')
-        edge_handle = open(self.output_edge_file, 'w')
-        node_handle.write("\t".join(self.node_header) + "\n")
-        edge_handle.write("\t".join(self.edge_header) + "\n")
-        self.parse_annotations(node_handle, edge_handle, Planteome)
-
-        node_handle = open(os.path.join(self.output_dir, "eol_traits_nodes.tsv"), 'w')
-        edge_handle = open(os.path.join(self.output_dir, "eol_traits_edges.tsv"), 'w')
-        node_handle.write("\t".join(self.node_header) + "\n")
-        edge_handle.write("\t".join(self.edge_header) + "\n")
-        self.parse_cooccurrence(node_handle, edge_handle, co_occur_zipfile)
+	def gaf_header(line):
+		if line.startswith('!'):
+			return True
+		return False
 
     def parse_annotations(self, node_handle: IO, edge_handle: IO,
                           data_file1: str,
                           ) -> None:
-        """Parse annotations from CORD-19_1_5.zip.
+        """Parse annotations from Planteome.
         Args:
             node_handle: File handle for nodes.csv.
             edge_handle: File handle for edges.csv.
-            data_file1: Path to traits_all.zip
+            data_file1: Path to Planteome GAF
         Returns:
              None.
         """
-        pbar = tqdm(total=3, desc="Unzipping files")
-
-        # unzip to tmpdir, remove after use, to avoid cluttering raw/ with processed
-        # data
-        with tempfile.TemporaryDirectory(dir=self.input_base_dir) as tmpdir:
-            unzip_to_tempdir(data_file1, tmpdir)
-            pbar.update(1)
-            pbar.close()
-
-            subsets = ['EOL_TraitBank']
-            for subset in subsets:
-                subset_dir = os.path.join(tmpdir, subset)
-                for filename in tqdm(os.listdir(subset_dir)):
-                    if filename.startswith('.'):
-                        print(f"skipping file {filename}")
-                        continue
-                    file = os.path.join(subset_dir, filename)
-                    doc = json.load(open(file))
-                    df = pd.read_csv(file, sep=',', low_memory=False)
-                    if filename = 'pages':
-                    	self.parse_pages(node_handle, edge_handle, df)
-                    if filename = 'traits':
-                    	self.parse_traits(node_handle, edge_handle, df)
-                    if filename = 'metadata':
-                    	self.parse_metadata(node_handle, edge_handle, df)
-                    if filename = 'inferred':
-                    	self.parse_inferred(node_handle, edge_handle, df)
-                    if filename = 'terms':
-                    	self.parse_terms(node_handle, edge_handle, df)
-
-    def parse_pages(self, node_handle, edge_handle, df) -> None:
-        """Parse a pandas dataframe.
-        Args:
-            node_handle: File handle for nodes.csv.
-            edge_handle: File handle for edges.csv.
-            df: pandas dataframe
-            subset: The subset name for this dataset.
-        Returns:
-            None.
-        """
-        pages_df = df['page_id','canonical','rank','parent','trait','inferred_trait']
-
-    def parse_traits(self, node_handle, edge_handle, df) -> None:
-        """Parse a pandas dataframe.
-        Args:
-            node_handle: File handle for nodes.csv.
-            edge_handle: File handle for edges.csv.
-            df: pandas dataframe
-            subset: The subset name for this dataset.
-        Returns:
-            None.
-        """
-        traits_df = df['eol_pk','resource_pk','citation','source','predicate','object_term','object_page','sex_term','lifestage_term']
-        #find specific predicates
-        
-    def parse_metadata(self, node_handle, edge_handle, df) -> None:
-        """Parse a pandas dataframe.
-        Args:
-            node_handle: File handle for nodes.csv.
-            edge_handle: File handle for edges.csv.
-            df: pandas dataframe
-            subset: The subset name for this dataset.
-        Returns:
-            None.
-        """
-        metadata_df = df['columns']
-        
-    def parse_inferred(self, node_handle, edge_handle, df) -> None:
-        """Parse a pandas dataframe.
-        Args:
-            node_handle: File handle for nodes.csv.
-            edge_handle: File handle for edges.csv.
-            df: pandas dataframe
-            subset: The subset name for this dataset.
-        Returns:
-            None.
-        """
-        inferred_df = df['columns']
-        
-    def parse_terms(self, node_handle, edge_handle, df) -> None:
-        """Parse a pandas dataframe.
-        Args:
-            node_handle: File handle for nodes.csv.
-            edge_handle: File handle for edges.csv.
-            df: pandas dataframe
-            subset: The subset name for this dataset.
-        Returns:
-            None.
-        """
-        terms_df = df['columns']
-        
-        # add a biolink:Publication for each paper
-        write_node_edge_item(
-            fh=node_handle,
-            header=self.node_header,
-            data=[
-                f"CORD:{paper_id}",
-                f"{title}",
-                "biolink:Publication",
-                "",
-                self.source_name
-            ]
-        )
-        self.seen.add(paper_id)
-
-        for t in terms:
-            if len(t) == 2:
-                # country code
-                if t in self.country_code_map:
-                    mapped_t = self.country_code_map[t][0]
-                    name = self.country_code_map[t][1]
-                    curie = self.contract_uri(mapped_t)
-                else:
-                    name = ""
-                    curie = self.contract_uri(t)
-                category = 'biolink:NamedThing'
-            else:
-                category = 'biolink:OntologyClass'
-                curie = self.contract_uri(t)
-                name = self.concept_name_map[t] if t in self.concept_name_map else "",
-
-            if t not in self.seen:
-                # add a biolink:OntologyClass node for each term
-                write_node_edge_item(
-                    fh=node_handle,
-                    header=self.node_header,
-                    data=[
-                        f"{curie}",
-                        name if isinstance(name, str) else "",
-                        category,
-                        "",
-                        self.source_name
-                    ]
-                )
-                self.seen.add(curie)
-
-            # add has_annotation edge between OntologyClass and Publication
-            write_node_edge_item(
-                fh=edge_handle,
-                header=self.edge_header,
-                data=[
-                    f"{curie}",
-                    f"biolink:related_to",
-                    f"CORD:{paper_id}",
-                    "SIO:000255",
-                    provided_by,
-                    "biolink:Association"
-                ]
-            )
-
-
-
-        """
-        Implement ROBOT 
-        """
-        # Convert OWL to JSON for CheBI Ontology
-        convert_to_json(self.input_base_dir, 'CHEBI')
-
-
-        """
-        Get information from the EnvironemtTransform
-        """
-        environment_file = os.path.join(self.input_base_dir, 'environments.csv')
-        env_df = pd.read_csv(environment_file, sep=',', low_memory=False, usecols=['Type', 'ENVO_terms', 'ENVO_ids'])
-        unique_env_df = env_df.drop_duplicates()
-
-
-
-        """
-        Create termlist.tsv files from ontology JSON files for NLP
-        TODO: Replace this code once runNER is installed and remove 'project_name/utils/biohub_converter.py'
-        """
-        ont = 'chebi'
-        ont_int = ont+'.json'
-        
-        json_input = os.path.join(self.input_base_dir,ont_int)
-        tsv_output = os.path.join(self.input_base_dir,ont)
-
-        transform(inputs=[json_input], input_format='obojson', output= tsv_output, output_format='tsv')
-
-        ont_nodes = os.path.join(self.input_base_dir, ont + '_nodes.tsv')
-        ont_terms = os.path.abspath(os.path.join(os.path.dirname(json_input),'..','nlp/terms/', ont+'_termlist.tsv'))
-        bc.parse(ont_nodes, ont_terms)
-
-
-        """
-        NLP: Get 'chem_node_type' and 'org_to_chem_edge_label'
-        """
-        if self.nlp:
-            # Prep for NLP. Make sure the first column is the ID
-            cols_for_nlp = ['tax_id', 'carbon_substrates']
-            input_file_name = prep_nlp_input(input_file, cols_for_nlp)
-            # Set-up the settings.ini file for OGER and run
-            create_settings_file(self.nlp_dir, 'CHEBI')
-            oger_output = run_oger(self.nlp_dir, input_file_name, n_workers=5)
-            #oger_output = process_oger_output(self.nlp_dir, input_file_name)
-
-        # transform data, something like:
+        #transform data
         with open(input_file, 'r') as f, \
-                open(self.output_node_file, 'w') as node, \
-                open(self.output_edge_file, 'w') as edge, \
-                open(self.subset_terms_file, 'w') as terms_file:
+            open(self.output_node_file, 'w') as node, \
+            open(self.output_edge_file, 'w') as edge, \
+            #open(self.subset_terms_file, 'w') as terms_file:   # If need to capture CURIEs for ROBOT STAR extraction
 
             # write headers (change default node/edge headers if necessary
             node.write("\t".join(self.node_header) + "\n")
             edge.write("\t".join(self.edge_header) + "\n")
             
             header_items = parse_header(f.readline(), sep=',')
-            
             seen_node: dict = defaultdict(int)
             seen_edge: dict = defaultdict(int)
-
+            
+        	df = pd.read_csv(input_file, sep='\t', skiprows= lambda x: gaf_header(x), low_memory=False)
+        	gaf_df = df.columns['DB','DB_Object_ID','DB_Object_Symbol','Qualifier','GO_ID','DB:Reference','Evidence_Code','With_or_From','Aspect','DB_Object_Name','DB_Object_Synonym','DB_Object_Type','Taxon','Date','Assigned_By','Annotation_Extension','Gene_Product_Form_ID']
 
             # Nodes
-            org_node_type = "biolink:OrganismTaxon" # [org_name]
-            trait_node_type = "biolink:" # [carbon_substrate]
-            shape_node_type = "biolink:AbstractEntity" # [cell_shape]
-            #metabolism_node_type = "biolink:ActivityAndBehavior" # [metabolism]
+            org_node_type = "biolink:OrganismTaxon"
+            gene_node_type = "biolink:GenomicEntity"
+            cellular_component_node_type = "biolink:CellularComponent"
+            process_node_type = 'biolink:BiologicalProcess'
+            molecular_function_node_type = 'biolink:MolecularFunction'
             curie = 'NEED_CURIE'
             
             #Prefixes
-            org_prefix = "EOL:"
-            trait_prefix = "Carbon:"
-            shape_prefix = "Shape:"
-            #activity_prefix = "Metab:"
-            source_prefix = "Env:"
+            org_prefix = "NCBITaxon:"
+            gene_prefix = "GO:"
+            cellular_component_prefix = "GO:"
+            process_prefix = "GO:"
+            molecular_function_prefix = "GO:"
 
             # Edges
-            org_to_trait_edge_label = "biolink:has_phenotype" #  [org_name -> cell_shape, metabolism]
-            org_to_trait_edge_relation = "RO:0002200" #  [org_name -> has phenotype -> cell_shape, metabolism]
-            org_to_chem_edge_label = "biolink:interacts_with" # [org_name -> carbon_substrate]
-            org_to_chem_edge_relation = "RO:0002438" # [org_name -> 'trophically interacts with' -> carbon_substrate]
-            org_to_source_edge_label = "biolink:location_of" # [org -> isolation_source]
-            org_to_source_edge_relation = "RO:0001015" #[org -> location_of -> source]
+            gene_to_org_edge_label = "biolink:in_taxon" #  [org_name -> cell_shape, metabolism]
+            gene_to_org_edge_relation = "RO:0002200" #  [org_name -> has phenotype -> cell_shape, metabolism]
+            gene_to_cellular_component_edge_label = "biolink:has_gene_product" # [org_name -> carbon_substrate]
+            gene_to_cellular_component_edge_relation = "RO:0002438" # [org_name -> 'trophically interacts with' -> carbon_substrate]
+            gene_to_process_edge_label = "biolink:location_of" # [org -> isolation_source]
+            gene_to_process_edge_relation = "RO:0001015" #[org -> location_of -> source]
+            gene_to_molecular_function_label = 
+            gene_to_molecular_function_relation = 
 
             
             
