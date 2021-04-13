@@ -7,6 +7,7 @@ from eco_kg.transform_utils.eol_hierarchy.eol_hierarchy import EOLheirarchyTrans
 from eco_kg.transform_utils.ontology import OntologyTransform
 from eco_kg.transform_utils.ontology.ontology_transform import ONTOLOGIES
 from eco_kg.transform_utils.eol_traits.eol_traits import EOLTraitsTransform
+from eco_kg.transform_utils.planteome.planteome import PlanteomeTransform
 
 
 DATA_SOURCES = {
@@ -16,7 +17,8 @@ DATA_SOURCES = {
     'NCBITransform': OntologyTransform,
     'ChebiTransform': OntologyTransform,
     'EnvoTransform' : OntologyTransform,
-    'EOLTraitsTransform': TraitsTransform
+    'EOLTraitsTransform': TraitsTransform,
+    'PlanteomeTransform': PlanteomeTransform
 }
 
 

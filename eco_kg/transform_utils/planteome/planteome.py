@@ -14,10 +14,10 @@ from eco_kg.utils.robot_utils import *
 from eco_kg.utils.transform_utils import unzip_to_tempdir
 from kgx.cli.cli_utils import transform
 """
-Ingest traits dataset (EOL TraitBank)
+Ingest plant annotations from Planteome
 
-Essentially just ingests and transforms this file:
-https://editors.eol.org/other_files/SDR/traits_all.zip
+Essentially just ingests and transforms GAF files:
+
 
 And extracts the following columns:
     - 
@@ -26,18 +26,18 @@ And extracts the following columns:
 class EOLTraitsTransform(Transform):
 
     def __init__(self, input_dir: str = None, output_dir: str = None) -> None:
-        source_name = "EOL_TraitBank"
+        source_name = "Planteome"
         super().__init__(source_name, input_dir, output_dir)  # set some variables
 
-    def run(self, EOL_TraitBank: Optional[str] = None) -> None:
+    def run(self, Planteome: Optional[str] = None) -> None:
         """Method is called and performs needed transformations to process the 
-        trait data (EOL TraitBank)
+        plant data (Planteome)
         
         Args:
-        	EOL_TraitBank: entire contents of EOL TraitBank [traits_all.zip]
+        	Planteome: entire contents of Planteome []
         """
-        if not EOL_TraitBank:
-            EOL_TraitBank = os.path.join(self.input_base_dir, "traits_all.zip")
+        if not Planteome:
+            Planteome = os.path.join(self.input_base_dir, "file name")
 
         self.node_header = ['id', 'name', 'category', 'description', 'provided_by']
         self.edge_header = ['subject', 'edge_label', 'object', 'relation', 'provided_by', 'type']
@@ -45,7 +45,7 @@ class EOLTraitsTransform(Transform):
         edge_handle = open(self.output_edge_file, 'w')
         node_handle.write("\t".join(self.node_header) + "\n")
         edge_handle.write("\t".join(self.edge_header) + "\n")
-        self.parse_annotations(node_handle, edge_handle, EOL_TraitBank)
+        self.parse_annotations(node_handle, edge_handle, Planteome)
 
         node_handle = open(os.path.join(self.output_dir, "eol_traits_nodes.tsv"), 'w')
         edge_handle = open(os.path.join(self.output_dir, "eol_traits_edges.tsv"), 'w')
@@ -129,7 +129,7 @@ class EOLTraitsTransform(Transform):
         Returns:
             None.
         """
-        metadata_df = df['eol_pk','trait_eol_pk','predicate','value_uri','measurement','units_uri','literal']
+        metadata_df = df['columns']
         
     def parse_inferred(self, node_handle, edge_handle, df) -> None:
         """Parse a pandas dataframe.
@@ -141,7 +141,7 @@ class EOLTraitsTransform(Transform):
         Returns:
             None.
         """
-        inferred_df = df['page_id','inferred_trait']
+        inferred_df = df['columns']
         
     def parse_terms(self, node_handle, edge_handle, df) -> None:
         """Parse a pandas dataframe.
@@ -153,8 +153,114 @@ class EOLTraitsTransform(Transform):
         Returns:
             None.
         """
-        terms_df = df['uri','name','type','parent_uri']
-"""
+        terms_df = df['columns']
+        
+        # add a biolink:Publication for each paper
+        write_node_edge_item(
+            fh=node_handle,
+            header=self.node_header,
+            data=[
+                f"CORD:{paper_id}",
+                f"{title}",
+                "biolink:Publication",
+                "",
+                self.source_name
+            ]
+        )
+        self.seen.add(paper_id)
+
+        for t in terms:
+            if len(t) == 2:
+                # country code
+                if t in self.country_code_map:
+                    mapped_t = self.country_code_map[t][0]
+                    name = self.country_code_map[t][1]
+                    curie = self.contract_uri(mapped_t)
+                else:
+                    name = ""
+                    curie = self.contract_uri(t)
+                category = 'biolink:NamedThing'
+            else:
+                category = 'biolink:OntologyClass'
+                curie = self.contract_uri(t)
+                name = self.concept_name_map[t] if t in self.concept_name_map else "",
+
+            if t not in self.seen:
+                # add a biolink:OntologyClass node for each term
+                write_node_edge_item(
+                    fh=node_handle,
+                    header=self.node_header,
+                    data=[
+                        f"{curie}",
+                        name if isinstance(name, str) else "",
+                        category,
+                        "",
+                        self.source_name
+                    ]
+                )
+                self.seen.add(curie)
+
+            # add has_annotation edge between OntologyClass and Publication
+            write_node_edge_item(
+                fh=edge_handle,
+                header=self.edge_header,
+                data=[
+                    f"{curie}",
+                    f"biolink:related_to",
+                    f"CORD:{paper_id}",
+                    "SIO:000255",
+                    provided_by,
+                    "biolink:Association"
+                ]
+            )
+
+
+
+        """
+        Implement ROBOT 
+        """
+        # Convert OWL to JSON for CheBI Ontology
+        convert_to_json(self.input_base_dir, 'CHEBI')
+
+
+        """
+        Get information from the EnvironemtTransform
+        """
+        environment_file = os.path.join(self.input_base_dir, 'environments.csv')
+        env_df = pd.read_csv(environment_file, sep=',', low_memory=False, usecols=['Type', 'ENVO_terms', 'ENVO_ids'])
+        unique_env_df = env_df.drop_duplicates()
+
+
+
+        """
+        Create termlist.tsv files from ontology JSON files for NLP
+        TODO: Replace this code once runNER is installed and remove 'project_name/utils/biohub_converter.py'
+        """
+        ont = 'chebi'
+        ont_int = ont+'.json'
+        
+        json_input = os.path.join(self.input_base_dir,ont_int)
+        tsv_output = os.path.join(self.input_base_dir,ont)
+
+        transform(inputs=[json_input], input_format='obojson', output= tsv_output, output_format='tsv')
+
+        ont_nodes = os.path.join(self.input_base_dir, ont + '_nodes.tsv')
+        ont_terms = os.path.abspath(os.path.join(os.path.dirname(json_input),'..','nlp/terms/', ont+'_termlist.tsv'))
+        bc.parse(ont_nodes, ont_terms)
+
+
+        """
+        NLP: Get 'chem_node_type' and 'org_to_chem_edge_label'
+        """
+        if self.nlp:
+            # Prep for NLP. Make sure the first column is the ID
+            cols_for_nlp = ['tax_id', 'carbon_substrates']
+            input_file_name = prep_nlp_input(input_file, cols_for_nlp)
+            # Set-up the settings.ini file for OGER and run
+            create_settings_file(self.nlp_dir, 'CHEBI')
+            oger_output = run_oger(self.nlp_dir, input_file_name, n_workers=5)
+            #oger_output = process_oger_output(self.nlp_dir, input_file_name)
+
         # transform data, something like:
         with open(input_file, 'r') as f, \
                 open(self.output_node_file, 'w') as node, \
@@ -169,7 +275,7 @@ class EOLTraitsTransform(Transform):
             
             seen_node: dict = defaultdict(int)
             seen_edge: dict = defaultdict(int)
-"""
+
 
             # Nodes
             org_node_type = "biolink:OrganismTaxon" # [org_name]
@@ -188,11 +294,12 @@ class EOLTraitsTransform(Transform):
             # Edges
             org_to_trait_edge_label = "biolink:has_phenotype" #  [org_name -> cell_shape, metabolism]
             org_to_trait_edge_relation = "RO:0002200" #  [org_name -> has phenotype -> cell_shape, metabolism]
-            org_to_org_edge_label = "biolink:interacts_with" # [org_name -> carbon_substrate]
-            org_to_org_edge_relation = "RO:" # [org_name -> 'trophically interacts with' -> carbon_substrate]
-            org_to_env_edge_label = "biolink:location_of" # [org -> isolation_source]
-            org_to_env_edge_relation = "RO:" #[org -> location_of -> source]
+            org_to_chem_edge_label = "biolink:interacts_with" # [org_name -> carbon_substrate]
+            org_to_chem_edge_relation = "RO:0002438" # [org_name -> 'trophically interacts with' -> carbon_substrate]
+            org_to_source_edge_label = "biolink:location_of" # [org -> isolation_source]
+            org_to_source_edge_relation = "RO:0001015" #[org -> location_of -> source]
 
+            
             
             # transform
             for line in f:
