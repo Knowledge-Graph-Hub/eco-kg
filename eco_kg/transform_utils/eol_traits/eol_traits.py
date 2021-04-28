@@ -39,20 +39,17 @@ class EOLTraitsTransform(Transform):
         """
         if not EOL_TraitBank:
             EOL_TraitBank = os.path.join(self.input_base_dir, "traits_all.zip")
-
-        self.node_header = ['id', 'name', 'category', 'description', 'provided_by']
+        #need to define output files earlier
+        node_handle = open(os.path.join(self.output_dir, "eol_traits_nodes.tsv"), 'w')
+        edge_handle = open(os.path.join(self.output_dir, "eol_traits_edges.tsv"), 'w')
+        self.node_header = ['id', 'name', 'category', 'description', 'provided_by'] #can I add node properties?
         self.edge_header = ['subject', 'edge_label', 'object', 'relation', 'provided_by', 'type']
         node_handle = open(self.output_node_file, 'w')
         edge_handle = open(self.output_edge_file, 'w')
         node_handle.write("\t".join(self.node_header) + "\n")
         edge_handle.write("\t".join(self.edge_header) + "\n")
         self.parse_annotations(node_handle, edge_handle, EOL_TraitBank)
-
-        node_handle = open(os.path.join(self.output_dir, "eol_traits_nodes.tsv"), 'w')
-        edge_handle = open(os.path.join(self.output_dir, "eol_traits_edges.tsv"), 'w')
-        node_handle.write("\t".join(self.node_header) + "\n")
-        edge_handle.write("\t".join(self.edge_header) + "\n")
-        self.parse_cooccurrence(node_handle, edge_handle, co_occur_zipfile)
+        #self.parse_cooccurrence(node_handle, edge_handle, co_occur_zipfile)
 
     def parse_annotations(self, node_handle: IO, edge_handle: IO,
                           data_file1: str,
@@ -65,7 +62,8 @@ class EOLTraitsTransform(Transform):
         Returns:
              None.
         """
-        pbar = tqdm(total=3, desc="Unzipping files")
+        #progress bar showing the unzipping of files on cmd line
+        pbar = tqdm(total=1, desc="Unzipping files")
 
         # unzip to tmpdir, remove after use, to avoid cluttering raw/ with processed
         # data
@@ -73,6 +71,7 @@ class EOLTraitsTransform(Transform):
             unzip_to_tempdir(data_file1, tmpdir)
             pbar.update(1)
             pbar.close()
+
 
             subsets = ['EOL_TraitBank']
             for subset in subsets:
@@ -171,193 +170,114 @@ class EOLTraitsTransform(Transform):
             seen_node: dict = defaultdict(int)
             seen_edge: dict = defaultdict(int)
 """
+	# transform
+	
+	header_items = parse_header(f.readline(), sep=',')
+	seen_node: dict = defaultdict(int)
+	seen_edge: dict = defaultdict(int)
+	# Nodes
+	org_node_type = "biolink:OrganismTaxon" 
+	trait_node_type = 'biolink:PhenotypicFeature'
+	env_node_type = "biolink:AbstractEntity" 
+	curie = 'NEED_CURIE'
 
-            # Nodes
-            org_node_type = "biolink:OrganismTaxon" # [org_name]
-            trait_node_type = "biolink:" # [carbon_substrate]
-            shape_node_type = "biolink:AbstractEntity" # [cell_shape]
-            #metabolism_node_type = "biolink:ActivityAndBehavior" # [metabolism]
-            curie = 'NEED_CURIE'
-            
-            #Prefixes
-            org_prefix = "EOL:"
-            trait_prefix = "Carbon:"
-            shape_prefix = "Shape:"
-            #activity_prefix = "Metab:"
-            source_prefix = "Env:"
+	#Prefixes
+	org_prefix = "EOL:"
+	trait_prefix = "Carbon:"#not sure what this should be
+	env_prefix = "ENVO:"
 
-            # Edges
-            org_to_trait_edge_label = "biolink:has_phenotype" #  [org_name -> cell_shape, metabolism]
-            org_to_trait_edge_relation = "RO:0002200" #  [org_name -> has phenotype -> cell_shape, metabolism]
-            org_to_org_edge_label = "biolink:interacts_with" # [org_name -> carbon_substrate]
-            org_to_org_edge_relation = "RO:" # [org_name -> 'trophically interacts with' -> carbon_substrate]
-            org_to_env_edge_label = "biolink:location_of" # [org -> isolation_source]
-            org_to_env_edge_relation = "RO:" #[org -> location_of -> source]
+	# Edges
+	org_to_trait_edge_label = "biolink:has_phenotype" 
+	org_to_trait_edge_relation = "RO:0002200" 
+	org_to_parent_edge_label = 'biolink:OrganismTaxonToOrganismTaxonSpecialization' #need to make a new biolink predicate
+	org_to_parent_edge_relation = 'RO:'
+	org_to_org_edge_label = "biolink:interacts_with"
+	org_to_org_edge_relation = "RO:" 
+	org_to_env_edge_label = "biolink:location_of" 
+	org_to_env_edge_relation = "RO:" 
+	
+	#need a function to pare down the terms file and make a dict/json of what I want to use
+	
+	#write organism nodes
+	for index, row in pages_df.iterrows():
+		org_id = org_prefix + str(pages_df['page_id'])
+		if org_id not in seen_node:
+			write_node_edge_item(fh=node,
+								 header=self.node_header,
+								 data=[org_id,
+									   org_name,
+									   org_node_type,
+									   org_id])
+			seen_node[org_id] += 1
+		if org_id+parent_id not in seen_edge:
+			parent_id = org_prfix + str(pages_df['parent'])
+			write_node_edge_item(fh=edge,
+									header=self.edge_header,
+									data=[org_id,
+										org_to_parent_edge_label,
+										parent_id,
+										org_to_parent_edge_relation])
+			seen_edge[org_id+parent_id] += 1
 
-            
-            # transform
-            for line in f:
-                """
-                This dataset is a csv and also has commas 
-                present within a column of data. 
-                Hence a regex solution
-                """
-                # transform line into nodes and edges
-                # node.write(this_node1)
-                # node.write(this_node2)
-                # edge.write(this_edge)
-                
+	# Write trait node
+	for index, row in traits_df.iterrows():
+		trait_id = traits_df['eol_pk']
+		trait_uri = traits_df['predicate']
+		value_uri = traits_df['value_uri']
+		org_id = traits_df['page_id']
+		#need to write rest of function when I transform terms.csv to json
+		#this will also create env nodes
+		#need to figure out if I should have traits and values separate nodes or not. What does kg-microbe do?
+		if traits_df['type'] == 'measurement':
+			trait = trait_dict[trait_uri]
+			value = value_dict[value_uri]
+			if trait+value not in seen_node:
+				write_node_edge_item(fh=node,
+									 header=self.node_header,
+									 data=[org_id,
+										   org_name,
+										   org_node_type,
+										   org_id])
+				seen_node[trait_id] += 1
+			if org_id+trait_id not in seen_edge:
+				trait_id
 
-                line = re.sub(r'(?!(([^"]*"){2})*[^"]*$),', '|', line) # alanine, glucose -> alanine| glucose
-                items_dict = parse_line(line, header_items, sep=',')
+	# Write Edge
+		# org-chem edge
+		if not chem_id.endswith(':na') and org_id+chem_id not in seen_edge:
+			write_node_edge_item(fh=edge,
+									header=self.edge_header,
+									data=[org_id,
+										org_to_chem_edge_label,
+										chem_id,
+										org_to_chem_edge_relation])
+			seen_edge[org_id+chem_id] += 1
 
-                org_name = items_dict['org_name']
-                tax_id = items_dict['tax_id']
-                metabolism = items_dict['metabolism']
-                carbon_substrates = set([x.strip() for x in items_dict['carbon_substrates'].split('|')])
-                cell_shape = items_dict['cell_shape']
-                isolation_source = set([x.strip() for x in items_dict['isolation_source'].split('|')])
-                
+		# org-shape edge
+		if  not shape_id.endswith(':na') and org_id+shape_id not in seen_edge:
+			write_node_edge_item(fh=edge,
+									header=self.edge_header,
+									data=[org_id,
+										org_to_shape_edge_label,
+										shape_id,
+										org_to_shape_edge_relation])
+			seen_edge[org_id+shape_id] += 1
+		
+		# org-source edge
+		if not source_id.endswith(':na') and org_id+source_id not in seen_edge:
+			write_node_edge_item(fh=edge,
+									header=self.edge_header,
+									data=[org_id,
+										org_to_source_edge_label,
+										source_id,
+										org_to_source_edge_relation])
+			seen_edge[org_id+source_id] += 1
+	# Files write ends
 
-            # Write Node ['id', 'entity', 'category']
-                # Write organism node 
-                org_id = org_prefix + str(tax_id)
-                if not org_id.endswith(':na') and org_id not in seen_node:
-                    write_node_edge_item(fh=node,
-                                         header=self.node_header,
-                                         data=[org_id,
-                                               org_name,
-                                               org_node_type,
-                                               org_id])
-                    seen_node[org_id] += 1
-                    if org_id.startswith('NCBITaxon:'):
-                        terms_file.write(org_id + "\n")
-
-                # Write chemical node
-                for chem_name in carbon_substrates:
-                    chem_curie = curie
-                    #chem_node_type = chem_name
-
-                    # Get relevant NLP results
-                    if chem_name != 'NA':
-                        relevant_tax = oger_output.loc[oger_output['TaxId'] == int(tax_id)]
-                        relevant_chem = relevant_tax.loc[relevant_tax['TokenizedTerm'] == chem_name]
-                        if len(relevant_chem) == 1:
-                            chem_curie = relevant_chem.iloc[0]['CURIE']
-                            chem_node_type = relevant_chem.iloc[0]['Biolink']
-                        
-
-                    if chem_curie == curie:
-                        chem_id = chem_prefix + chem_name.lower().replace(' ','_')
-                    else:
-                        chem_id = chem_curie
-
-                    
-                    if  not chem_id.endswith(':na') and  chem_id not in seen_node:
-                        write_node_edge_item(fh=node,
-                                            header=self.node_header,
-                                            data=[chem_id,
-                                                chem_name,
-                                                chem_node_type,
-                                                chem_curie])
-                        seen_node[chem_id] += 1
-
-                # Write shape node
-                shape_id = shape_prefix + cell_shape.lower()
-                if  not shape_id.endswith(':na') and shape_id not in seen_node:
-                    write_node_edge_item(fh=node,
-                                         header=self.node_header,
-                                         data=[shape_id,
-                                               cell_shape,
-                                               shape_node_type,
-                                               curie])
-                    seen_node[shape_id] += 1
-
-                # Write source node
-                for source_name in isolation_source:
-                    #   Collapse the entity
-                    #   A_B_C_D => [A, B, C, D]
-                    #   D is the entity of interest
-                    source_name_split = source_name.split('_')
-                    source_name_collapsed = source_name_split[-1]
-                    env_curie = curie
-                    env_term = source_name_collapsed
-                    source_node_type = "" # [isolation_source] left blank intentionally
-
-                    # Get information from the environments.csv (unique_env_df)
-                    relevant_env_df = unique_env_df.loc[unique_env_df['Type'] == source_name]
-
-                    if len(relevant_env_df) == 1:
-                            '''
-                            If multiple ENVOs exist, take the last one since that would be the curie of interest
-                            after collapsing the entity.
-                            TODO(Maybe): If CURIE is 'nan', it could be sourced from OGER o/p (ENVO backend)
-                                  of environments.csv
-                            '''
-                            env_curie = str(relevant_env_df.iloc[0]['ENVO_ids']).split(',')[-1].strip()
-                            env_term = str(relevant_env_df.iloc[0]['ENVO_terms']).split(',')[-1].strip()
-                            if env_term == 'nan':
-                                env_curie = curie
-                                env_term = source_name_collapsed
-                            
-                                 
-
-                    #source_id = source_prefix + source_name.lower()
-                    if env_curie == curie:
-                        source_id = source_prefix + source_name_collapsed.lower()
-                    else:
-                        source_id = env_curie
-                        if source_id.startswith('CHEBI:'):
-                            source_node_type = chem_node_type
-
-                    if  not source_id.endswith(':na') and source_id not in seen_node:
-                        write_node_edge_item(fh=node,
-                                            header=self.node_header,
-                                            data=[source_id,
-                                                env_term,
-                                                source_node_type,
-                                                env_curie])
-                        seen_node[source_id] += 1
-
-                
-
-
-            # Write Edge
-                # org-chem edge
-                if not chem_id.endswith(':na') and org_id+chem_id not in seen_edge:
-                    write_node_edge_item(fh=edge,
-                                            header=self.edge_header,
-                                            data=[org_id,
-                                                org_to_chem_edge_label,
-                                                chem_id,
-                                                org_to_chem_edge_relation])
-                    seen_edge[org_id+chem_id] += 1
-
-                # org-shape edge
-                if  not shape_id.endswith(':na') and org_id+shape_id not in seen_edge:
-                    write_node_edge_item(fh=edge,
-                                            header=self.edge_header,
-                                            data=[org_id,
-                                                org_to_shape_edge_label,
-                                                shape_id,
-                                                org_to_shape_edge_relation])
-                    seen_edge[org_id+shape_id] += 1
-                
-                # org-source edge
-                if not source_id.endswith(':na') and org_id+source_id not in seen_edge:
-                    write_node_edge_item(fh=edge,
-                                            header=self.edge_header,
-                                            data=[org_id,
-                                                org_to_source_edge_label,
-                                                source_id,
-                                                org_to_source_edge_relation])
-                    seen_edge[org_id+source_id] += 1
-        # Files write ends
-
-        # Extract the 'cellular organismes' tree from NCBITaxon and convert to JSON
-        '''
-        NCBITaxon_131567 = cellular organisms 
-        (Source = http://www.ontobee.org/ontology/NCBITaxon?iri=http://purl.obolibrary.org/obo/NCBITaxon_131567)
-        '''
-        subset_ontology_needed = 'NCBITaxon'
-        extract_convert_to_json(self.input_base_dir, subset_ontology_needed, self.subset_terms_file)
+	# Extract the 'cellular organismes' tree from NCBITaxon and convert to JSON
+	'''
+	NCBITaxon_131567 = cellular organisms 
+	(Source = http://www.ontobee.org/ontology/NCBITaxon?iri=http://purl.obolibrary.org/obo/NCBITaxon_131567)
+	'''
+	subset_ontology_needed = 'NCBITaxon'
+	extract_convert_to_json(self.input_base_dir, subset_ontology_needed, self.subset_terms_file)

@@ -870,7 +870,7 @@
   local_name: to_qtl_Gramene.assoc
 #
 # #**** ROBOT ****
-#
+#might be able to delete this
 -
   url: https://github.com/ontodev/robot/releases/download/v1.7.2/robot.jar
   local_name: robot.jar
@@ -878,30 +878,23 @@
   url: https://raw.githubusercontent.com/ontodev/robot/master/bin/robot 
   local_name: robot
 
-# # ****Conversion Tables****
-#
-# Environment
-#
--
-  url: https://raw.githubusercontent.com/bacteria-archaea-traits/bacteria-archaea-traits/master/data/conversion_tables/environments.csv
-  local_name: environments.csv
-
 # #**** Ontology files****
-#
-# ENVO
 #
 -
   url: http://purl.obolibrary.org/obo/envo.json
   local_name: envo.json
+-
+  url: http://purl.obolibrary.org/obo/to.owl
+  local_name: to.owl
+-
+  url: http://purl.obolibrary.org/obo/po.owl
+  local_name: po.owl
+-
+  url: http://purl.obolibrary.org/obo/pato.json
+  local_name: pato.json
+-
+  url: http://purl.obolibrary.org/obo/go/go-basic.json #which GO?
+  local_name: go-basic.json
 #
-# CHEBI
-#
-#-
-#  url: http://purl.obolibrary.org/obo/chebi.owl
-#  local_name: chebi.owl
-#
-# NCBI Taxon
-#
-#-
 #  url: http://purl.obolibrary.org/obo/ncbitaxon.owl
 #  local_name: ncbitaxon.owl
