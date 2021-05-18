@@ -38,6 +38,7 @@ def convert_to_json(path:str, ont:str):
 def extract_convert_to_json(path:str, ont_name:str, term_file:str):
     """
     This method extracts all children of provided CURIE
+    USE THIS ONE TO EXTRACT ALL PLANTS FROM NCBI TAXON
     """
     robot_file, env = initialize_robot(path)
     input_owl = os.path.join(path, ont_name.lower()+'.owl')

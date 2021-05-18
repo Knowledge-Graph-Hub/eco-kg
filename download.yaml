@@ -870,7 +870,7 @@
   local_name: to_qtl_Gramene.assoc
 #
 # #**** ROBOT ****
-#might be able to delete this
+#
 -
   url: https://github.com/ontodev/robot/releases/download/v1.7.2/robot.jar
   local_name: robot.jar
@@ -880,9 +880,9 @@
 
 # #**** Ontology files****
 #
--
-  url: http://purl.obolibrary.org/obo/envo.json
-  local_name: envo.json
+#-
+#  url: http://purl.obolibrary.org/obo/envo.json
+#  local_name: envo.json
 -
   url: http://purl.obolibrary.org/obo/to.owl
   local_name: to.owl
@@ -890,11 +890,11 @@
   url: http://purl.obolibrary.org/obo/po.owl
   local_name: po.owl
 -
-  url: http://purl.obolibrary.org/obo/pato.json
-  local_name: pato.json
+  url: http://purl.obolibrary.org/obo/peco.owl
+  local_name: peco.owl
 -
   url: http://purl.obolibrary.org/obo/go/go-basic.json #which GO?
   local_name: go-basic.json
-#
-#  url: http://purl.obolibrary.org/obo/ncbitaxon.owl
-#  local_name: ncbitaxon.owl
+-
+  url: http://purl.obolibrary.org/obo/ncbitaxon.owl
+  local_name: ncbitaxon.owl

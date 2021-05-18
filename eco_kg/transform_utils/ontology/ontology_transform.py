@@ -8,12 +8,15 @@ from kgx import PandasTransformer, ObographJsonTransformer  # type: ignore
 
 ONTOLOGIES = {
     #'HpTransform': 'hp.json',
-    #'GoTransform': 'go-plus.json',
+    'GoTransform': 'go-plus.json',
     'NCBITransform':  'ncbitaxon.json',
-    'ChebiTransform': 'chebi.json',
-    'EnvoTransform': 'envo.json'
+    #'ChebiTransform': 'chebi.json',
+    #'EnvoTransform': 'envo.json'
+    'ToTransform' : OntologyTransform,
+    'PoTransform' : OntologyTransform,
+    'PecoTransform' : OntologyTransform,
 }
-
+# Is there a tool for transforming owl to json?
 
 class OntologyTransform(Transform):
     """

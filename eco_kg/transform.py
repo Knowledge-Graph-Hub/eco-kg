@@ -11,15 +11,15 @@ from eco_kg.transform_utils.planteome.planteome import PlanteomeTransform
 
 
 DATA_SOURCES = {
-    'EOLheirarchyTransform': EOLheirarchyTransform,
+    #'EOLheirarchyTransform': EOLheirarchyTransform,
     'GoTransform': OntologyTransform,
     #'HpTransform': OntologyTransform,
-    #'NCBITransform': OntologyTransform,
-    'EnvoTransform' : OntologyTransform,
+    'NCBITransform': OntologyTransform,
+    #'EnvoTransform' : OntologyTransform,
     'ToTransform' : OntologyTransform,
     'PoTransform' : OntologyTransform,
-    'PatoTransform' : OntologyTransform,
-    'EOLTraitsTransform': TraitsTransform,
+    'PecoTransform' : OntologyTransform,
+    #'EOLTraitsTransform': TraitsTransform,
     'PlanteomeTransform': PlanteomeTransform
 }
 
