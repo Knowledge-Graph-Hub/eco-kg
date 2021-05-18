@@ -24,7 +24,7 @@ def find_version(*file_paths):
     raise RuntimeError('Unable to find version string.')
 
 
-__version__ = find_version('eco-kg', '__version__.py')
+__version__ = find_version('eco_kg', '__version__.py')
 
 test_deps = [
     'pytest',

@@ -16,35 +16,27 @@ def create_settings_file(path: str, ont: str = 'ALL') -> None:
     -   Parameters: 
         -   path - path of the 'nlp' folder
         -   ont - the ontology to be used as dictionary ['ALL', 'ENVO', 'CHEBI']
-
     -   The 'Shared' section declares global variables that can be used in other sections
         e.g. Data root.
         root = location of the working directory
         accessed in other sections using => ${Shared:root}/
-
     -   Input formats accepted:
         txt, txt_json, bioc_xml, bioc_json, conll, pubmed,
         pxml, pxml.gz, pmc, nxml, pubtator, pubtator_fbk,
         becalmabstracts, becalmpatents
-
     -   Two iter-modes available: [collection or document]
         document:- 'n' input files = 'n' output files
         (provided every file has ontology terms)
         collection:- n input files = 1 output file
-
     -   Export formats possible:
         tsv, txt, text_tsv, xml, text_xml, bioc_xml,
         bioc_json, bionlp, bionlp.ann, brat, brat.ann,
         conll, pubtator, pubanno_json, pubtator, pubtator_fbk,
         europepmc, europepmc.zip, odin, becalm_tsv, becalm_json
         These can be passed as a list for multiple outputs too.
-
     -   Multiple Termlists can be declared in separate sections
         e.g. [Termlist1], [Termlist2] ...[Termlistn] with each having
         their own paths
-
-
-
     """
     config = configparser.ConfigParser()
     config['Section'] = {}
@@ -77,7 +69,6 @@ def create_settings_file(path: str, ont: str = 'ALL') -> None:
     '''config['Termlist1'] = {
         'path' : os.path.join(path,'terms/envo_termlist.tsv')
     }
-
     config['Termlist2'] = {
         'path' : os.path.join(path,'terms/chebi_termlist.tsv')
     }'''
@@ -98,12 +89,10 @@ def prep_nlp_input(path: str, columns: list)-> str:
     '''for idx, row in sub_df.T.iteritems():
         new_file = 'nlp/input/'+str(row[0])+'.txt'
         path_to_new_file = os.path.abspath(os.path.join(os.path.dirname(path),'..',new_file))
-
         if os.path.exists(path_to_new_file):
             mode = 'a'
         else:
             mode = 'w'
-
         with open(path_to_new_file, mode) as txt_file:
             txt_file.write(row[1])'''
     # New way of doing this : PR submitted to Ontogene for merging code.

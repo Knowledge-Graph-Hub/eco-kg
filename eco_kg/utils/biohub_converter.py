@@ -8,7 +8,6 @@ def parse(input_filename, output_filename) -> None:
     """
     Parse the typical KGX compatible nodes TSV into Bio Term Hub format
     for compatibility with OGER.
-
     Mapping of columns from KGX format to Bio Term Hub format,
     [0] 'CUI-less' -> UMLS CUI
     [1] 'N/A' -> resource from which it comes
@@ -16,14 +15,12 @@ def parse(input_filename, output_filename) -> None:
     [3] name -> term (this is the field that is tokenized)
     [4] name -> preferred form
     [5] category -> type
-
     Parameters
     ----------
     input_filename: str
         Input file path
     output_filename: str
         Output file path
-
     """
     counter = 0
     OUTSTREAM = open(output_filename, 'w')
@@ -70,17 +67,14 @@ def parse(input_filename, output_filename) -> None:
 def parse_header(elements) -> dict:
     """
     Parse headers from nodes TSV
-
     Parameters
     ----------
     elements: list
         The header record
-
     Returns
     -------
     dict:
         A dictionary of node header names to index
-
     """
     header_dict = {}
     for col in elements:
@@ -91,13 +85,11 @@ def parse_header(elements) -> dict:
 def write_line(elements, OUTSTREAM) -> None:
     """
     Write line to OUTSTREAM.
-
     Parameters
     ----------
     elements: list
         The record to write
     OUTSTREAM:
         File handle to the output file
-
     """
     OUTSTREAM.write('\t'.join(elements) + '\n')

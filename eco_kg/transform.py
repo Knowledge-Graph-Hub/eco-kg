@@ -3,10 +3,10 @@
 import logging
 from typing import List
 
-from eco_kg.transform_utils.eol_hierarchy.eol_hierarchy import EOLheirarchyTransform
+#from eco_kg.transform_utils.eol_hierarchy.eol_hierarchy import EOLheirarchyTransform
 from eco_kg.transform_utils.ontology import OntologyTransform
 from eco_kg.transform_utils.ontology.ontology_transform import ONTOLOGIES
-from eco_kg.transform_utils.eol_traits.eol_traits import EOLTraitsTransform
+#from eco_kg.transform_utils.eol_traits.eol_traits import EOLTraitsTransform
 from eco_kg.transform_utils.planteome.planteome import PlanteomeTransform
 
 
@@ -28,15 +28,12 @@ def transform(input_dir: str, output_dir: str, sources: List[str] = None) -> Non
     """Call scripts in eco_kg/transform/[source name]/ to transform each source into a graph format that
     KGX can ingest directly, in either TSV or JSON format:
     https://github.com/NCATS-Tangerine/kgx/blob/master/data-preparation.md
-
     Args:
         input_dir: A string pointing to the directory to import data from.
         output_dir: A string pointing to the directory to output data to.
         sources: A list of sources to transform.
-
     Returns:
         None.
-
     """
     if not sources:
         # run all sources
