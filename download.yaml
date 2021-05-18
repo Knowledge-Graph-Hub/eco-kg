@@ -20,6 +20,7 @@
 ---
 
 # # ******Output Data*******
+"""
 # Lifewide-traits
 #   link: https://opendata.eol.org/dataset/all-trait-data-large
 -
@@ -31,6 +32,7 @@
 -
   url: https://eol.org/data/provider_ids.csv.gz
   local_name: EOLhierarchy.tsv.gz
+"""
 #
 # Plant traits and genes
 #   link: http://palea.cgrb.oregonstate.edu/viewsvn/associations/

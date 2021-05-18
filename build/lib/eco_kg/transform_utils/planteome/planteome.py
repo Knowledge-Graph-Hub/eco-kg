@@ -32,7 +32,7 @@ class PlanteomeTransform(Transform):
         	Planteome: entire contents of Planteome []
         """
         if data_file is None: # = if not data_file
-            data_file = self.source_name + '.csv'
+            data_file = self.source_name + '.csv')
         input_file = os.path.join(self.input_base_dir, data_file)
         
         #make directory in data/transformed

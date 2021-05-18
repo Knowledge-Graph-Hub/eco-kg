@@ -1,5 +1,5 @@
-from .drug_central import DrugCentralTransform
+from .eol_hierarchy import HierarchyTransform
 
 __all__ = [
-    "DrugCentralTransform"
+    "HeirarchyTransform"
 ]
