@@ -29,37 +29,25 @@ class PlanteomeTransform(Transform):
         plant data (Planteome)
         
         Args:
-        	Planteome: entire contents of Planteome []
+            Planteome: entire contents of Planteome []
         """
         if data_file is None: # = if not data_file
-            data_file = self.source_name + '.csv')
+            data_file = self.source_name + '.csv'
         input_file = os.path.join(self.input_base_dir, data_file)
         
         #make directory in data/transformed
         os.makedirs(self.output_dir, data_file)
 
-	def gaf_header(line):
-		if line.startswith('!'):
-			return True
-		return False
+    def gaf_header(line):
+        if line.startswith('!'):
+            return True
+        return False
 
-    def parse_annotations(self, node_handle: IO, edge_handle: IO,
-                          data_file1: str,
-                          ) -> None:
-        """Parse annotations from Planteome.
-        Args:
-            node_handle: File handle for nodes.csv.
-            edge_handle: File handle for edges.csv.
-            data_file1: Path to Planteome GAF
-        Returns:
-             None.
-        """
         #transform data
-        with open(input_file, 'r') as f, \ #is input_file set by download?
+        with open(input_file, 'r') as f, \
             open(self.output_node_file, 'w') as node, \
-            open(self.output_edge_file, 'w') as edge, \
+            open(self.output_edge_file, 'w') as edge:
             #open(self.subset_terms_file, 'w') as terms_file:   # If need to capture CURIEs for ROBOT STAR extraction
-
             # write headers (change default node/edge headers if necessary
             node.write("\t".join(self.node_header) + "\n")
             edge.write("\t".join(self.edge_header) + "\n")
@@ -69,8 +57,8 @@ class PlanteomeTransform(Transform):
             seen_edge: dict = defaultdict(int)
             
             #do I need a dataframe?
-        	df = pd.read_csv(input_file, sep='\t', skiprows= lambda x: gaf_header(x), low_memory=False)
-        	gaf_df = df.columns['DB','DB_Object_ID','DB_Object_Symbol','Qualifier','Ontology_ID','DB:Reference','Evidence_Code','With_or_From','Aspect','DB_Object_Name','DB_Object_Synonym','DB_Object_Type','Taxon','Date','Assigned_By','Annotation_Extension','Gene_Product_Form_ID']
+            df = pd.read_csv(input_file, sep='\t', skiprows= lambda x: gaf_header(x), low_memory=False)
+            gaf_df = df.columns['DB','DB_Object_ID','DB_Object_Symbol','Qualifier','Ontology_ID','DB:Reference','Evidence_Code','With_or_From','Aspect','DB_Object_Name','DB_Object_Synonym','DB_Object_Type','Taxon','Date','Assigned_By','Annotation_Extension','Gene_Product_Form_ID']
 
             # Nodes
             org_node_type = "biolink:OrganismTaxon"
@@ -131,84 +119,84 @@ class PlanteomeTransform(Transform):
                                                org_id])
                     seen_node[org_id] += 1
                 #create gene node
-				if gene_id not in seen_node:
-					write_node_edge_item(fh=node,
-										 header=self.node_header,
-										 data=[gene_id,
-											   gene_name,
-											   gene_node_type,
-											   gene_id])
-					seen_node[gene_id] += 1
-				#create org to gene edges
-				
-                if row['Aspect'] = 'T':
-                	trait_id = ['TOid']
-					#create trait node
-					if trait_id not in seen_node:
-						write_node_edge_item(fh=node,
-											 header=self.node_header,
-											 data=[trait_id,
-												   trait_name,
-												   trait_node_type,
-												   trait_id])
-						seen_node[trait_id] += 1
-                elif row['Aspect'] = 'A':
-                	anatomy_id = ['POid']
-					#create anatomy node
-					if anatomy_id not in seen_node:
-						write_node_edge_item(fh=node,
-											 header=self.node_header,
-											 data=[anatomy_id,
-												   anatomy_name,
-												   anatomy_node_type,
-												   anatomy_id])
-						seen_node[anatomy_id] += 1
-                elif row['Aspect'] = 'E':
-                	env_id = ['PECOid']
-					#create anatomy node
-					if env_id not in seen_node:
-						write_node_edge_item(fh=node,
-											 header=self.node_header,
-											 data=[env_id,
-												   env_name,
-												   env_node_type,
-												   env_id])
-						seen_node[env_id] += 1
-                elif row['Aspect'] = 'C':
-                	GO_id = ['GOid']
-					#create cellular component node
-					if GO_id not in seen_node:
-						write_node_edge_item(fh=node,
-											 header=self.node_header,
-											 data=[go_id,
-												   go_name,
-												   go_node_type,
-												   go_id])
-						seen_node[go_id] += 1
-                elif row['Aspect'] = 'F':
-                	GO_id = ['GOid']
-					#create molecular function node
-					if GO_id not in seen_node:
-						write_node_edge_item(fh=node,
-											 header=self.node_header,
-											 data=[go_id,
-												   go_name,
-												   go_node_type,
-												   go_id])
-						seen_node[go_id] += 1
-                elif row['Aspect'] = 'P':
-                	GO_id = ['GOid']
-					#create biological process node
-					if GO_id not in seen_node:
-						write_node_edge_item(fh=node,
-											 header=self.node_header,
-											 data=[go_id,
-												   go_name,
-												   go_node_type,
-												   go_id])
-						seen_node[go_id] += 1
+                if gene_id not in seen_node:
+                    write_node_edge_item(fh=node,
+                                         header=self.node_header,
+                                         data=[gene_id,
+                                               gene_name,
+                                               gene_node_type,
+                                               gene_id])
+                    seen_node[gene_id] += 1
+                #create org to gene edges
+                
+                if row['Aspect'] == 'T':
+                    trait_id = ['TOid']
+                    #create trait node
+                    if trait_id not in seen_node:
+                        write_node_edge_item(fh=node,
+                                             header=self.node_header,
+                                             data=[trait_id,
+                                                   trait_name,
+                                                   trait_node_type,
+                                                   trait_id])
+                        seen_node[trait_id] += 1
+                elif row['Aspect'] == 'A':
+                    anatomy_id = ['POid']
+                    #create anatomy node
+                    if anatomy_id not in seen_node:
+                        write_node_edge_item(fh=node,
+                                             header=self.node_header,
+                                             data=[anatomy_id,
+                                                   anatomy_name,
+                                                   anatomy_node_type,
+                                                   anatomy_id])
+                        seen_node[anatomy_id] += 1
+                elif row['Aspect'] == 'E':
+                    env_id = ['PECOid']
+                    #create anatomy node
+                    if env_id not in seen_node:
+                        write_node_edge_item(fh=node,
+                                             header=self.node_header,
+                                             data=[env_id,
+                                                   env_name,
+                                                   env_node_type,
+                                                   env_id])
+                        seen_node[env_id] += 1
+                elif row['Aspect'] == 'C':
+                    GO_id = ['GOid']
+                    #create cellular component node
+                    if GO_id not in seen_node:
+                        write_node_edge_item(fh=node,
+                                             header=self.node_header,
+                                             data=[go_id,
+                                                   go_name,
+                                                   go_node_type,
+                                                   go_id])
+                        seen_node[go_id] += 1
+                elif row['Aspect'] == 'F':
+                    GO_id = ['GOid']
+                    #create molecular function node
+                    if GO_id not in seen_node:
+                        write_node_edge_item(fh=node,
+                                             header=self.node_header,
+                                             data=[go_id,
+                                                   go_name,
+                                                   go_node_type,
+                                                   go_id])
+                        seen_node[go_id] += 1
+                elif row['Aspect'] == 'P':
+                    GO_id = ['GOid']
+                    #create biological process node
+                    if GO_id not in seen_node:
+                        write_node_edge_item(fh=node,
+                                             header=self.node_header,
+                                             data=[go_id,
+                                                   go_name,
+                                                   go_node_type,
+                                                   go_id])
+                        seen_node[go_id] += 1
                 else:
-                	print('Error')
+                    print('Error')
 
             # Write Edge
                 # gene to org edge

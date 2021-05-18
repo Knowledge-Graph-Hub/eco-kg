@@ -24,7 +24,7 @@ def find_version(*file_paths):
     raise RuntimeError('Unable to find version string.')
 
 
-__version__ = find_version('eco-kg', '__version__.py')
+__version__ = find_version('eco_kg', '__version__.py')
 
 test_deps = [
     'pytest',
@@ -64,9 +64,36 @@ setup(
         'tqdm',
         'wget',
         'compress_json',
-        'click==7',
+        'click==7.1.2',
         'pyyaml',
-        'kgx'
+        'biolinkml==1.5.8',
+        'bmt==0.4.0',
+        'kgx==0.4.0',
+        'sphinx',
+        'sphinx_rtd_theme',
+        'recommonmark',
+        'parameterized',
+        'validate_version_code',
+        'pandas',
+        # Extra packages added
+        'six',
+        'ordered-set',
+        'requests',
+        'stringcase',
+        'rdflib',
+        'ShExJSG',
+        'jsonasobj==1.2.1', #deprecated
+        'prefixcommons',
+        'pyshex',
+        'antlr4-python3-runtime',
+        'packaging==20.8',
+        'cachetools==4.2.0',
+        'deprecation==2.1.0',
+        'networkx==2.5',
+        'pystache==0.5.4',
+        'jsonlines==1.2.0',
+        'neo4jrestclient==2.1.1',
+        'validators==0.18.1'
     ],
     extras_require=extras,
 )
