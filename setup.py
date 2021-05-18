@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 here = os.path.abspath(os.path.dirname(__file__))
 
 # get the long description from the relevant file
-with copen(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
+with copen(os.path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 
@@ -24,7 +24,7 @@ def find_version(*file_paths):
     raise RuntimeError('Unable to find version string.')
 
 
-__version__ = find_version('project_name', '__version__.py')
+__version__ = find_version('eco-kg', '__version__.py')
 
 test_deps = [
     'pytest',
@@ -41,7 +41,7 @@ extras = {
 
 setup(
     name='eco-kg',
-    version=__0.1__,
+    version=__version__,
     description='KG hub for eco-kg',
     long_description=long_description,
     url='https://github.com/Knowledge-Graph-Hub/eco-kg',

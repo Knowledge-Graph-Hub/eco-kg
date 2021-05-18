@@ -1,0 +1,14 @@
+tqdm
+wget
+compress_json
+click==7
+pyyaml
+kgx
+
+[test]
+pytest
+pytest-cov
+coveralls
+validate_version_code
+codacy-coverage
+parameterized
