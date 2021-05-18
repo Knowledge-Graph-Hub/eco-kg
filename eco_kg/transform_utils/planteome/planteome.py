@@ -43,17 +43,6 @@ class PlanteomeTransform(Transform):
             return True
         return False
 
-    def parse_annotations(self, node_handle: IO, edge_handle: IO,
-                          data_file1: str,
-                          ) -> None:
-        """Parse annotations from Planteome.
-        Args:
-            node_handle: File handle for nodes.csv.
-            edge_handle: File handle for edges.csv.
-            data_file1: Path to Planteome GAF
-        Returns:
-             None.
-        """
         #transform data
         with open(input_file, 'r') as f, \
             open(self.output_node_file, 'w') as node, \
