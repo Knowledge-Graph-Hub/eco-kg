@@ -3,10 +3,10 @@
 import logging
 from typing import List
 
-from eco_kg.transform_utils.eol_hierarchy.eol_hierarchy import EOLheirarchyTransform
+#from eco_kg.transform_utils.eol_hierarchy.eol_hierarchy import EOLheirarchyTransform
 from eco_kg.transform_utils.ontology import OntologyTransform
 from eco_kg.transform_utils.ontology.ontology_transform import ONTOLOGIES
-from eco_kg.transform_utils.eol_traits.eol_traits import EOLTraitsTransform
+#from eco_kg.transform_utils.eol_traits.eol_traits import EOLTraitsTransform
 from eco_kg.transform_utils.planteome.planteome import PlanteomeTransform
 
 

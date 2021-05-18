@@ -12,9 +12,9 @@ ONTOLOGIES = {
     'NCBITransform':  'ncbitaxon.json',
     #'ChebiTransform': 'chebi.json',
     #'EnvoTransform': 'envo.json'
-    'ToTransform' : 'to.json',
-    'PoTransform' : 'po.json',
-    'PecoTransform' : 'peco.json',
+    'ToTransform' : OntologyTransform,
+    'PoTransform' : OntologyTransform,
+    'PecoTransform' : OntologyTransform,
 }
 # Is there a tool for transforming owl to json?
 

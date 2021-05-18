@@ -11,5 +11,15 @@ eco_kg.egg-info/SOURCES.txt
 eco_kg.egg-info/dependency_links.txt
 eco_kg.egg-info/requires.txt
 eco_kg.egg-info/top_level.txt
+eco_kg/transform_utils/__init__.py
+eco_kg/transform_utils/transform.py
+eco_kg/transform_utils/ontology/__init__.py
+eco_kg/transform_utils/ontology/ontology_transform.py
+eco_kg/utils/__init__.py
+eco_kg/utils/biohub_converter.py
+eco_kg/utils/download_utils.py
+eco_kg/utils/nlp_utils.py
+eco_kg/utils/robot_utils.py
+eco_kg/utils/transform_utils.py
 query_utils/__init__.py
 query_utils/query.py
