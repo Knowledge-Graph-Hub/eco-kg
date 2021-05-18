@@ -1,2 +1,0 @@
-eco-kg
-query_utils
