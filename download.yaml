@@ -898,5 +898,5 @@
   url: http://purl.obolibrary.org/obo/go/go-basic.json #which GO?
   local_name: go-basic.json
 -
-  url: http://purl.obolibrary.org/obo/ncbitaxon.owl
-  local_name: ncbitaxon.owl
+  url: http://purl.obolibrary.org/obo/ncbitaxon.json
+  local_name: ncbitaxon.json
