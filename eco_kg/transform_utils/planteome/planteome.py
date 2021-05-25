@@ -67,13 +67,19 @@ class PlanteomeTransform(Transform):
             process_node_type = 'biolink:BiologicalProcess' #Aspect = P
             molecular_function_node_type = 'biolink:MolecularFunction' #Aspect = F
             exposure_node_type = 'biolink:EnvironmentalExposure' #Aspect = E I suspect environment
-            anatomy_node_type = 'biolink:AnatomicalEntity' #Aspect = A I suspect anatomy
+            anatomy_node_type = 'biolink:AnatomicalEntity' #Aspect = A The root class in PO is plant anatomical entity - Is this a problem?
             trait_node_type = 'biolink:PhenotypicFeature' #Aspect = T I suspect trait
-            growth_stage_node_type = 'biolink:LifeStage' #Aspect = G gene expressed in growth stage form
+            growth_stage_node_type = 'biolink:LifeStage' #Aspect = G (might be S) gene expressed in growth stage form
             
             #Prefixes - may not need this - only if I'm missing the first part of the CURIE
             org_prefix = "NCBITaxon:"
             gene_prefix = "GO:" #This is a crazy mess, won't be GO
+            """
+            ATnumbers for Arabidopsis
+            BGIOSG for rice
+            go into planteome and figure out which gene id is best for each taxon 
+            and where it is the GAF file
+            """
             cellular_component_prefix = "GO:"
             process_prefix = "GO:"
             molecular_function_prefix = "GO:"
@@ -86,13 +92,18 @@ class PlanteomeTransform(Transform):
             gene_to_org_edge_label = "biolink:in_taxon"
             gene_to_org_edge_relation = "RO:0002162" 
             gene_to_cellular_component_edge_label = "biolink:has_gene_product" # not sure about this one
-            gene_to_cellular_component_edge_relation = "RO:" #part of or located in
+            gene_to_cellular_component_edge_relation = "RO:0002205" #part of or located in
             gene_to_process_edge_label = "biolink:regulates" # not sure acts upstream of or within - involved in
             gene_to_process_edge_relation = "RO:0011002" #regulates activity of - not sure about this
             gene_to_molecular_function_edge_label = 'biolink:enables'
             gene_to_molecular_function_edge_relation = 'RO:0002327'
-            gene_to_exposure_edge_label = 'biolink:increases_expression_of'
-            gene_to_exposure_edge_relation = 'RO:0003003'
+            exposure_to_gene_edge_label = 'biolink:affects'
+            """
+            filter out PECO:0007403 this is unknown exposure
+            Need a different RO term that is more general and can accommodate a process
+            How do people link exposures to the genes they affect?
+            """
+            exposure_to_gene_edge_relation = 'RO:0002240'
             gene_to_anatomy_edge_label = 'biolink:expressed_in'
             gene_to_anatomy_edge_relation = 'RO:0002206'
             gene_to_growth_stage_edge_label = 'biolink:expressed_in'
@@ -142,7 +153,7 @@ class PlanteomeTransform(Transform):
                         seen_node[trait_id] += 1
                 elif row['Aspect'] == 'A':
                     anatomy_id = ['POid']
-                    #create anatomy node
+                    #create anatomy nodes
                     if anatomy_id not in seen_node:
                         write_node_edge_item(fh=node,
                                              header=self.node_header,
@@ -153,8 +164,8 @@ class PlanteomeTransform(Transform):
                         seen_node[anatomy_id] += 1
                 elif row['Aspect'] == 'E':
                     env_id = ['PECOid']
-                    #create anatomy node
-                    if env_id not in seen_node:
+                    #create environment nodes. filter out PECO_0007403 because that is "unknown environment"
+                    if env_id not in seen_node and != 'PECO:0007403':
                         write_node_edge_item(fh=node,
                                              header=self.node_header,
                                              data=[env_id,
