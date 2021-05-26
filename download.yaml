@@ -655,33 +655,6 @@
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_protein_Oryza_Gramene.assoc
   local_name: peco_protein_Oryza_Gramene.assoc
 -
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_qtl_Avena_sativa_Gramene.assoc
-  local_name: peco_qtl_Avena_sativa_Gramene.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_qtl_Cenchrus_americanus_Gramene.assoc
-  local_name: peco_qtl_Cenchrus_americanus_Gramene.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_qtl_Hordeum_vulgare_Gramene.assoc
-  local_name: peco_qtl_Hordeum_vulgare_Gramene.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_qtl_Oryza_sativa_Gramene.assoc
-  local_name: peco_qtl_Oryza_sativa_Gramene.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_qtl_Setaria_italica_Gramene.assoc
-  local_name: peco_qtl_Setaria_italica_Gramene.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_qtl_Sorghum_bicolor_Gramene.assoc
-  local_name: peco_qtl_Sorghum_bicolor_Gramene.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_qtl_Triticum_spp._Gramene.assoc
-  local_name: peco_qtl_Triticum_spp._Gramene.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_qtl_Zea_mays_Gramene.assoc
-  local_name: peco_qtl_Zea_mays_Gramene.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_qtl_Zinzania_palustris_Gramene.assoc
-  local_name: peco_qtl_Zinzania_palustris_Gramene.assoc
--
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_anatomy_gene_Picea_jaiswallab.assoc
   local_name: po_anatomy_gene_Picea_jaiswallab.assoc
 -
@@ -769,18 +742,6 @@
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_gene_model_li_Zea_POC.assoc
   local_name: po_gene_model_li_Zea_POC.assoc
 -
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_germplasm_S.chmielewskii_sgn.assoc
-  local_name: po_germplasm_S.chmielewskii_sgn.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_germplasm_S.lycopersicum_sgn.assoc
-  local_name: po_germplasm_S.lycopersicum_sgn.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_germplasm_S.melongena_sgn.assoc
-  local_name: po_germplasm_S.melongena_sgn.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_germplasm_S.pennellii_sgn.assoc
-  local_name: po_germplasm_S.pennellii_sgn.assoc
--
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_growth_gene_Arabidopsis_TAIR.assoc
   local_name: po_growth_gene_Arabidopsis_TAIR.assoc
 -
@@ -802,9 +763,6 @@
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_growth_protein_Gossypium_AgBase.assoc
   local_name: po_growth_protein_Gossypium_AgBase.assoc
 -
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_qtl_glycine_SoyBase.assoc
-  local_name: po_qtl_glycine_SoyBase.assoc
--
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_gene_G.max_PPPP.assoc
   local_name: to_gene_G.max_PPPP.assoc
 -
@@ -822,48 +780,6 @@
 -
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_gene_Z.mays_PPPP.assoc
   local_name: to_gene_Z.mays_PPPP.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_L.culinaris_GRIN.assoc
-  local_name: to_germplasm_L.culinaris_GRIN.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_M.esculenta_Genesys.assoc
-  local_name: to_germplasm_M.esculenta_Genesys.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI3K.assoc
-  local_name: to_germplasm_O.sativa_IRRI3K.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_A-traits.assoc
-  local_name: to_germplasm_O.sativa_IRRI_GRIMS_A-traits.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_B-traits.assoc
-  local_name: to_germplasm_O.sativa_IRRI_GRIMS_B-traits.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_C-traits.assoc
-  local_name: to_germplasm_O.sativa_IRRI_GRIMS_C-traits.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_FG-traits.assoc
-  local_name: to_germplasm_O.sativa_IRRI_GRIMS_FG-traits.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_L-traits.assoc
-  local_name: to_germplasm_O.sativa_IRRI_GRIMS_L-traits.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_PR-traits.assoc
-  local_name: to_germplasm_O.sativa_IRRI_GRIMS_PR-traits.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_S-traits.assoc
-  local_name: to_germplasm_O.sativa_IRRI_GRIMS_S-traits.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_Sorghum_GRIN.assoc
-  local_name: to_germplasm_Sorghum_GRIN.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_maize_GRIN.assoc
-  local_name: to_germplasm_maize_GRIN.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_rice_GRIN.assoc
-  local_name: to_germplasm_rice_GRIN.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_wheat_GRIN.assoc
-  local_name: to_germplasm_wheat_GRIN.assoc
 -
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_protein_Oryza_Gramene.assoc
   local_name: to_protein_Oryza_Gramene.assoc

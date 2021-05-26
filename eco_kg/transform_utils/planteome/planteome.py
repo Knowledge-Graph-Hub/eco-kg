@@ -247,18 +247,18 @@ class PlanteomeTransform(Transform):
                             seen_edge[ontology_id+org_id] += 1
             # Files write ends
 
-            """
-            Implement ROBOT 
-            """
-            # Convert OWL to JSON for Ontologies
-            convert_to_json(self.input_base_dir, 'PO')
-            convert_to_json(self.input_base_dir, 'TO')
-            convert_to_json(self.input_base_dir, 'PECO')
-            # Extract the 'plant' tree from NCBITaxon and convert to JSON
-            '''
-            NCBITaxon_33090 = viridiplantae
-            (Source = http://www.ontobee.org/ontology/NCBITaxon?iri=http://purl.obolibrary.org/obo/NCBITaxon_33090)
-            '''
-            subset_ontology_needed = 'NCBITaxon'
-            extract_convert_to_json(self.input_base_dir, subset_ontology_needed, self.subset_terms_file, 'BOT')
-            #Can I chop out branches of the hierarchy? NCBITaxon_144314
+        """
+        Implement ROBOT 
+        """
+        # Convert OWL to JSON for Ontologies
+        convert_to_json(self.input_base_dir, 'PO')
+        convert_to_json(self.input_base_dir, 'TO')
+        convert_to_json(self.input_base_dir, 'PECO')
+        # Extract the 'plant' tree from NCBITaxon and convert to JSON
+        '''
+        NCBITaxon_33090 = viridiplantae
+        (Source = http://www.ontobee.org/ontology/NCBITaxon?iri=http://purl.obolibrary.org/obo/NCBITaxon_33090)
+        '''
+        subset_ontology_needed = 'NCBITaxon'
+        extract_convert_to_json(self.input_base_dir, subset_ontology_needed, self.subset_terms_file, 'BOT')
+        #Can I chop out branches of the hierarchy? NCBITaxon_144314
