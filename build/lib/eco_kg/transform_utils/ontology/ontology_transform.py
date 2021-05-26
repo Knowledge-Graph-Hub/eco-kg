@@ -3,18 +3,18 @@ import os
 from typing import Optional
 
 from eco_kg.transform_utils.transform import Transform
-from kgx import PandasTransformer, ObographJsonTransformer  # type: ignore
+from kgx import PandasTransformer, ObographJsonTransformer
 
 
 ONTOLOGIES = {
     #'HpTransform': 'hp.json',
-    'GoTransform': 'go-plus.json',
+    'GoTransform': 'go-basic.json',
     'NCBITransform':  'ncbitaxon.json',
     #'ChebiTransform': 'chebi.json',
     #'EnvoTransform': 'envo.json'
-    'ToTransform' : OntologyTransform,
-    'PoTransform' : OntologyTransform,
-    'PecoTransform' : OntologyTransform,
+    'ToTransform' : 'to.owl',
+    'PoTransform' : 'po.owl',
+    'PecoTransform' : 'peco.owl',
 }
 # Is there a tool for transforming owl to json?
 
