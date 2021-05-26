@@ -16,9 +16,9 @@ DATA_SOURCES = {
     #'HpTransform': OntologyTransform,
     #'NCBITransform': OntologyTransform,
     #'EnvoTransform' : OntologyTransform,
-    'ToTransform' : OntologyTransform,
-    'PoTransform' : OntologyTransform,
-    'PecoTransform' : OntologyTransform,
+    #'ToTransform' : OntologyTransform,
+    #'PoTransform' : OntologyTransform,
+    #'PecoTransform' : OntologyTransform,
     #'EOLTraitsTransform': TraitsTransform,
     'PlanteomeTransform': PlanteomeTransform
 }

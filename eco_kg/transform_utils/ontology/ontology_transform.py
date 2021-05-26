@@ -3,7 +3,7 @@ import os
 from typing import Optional
 
 from eco_kg.transform_utils.transform import Transform
-from kgx import PandasTransformer, ObographJsonTransformer
+from kgx import PandasTransformer, ObographJsonTransformer, RdfOwlTransformer
 
 
 ONTOLOGIES = {
@@ -54,7 +54,10 @@ class OntologyTransform(Transform):
              None.
         """
         print(f"Parsing {data_file}")
-        transformer = ObographJsonTransformer()
+        if data_file.endswith('.json'):
+            transformer = ObographJsonTransformer()
+        if data_file.endswith('.owl'):
+            transformer = RdfOwlTransformer()
         compression: Optional[str]
         if data_file.endswith('.gz'):
             compression = 'gz'
