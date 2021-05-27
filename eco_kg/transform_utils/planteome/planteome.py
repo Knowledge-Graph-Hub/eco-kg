@@ -156,6 +156,7 @@ class PlanteomeTransform(Transform):
                             seen_node[org_id] += 1
                         #create gene node
                         if gene_id not in seen_node:
+                            gene_id = str(gene_id)
                             write_node_edge_item(fh=node,
                                                  header=self.node_header,
                                                  data=[gene_id,
@@ -169,8 +170,10 @@ class PlanteomeTransform(Transform):
                                 node_type = trait_node_type
                             elif row['Aspect'] == 'A':
                                 node_type = anatomy_node_type
-                            elif row['Aspect'] == 'E' and ontology_id != 'PECO:0007403':#filter out PECO_0007403 because that is "unknown environment"
-                                node_type = env_node_type
+                            elif row['Aspect'] == 'E':#filter out PECO_0007403 because that is "unknown environment"
+                                node_type = exposure_node_type
+                            elif row['Aspect'] == 'G':
+                                node_type = growth_stage_node_type
                             elif row['Aspect'] == 'C':
                                 node_type = cellular_component_node_type
                             elif row['Aspect'] == 'F':
@@ -256,5 +259,5 @@ class PlanteomeTransform(Transform):
         (Source = http://www.ontobee.org/ontology/NCBITaxon?iri=http://purl.obolibrary.org/obo/NCBITaxon_33090)
         '''
         subset_ontology_needed = 'NCBITaxon'
-        extract_convert_to_json(self.input_base_dir, subset_ontology_needed, self.subset_terms_file, 'BOT')
+        extract_convert_to_json(self.input_base_dir, subset_ontology_needed, '33090')
         #Can I chop out branches of the hierarchy? NCBITaxon_144314
