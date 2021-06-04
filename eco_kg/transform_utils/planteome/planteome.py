@@ -3,6 +3,7 @@ import os
 import pandas as pd
 from typing import Dict, List, Optional
 from collections import defaultdict
+import gzip
 
 from eco_kg.transform_utils.transform import Transform
 from eco_kg.utils.transform_utils import parse_header, parse_line, write_node_edge_item
@@ -33,6 +34,20 @@ class PlanteomeTransform(Transform):
         Args:
             Planteome: entire contents of Planteome []
         """
+        """
+        Get rice gene ID map
+        """
+        rice_gene_ids = {}
+        with gzip.open(os.path.join(self.input_base_dir, 'rice_map.gz'),'rt') as rg:
+            for line in rg.readlines():
+                line = line.strip('\n')
+                row = line.split('\t')
+                Os = row[0]
+                LOC = row[1]
+                if Os == 'None' or LOC == 'None':
+                    continue
+                rice_gene_ids[Os] = LOC
+
         if not data_files: # = if not data_file
             data_files = []
             for file in os.listdir(self.input_base_dir):
@@ -64,20 +79,12 @@ class PlanteomeTransform(Transform):
                     cellular_component_node_type = "biolink:CellularComponent" #Aspect = C
                     process_node_type = 'biolink:BiologicalProcess' #Aspect = P
                     molecular_function_node_type = 'biolink:MolecularFunction' #Aspect = F
-                    exposure_node_type = 'biolink:EnvironmentalExposure' #Aspect = E I suspect environment
                     anatomy_node_type = 'biolink:AnatomicalEntity' #Aspect = A The root class in PO is plant anatomical entity - Is this a problem?
                     trait_node_type = 'biolink:PhenotypicFeature' #Aspect = T I suspect trait
                     growth_stage_node_type = 'biolink:LifeStage' #Aspect = G (might be S) gene expressed in growth stage form
             
                     #Prefixes - may not need this - only if I'm missing the first part of the CURIE
                     org_prefix = "NCBITaxon:"
-                    gene_prefix = "GO:" #This is a crazy mess, won't be GO
-                    """
-                    ATnumbers for Arabidopsis
-                    BGIOSG for rice
-                    go into planteome and figure out which gene id is best for each taxon 
-                    and where it is the GAF file
-                    """
                     cellular_component_prefix = "GO:"
                     process_prefix = "GO:"
                     molecular_function_prefix = "GO:"
@@ -95,12 +102,6 @@ class PlanteomeTransform(Transform):
                     gene_to_process_edge_relation = "RO:0011002" #regulates activity of - not sure about this
                     gene_to_molecular_function_edge_label = 'biolink:enables'
                     gene_to_molecular_function_edge_relation = 'RO:0002327'
-                    exposure_to_gene_edge_label = 'biolink:affects'
-                    """
-                    Need a different RO term that is more general and can accommodate a process
-                    How do people link exposures to the genes they affect?
-                    """
-                    exposure_to_gene_edge_relation = 'RO:0002240'
                     gene_to_anatomy_edge_label = 'biolink:expressed_in'
                     gene_to_anatomy_edge_relation = 'RO:0002206'
                     gene_to_growth_stage_edge_label = 'biolink:expressed_in'
@@ -121,10 +122,17 @@ class PlanteomeTransform(Transform):
                         label = row['DB_Object_Symbol']
                         #source = row['DB']
                         if tax_id == '3702':
-                            gene_id = row['DB_Object_Name']
+                            gene_id = str(row['DB_Object_Name'])
                             org_name = 'Arabidopsis thaliana'
-                            if isinstance(gene_id, float):
-                                gene_id = row['DB_Object_ID']
+                            if 'AT' in gene_id:
+                                if '.' in gene_id:
+                                    gene_id = gene_id.split('.')[0]
+                                elif len(gene_id) > 9:
+                                    gene_id = row['DB_Object_Synonym'].split('|')[0]
+                            else:
+                                gene_id = str(row['DB_Object_Synonym']).split('|')[0]
+                                if 'AT' not in gene_id:
+                                    gene_id = row['DB_Object_ID']
                         elif tax_id == '4530':
                             gene_id = row['DB_Object_ID']
                             org_name = 'Oryza sativa'
@@ -134,18 +142,25 @@ class PlanteomeTransform(Transform):
                         elif tax_id == '4558':
                             gene_id = row['DB_Object_ID']
                             org_name = 'Sorghum bicolor'
+                            print(gene_id)
                         elif tax_id == '3694':
                             gene_id = row['DB_Object_ID']
                             org_name = 'Populus trichocarpa'
-                        elif tax_id == ['4577']:#need to add another conditional to make it look in synonyms
+                        elif tax_id == '4577':#need to add another conditional to make it look in synonyms
                             gene_id = row['DB_Object_ID']
                             org_name = 'Zea mays'
+                        elif tax_id == '381124':#need to add another conditional to make it look in synonyms
+                            gene_id = row['DB_Object_ID']
+                            org_name = 'Zea mays mays'
                         else:
                             gene_id = row['DB_Object_ID']
                             org_name = 'taxon name'
                         provided_by = db + '-' + source_name
                         #create organism node
                         org_id = org_prefix + str(tax_id)
+                        if tax_id == '4530' or tax_id == '39947':#changing Os gene IDs to LOC gene IDs
+                            if 'LOC' not in gene_id and gene_id in rice_gene_ids:
+                                gene_id = rice_gene_ids[gene_id].split(',')
                         if org_id not in seen_node:
                             write_node_edge_item(fh=node,
                                                  header=self.node_header,
@@ -155,23 +170,28 @@ class PlanteomeTransform(Transform):
                                                        provided_by])
                             seen_node[org_id] += 1
                         #create gene node
-                        if gene_id not in seen_node:
-                            gene_id = str(gene_id)
-                            write_node_edge_item(fh=node,
-                                                 header=self.node_header,
-                                                 data=[gene_id,
-                                                       gene_name,
-                                                       gene_node_type,
-                                                       provided_by])
-                            seen_node[gene_id] += 1
+                        if isinstance(gene_id, str) or isinstance(gene_id, int):
+                            genes = [gene_id]
+                        if isinstance(gene_id, int):
+                            gi = str(gene_id)
+                            genes = [gi]
+                        #print(genes)
+                        for g in genes:
+                            if g not in seen_node:
+                                g = str(g)
+                                write_node_edge_item(fh=node,
+                                                     header=self.node_header,
+                                                     data=[g,
+                                                           gene_name,
+                                                           gene_node_type,
+                                                           provided_by])
+                            seen_node[g] += 1
                         #create all other node types
                         if ontology_id not in seen_node:
                             if row['Aspect'] == 'T':
                                 node_type = trait_node_type
                             elif row['Aspect'] == 'A':
                                 node_type = anatomy_node_type
-                            elif row['Aspect'] == 'E':#filter out PECO_0007403 because that is "unknown environment"
-                                node_type = exposure_node_type
                             elif row['Aspect'] == 'G':
                                 node_type = growth_stage_node_type
                             elif row['Aspect'] == 'C':
@@ -194,44 +214,47 @@ class PlanteomeTransform(Transform):
                                 print(row['Aspect'])
                     # Write Edge
                         # gene to org edge
-                        if gene_id+tax_id not in seen_edge:
-                            write_node_edge_item(fh=edge,
-                                                    header=self.edge_header,
-                                                    data=[gene_id,
-                                                        gene_to_org_edge_label,
-                                                        tax_id,
-                                                        gene_to_org_edge_relation,
-                                                        provided_by])
-                            seen_edge[gene_id+tax_id] += 1
+                        if isinstance(gene_id, str):
+                            genes = [gene_id]
+                        if isinstance(gene_id, int):
+                            gi = str(gene_id)
+                            genes = [gene_id]
+                        for g in genes:
+                            if str(g)+str(tax_id) not in seen_edge:
+                                write_node_edge_item(fh=edge,
+                                                        header=self.edge_header,
+                                                        data=[g,
+                                                            gene_to_org_edge_label,
+                                                            tax_id,
+                                                            gene_to_org_edge_relation,
+                                                            provided_by])
+                                seen_edge[str(g)+str(tax_id)] += 1
 
-                        # gene to cellular component edge
-                        if gene_id+ontology_id not in seen_edge:
-                            if row['Aspect'] == 'T':
-                                edge_label = gene_to_trait_edge_label
-                                edge_relation = gene_to_trait_edge_relation
-                            elif row['Aspect'] == 'A':
-                                edge_label = gene_to_anatomy_edge_label
-                                edge_relation = gene_to_anatomy_edge_relation
-                            elif row['Aspect'] == 'E':
-                                edge_label = exposure_to_gene_edge_label
-                                edge_relation = exposure_to_gene_edge_relation
-                            elif row['Aspect'] == 'C':
-                                edge_label = gene_to_cellular_component_edge_label
-                                edge_relation = gene_to_cellular_component_edge_relation
-                            elif row['Aspect'] == 'P':
-                                edge_label = gene_to_process_edge_label
-                                edge_relation = gene_to_process_edge_relation
-                            elif row['Aspect'] == 'F':
-                                edge_label = gene_to_molecular_function_edge_label
-                                edge_relation = gene_to_molecular_function_edge_relation
-                            write_node_edge_item(fh=edge,
-                                                    header=self.edge_header,
-                                                    data=[gene_id,
-                                                        edge_label,
-                                                        ontology_id,
-                                                        edge_relation,
-                                                        provided_by])
-                            seen_edge[gene_id+ontology_id] += 1
+                            # gene to cellular component edge
+                            if str(g)+ontology_id not in seen_edge:
+                                if row['Aspect'] == 'T':
+                                    edge_label = gene_to_trait_edge_label
+                                    edge_relation = gene_to_trait_edge_relation
+                                elif row['Aspect'] == 'A':
+                                    edge_label = gene_to_anatomy_edge_label
+                                    edge_relation = gene_to_anatomy_edge_relation
+                                elif row['Aspect'] == 'C':
+                                    edge_label = gene_to_cellular_component_edge_label
+                                    edge_relation = gene_to_cellular_component_edge_relation
+                                elif row['Aspect'] == 'P':
+                                    edge_label = gene_to_process_edge_label
+                                    edge_relation = gene_to_process_edge_relation
+                                elif row['Aspect'] == 'F':
+                                    edge_label = gene_to_molecular_function_edge_label
+                                    edge_relation = gene_to_molecular_function_edge_relation
+                                write_node_edge_item(fh=edge,
+                                                        header=self.edge_header,
+                                                        data=[g,
+                                                            edge_label,
+                                                            ontology_id,
+                                                            edge_relation,
+                                                            provided_by])
+                                seen_edge[str(g)+ontology_id] += 1
 
                         # trait to org edge
                         if 'TO' in ontology_id:
@@ -252,12 +275,11 @@ class PlanteomeTransform(Transform):
         # Convert OWL to JSON for Ontologies
         convert_to_json(self.input_base_dir, 'PO')
         convert_to_json(self.input_base_dir, 'TO')
-        convert_to_json(self.input_base_dir, 'PECO')
         # Extract the 'plant' tree from NCBITaxon and convert to JSON
         '''
         NCBITaxon_33090 = viridiplantae
         (Source = http://www.ontobee.org/ontology/NCBITaxon?iri=http://purl.obolibrary.org/obo/NCBITaxon_33090)
         '''
-        subset_ontology_needed = 'NCBITaxon'
-        extract_convert_to_json(self.input_base_dir, subset_ontology_needed, '33090')
+        subset_ontology_needed = 'NCBITaxon_33090'
+        extract_convert_to_json(self.input_base_dir, subset_ontology_needed, 'BOT')
         #Can I chop out branches of the hierarchy? NCBITaxon_144314

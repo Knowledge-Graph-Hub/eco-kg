@@ -76,12 +76,6 @@
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_ortholog_gene_Zea_mays.assoc
   local_name: go_ortholog_gene_Zea_mays.assoc
 -
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_gene_Oryza_Gramene.assoc
-  local_name: peco_gene_Oryza_Gramene.assoc
--
-  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_protein_Oryza_Gramene.assoc
-  local_name: peco_protein_Oryza_Gramene.assoc
--
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_anatomy_gene_oryza_gramene.assoc
   local_name: po_anatomy_gene_oryza_gramene.assoc
 -
@@ -779,7 +773,18 @@
 #-
 #  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_gene_S.lycopersicum_PPPP.assoc
 #  local_name: to_gene_S.lycopersicum_PPPP.assoc
-#
+#-
+#  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_gene_Oryza_Gramene.assoc
+#  local_name: peco_gene_Oryza_Gramene.assoc
+#-
+#  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/peco-associations/peco_protein_Oryza_Gramene.assoc
+#  local_name: peco_protein_Oryza_Gramene.assoc
+
+# #**** CONVERSION TABLES ****
+-
+  url: https://rapdb.dna.affrc.go.jp/download/archive/RAP-MSU_2021-05-10.txt.gz
+  local_name: rice_map.gz
+
 # #**** ROBOT ****
 #
 -
@@ -800,9 +805,6 @@
 -
   url: http://purl.obolibrary.org/obo/po.owl
   local_name: po.owl
--
-  url: http://purl.obolibrary.org/obo/peco.owl
-  local_name: peco.owl
 -
   url: http://purl.obolibrary.org/obo/go/go-basic.json #which GO?
   local_name: go-basic.json

@@ -14,7 +14,7 @@ ONTOLOGIES = {
     #'EnvoTransform': 'envo.json'
     'ToTransform' : 'to.owl',
     'PoTransform' : 'po.owl',
-    'PecoTransform' : 'peco.owl',
+    #'PecoTransform' : 'peco.owl',
 }
 # Is there a tool for transforming owl to json?
 
