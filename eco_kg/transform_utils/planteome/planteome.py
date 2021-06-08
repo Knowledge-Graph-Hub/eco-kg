@@ -142,7 +142,6 @@ class PlanteomeTransform(Transform):
                         elif tax_id == '4558':
                             gene_id = row['DB_Object_ID']
                             org_name = 'Sorghum bicolor'
-                            print(gene_id)
                         elif tax_id == '3694':
                             gene_id = row['DB_Object_ID']
                             org_name = 'Populus trichocarpa'
@@ -280,6 +279,6 @@ class PlanteomeTransform(Transform):
         NCBITaxon_33090 = viridiplantae
         (Source = http://www.ontobee.org/ontology/NCBITaxon?iri=http://purl.obolibrary.org/obo/NCBITaxon_33090)
         '''
-        subset_ontology_needed = 'NCBITaxon_33090'
-        extract_convert_to_json(self.input_base_dir, subset_ontology_needed, 'BOT')
+        subset_ontology_needed = 'NCBITaxon'
+        extract_convert_to_json(self.input_base_dir, subset_ontology_needed, 'NCBITaxon:33090','TOP')#maybe should be TOP
         #Can I chop out branches of the hierarchy? NCBITaxon_144314

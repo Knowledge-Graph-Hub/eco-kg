@@ -9,7 +9,7 @@ from kgx import PandasTransformer, ObographJsonTransformer, RdfOwlTransformer
 ONTOLOGIES = {
     #'HpTransform': 'hp.json',
     'GoTransform': 'go-basic.json',
-    'NCBITransform':  'ncbitaxon.json',
+    'NCBITransform':  'taxslim.owl',
     #'ChebiTransform': 'chebi.json',
     #'EnvoTransform': 'envo.json'
     'ToTransform' : 'to.owl',

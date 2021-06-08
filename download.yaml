@@ -784,6 +784,9 @@
 -
   url: https://rapdb.dna.affrc.go.jp/download/archive/RAP-MSU_2021-05-10.txt.gz
   local_name: rice_map.gz
+-
+  url: https://download.maizegdb.org/Pan-genes/MaizeGDB_B73_pangene_2020_11.tsv.gz
+  local_name: corn_map.gz
 
 # #**** ROBOT ****
 #
@@ -809,5 +812,5 @@
   url: http://purl.obolibrary.org/obo/go/go-basic.json #which GO?
   local_name: go-basic.json
 -
-  url: http://purl.obolibrary.org/obo/ncbitaxon.json
-  local_name: ncbitaxon.json
+  url: http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.owl
+  local_name: taxslim.owl
