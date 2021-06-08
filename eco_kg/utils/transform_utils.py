@@ -76,6 +76,8 @@ def write_node_edge_item(fh: Any, header: List, data: List, sep: str = '\t'):
         fh.write(sep.join(data) + "\n")
     except IOError:
         logging.warning("Can't write data for {}".format(data))
+    except TypeError:
+    	print(str(data))
 
 
 def get_item_by_priority(items_dict: dict, keys_by_priority: list) -> str:

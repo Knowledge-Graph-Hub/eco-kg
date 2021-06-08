@@ -35,7 +35,7 @@ def convert_to_json(path:str, ont:str):
     
     return None
 
-def extract_convert_to_json(path:str, ont_name:str, term_file:str):
+def extract_convert_to_json(path:str, ont_name:str, terms:str, mode:str):
     """
     This method extracts all children of provided CURIE
     USE THIS ONE TO EXTRACT ALL PLANTS FROM NCBI TAXON
@@ -45,16 +45,25 @@ def extract_convert_to_json(path:str, ont_name:str, term_file:str):
     output_json = os.path.join(path, ont_name.lower()+'.json')
     output_owl = os.path.join(path, ont_name.lower()+'_extracted_subset.owl')
 
-    if not os.path.isfile(output_json):
+    if ':' in terms:
         call = ['bash', robot_file, 'extract', \
-                                    '--method', 'STAR',
+                                    '--method', mode,
                                     '--input', input_owl, \
                                     '--output', output_owl, \
-                                    '--term-file', term_file, \
+                                    '--term', terms, \
                                     'convert', \
                                     '--output', output_json, \
                                     '-f', 'json']
-        
+    else:
+        call = ['bash', robot_file, 'extract', \
+                                    '--method', mode, \
+                                    '--input', input_owl, \
+                                    '--output', output_owl, \
+                                    '--term', terms, \
+                                    'convert', \
+                                    '--output', output_json, \
+                                    '-f', 'json']
+
         subprocess.call(call, env=env)
 
     return None
