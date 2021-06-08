@@ -24,7 +24,7 @@ class PlanteomeTransform(Transform):
         source_name = "Planteome"
         super().__init__(source_name, input_dir, output_dir)  # set some variables
         self.node_header = ['id', 'name', 'category', 'provided_by']
-        self.edge_header = ['subject', 'edge_label', 'object', 'relation', 'provided_by']
+        self.edge_header = ['subject', 'edge_label', 'object', 'predicate', 'provided_by']
 
     def run(self, data_files: List[str] = None):
         source_name = 'Planteome'#how do I pull this from the top?
