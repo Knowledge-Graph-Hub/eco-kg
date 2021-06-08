@@ -23,13 +23,15 @@ edge_stats:
   count_by_spo:
     biolink:GenomicEntity-RO:0002162-unknown:
       count: 262446
-    biolink:GenomicEntity-RO:0002200-unknown:
+    biolink:GenomicEntity-RO:0002200-biolink:PhenotypicFeature:
       count: 2612
-    biolink:GenomicEntity-RO:0002205-unknown:
+    biolink:GenomicEntity-RO:0002205-biolink:CellularComponent:
       count: 196587
-    biolink:GenomicEntity-RO:0002206-unknown:
-      count: 1022799
-    biolink:GenomicEntity-RO:0002327-unknown:
+    biolink:GenomicEntity-RO:0002206-biolink:AnatomicalEntity:
+      count: 11633
+    biolink:GenomicEntity-RO:0002206-biolink:LifeStage:
+      count: 1011166
+    biolink:GenomicEntity-RO:0002327-biolink:MolecularFunction:
       count: 394105
     biolink:GenomicEntity-RO:0011002-biolink:BiologicalProcess:
       count: 306675
@@ -37,7 +39,7 @@ edge_stats:
       count: 13429
     biolink:NamedThing-biolink:subclass_of-biolink:NamedThing:
       count: 14380
-    unknown-RO:0002201-biolink:OrganismTaxon:
+    biolink:PhenotypicFeature-RO:0002201-biolink:OrganismTaxon:
       count: 642
   predicates:
   - RO:0002162
@@ -53,19 +55,34 @@ edge_stats:
 graph_name: Merged Graph
 node_stats:
   count_by_category:
+    biolink:AnatomicalEntity:
+      count: 251
     biolink:BiologicalProcess:
       count: 4090
+    biolink:CellularComponent:
+      count: 891
     biolink:GenomicEntity:
       count: 263530
+    biolink:LifeStage:
+      count: 144
+    biolink:MolecularFunction:
+      count: 2921
     biolink:NamedThing:
       count: 14581
     biolink:OrganismTaxon:
       count: 14
+    biolink:PhenotypicFeature:
+      count: 391
     unknown:
-      count: 4577
+      count: 14
   node_categories:
+  - biolink:AnatomicalEntity
   - biolink:BiologicalProcess
+  - biolink:CellularComponent
   - biolink:GenomicEntity
+  - biolink:LifeStage
+  - biolink:MolecularFunction
   - biolink:NamedThing
   - biolink:OrganismTaxon
-  total_nodes: 286792
+  - biolink:PhenotypicFeature
+  total_nodes: 286827

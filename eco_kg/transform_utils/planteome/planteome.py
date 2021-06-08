@@ -201,16 +201,17 @@ class PlanteomeTransform(Transform):
                                 node_type = process_node_type
                                 if isinstance(label, float):
                                     label = 'Need GO label'
-                                write_node_edge_item(fh=node,
-                                                     header=self.node_header,
-                                                     data=[ontology_id,
-                                                           label,
-                                                           node_type,
-                                                           provided_by])
-                                seen_node[ontology_id] += 1
                             else:
                                 print('Error. New Aspect.')
                                 print(row['Aspect'])
+                            write_node_edge_item(fh=node,
+                                                 header=self.node_header,
+                                                 data=[ontology_id,
+                                                       label,
+                                                       node_type,
+                                                       provided_by])
+                            seen_node[ontology_id] += 1
+
                     # Write Edge
                         # gene to org edge
                         if isinstance(gene_id, str):
