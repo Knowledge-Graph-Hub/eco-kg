@@ -1,0 +1,88 @@
+edge_stats:
+  count_by_predicates:
+    RO:0002162:
+      count: 262446
+    RO:0002200:
+      count: 2612
+    RO:0002201:
+      count: 642
+    RO:0002205:
+      count: 196587
+    RO:0002206:
+      count: 1022799
+    RO:0002327:
+      count: 394105
+    RO:0011002:
+      count: 306675
+    biolink:related_to:
+      count: 13429
+    biolink:subclass_of:
+      count: 14380
+    unknown:
+      count: 0
+  count_by_spo:
+    biolink:GenomicEntity-RO:0002162-unknown:
+      count: 262446
+    biolink:GenomicEntity-RO:0002200-biolink:PhenotypicFeature:
+      count: 2612
+    biolink:GenomicEntity-RO:0002205-biolink:CellularComponent:
+      count: 196587
+    biolink:GenomicEntity-RO:0002206-biolink:AnatomicalEntity:
+      count: 11633
+    biolink:GenomicEntity-RO:0002206-biolink:LifeStage:
+      count: 1011166
+    biolink:GenomicEntity-RO:0002327-biolink:MolecularFunction:
+      count: 394105
+    biolink:GenomicEntity-RO:0011002-biolink:BiologicalProcess:
+      count: 306675
+    biolink:NamedThing-biolink:related_to-biolink:NamedThing:
+      count: 13429
+    biolink:NamedThing-biolink:subclass_of-biolink:NamedThing:
+      count: 14380
+    biolink:PhenotypicFeature-RO:0002201-biolink:OrganismTaxon:
+      count: 642
+  predicates:
+  - RO:0002162
+  - RO:0002200
+  - RO:0002201
+  - RO:0002205
+  - RO:0002206
+  - RO:0002327
+  - RO:0011002
+  - biolink:related_to
+  - biolink:subclass_of
+  total_edges: 2213675
+graph_name: Merged Graph
+node_stats:
+  count_by_category:
+    biolink:AnatomicalEntity:
+      count: 251
+    biolink:BiologicalProcess:
+      count: 4090
+    biolink:CellularComponent:
+      count: 891
+    biolink:GenomicEntity:
+      count: 263530
+    biolink:LifeStage:
+      count: 144
+    biolink:MolecularFunction:
+      count: 2921
+    biolink:NamedThing:
+      count: 14581
+    biolink:OrganismTaxon:
+      count: 14
+    biolink:PhenotypicFeature:
+      count: 391
+    unknown:
+      count: 14
+  node_categories:
+  - biolink:AnatomicalEntity
+  - biolink:BiologicalProcess
+  - biolink:CellularComponent
+  - biolink:GenomicEntity
+  - biolink:LifeStage
+  - biolink:MolecularFunction
+  - biolink:NamedThing
+  - biolink:OrganismTaxon
+  - biolink:PhenotypicFeature
+  total_nodes: 286827

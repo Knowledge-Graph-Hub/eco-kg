@@ -1,7 +1,7 @@
 # Sourced from: https://github.com/biolink/kgx/tree/master/examples
 ---
 configuration:
-  output_directory: data/merged
+  output_directory: /Volumes/Seagate Por/data/merged
   checkpoint: false
 
   curie_map:
@@ -14,15 +14,15 @@ configuration:
     # define the type for non-canonical properties for RDF export
 
 merged_graph:
-  name: Project-Name Graph
+  name: Eco-KG Graph
   source:
-    bacteria-archaea-traits-ncbi:
+    planteome:
       input:
-        name: "bacteria-archaea-traits-ncbi"
+        name: "planteome"
         format: tsv
         filename:
-        - data/transformed/condensed_traits_NCBI/nodes.tsv
-        - data/transformed/condensed_traits_NCBI/edges.tsv
+        - /Volumes/Seagate Por/data/transformed/Planteome/nodes.tsv
+        - /Volumes/Seagate Por/data/transformed/Planteome/edges.tsv
 
 #      operations:
 #        - name: kgx.utils.graph_utils.remap_node_identifier
@@ -31,29 +31,13 @@ merged_graph:
 #            alternative_property: xrefs
 #            prefix: UniProtKB
  
-    envo-ontology:
-      input:
-        name: "ENVO Ontology"
-        format: tsv
-        filename:
-          - data/transformed/ontologies/envo_nodes.tsv
-          - data/transformed/ontologies/envo_edges.tsv
-    
-    chebi-ontology:
-      input:
-        name: "CheBI Ontology"
-        format: tsv
-        filename:
-          - data/transformed/ontologies/chebi_nodes.tsv
-          - data/transformed/ontologies/chebi_edges.tsv
-    
     ncbi-ontology:
       input:
-        name: "NCBITaxon Ontology"
+        name: "NCBISlim Ontology"
         format: tsv
         filename:
-          - data/transformed/ontologies/ncbitaxon_nodes.tsv
-          - data/transformed/ontologies/ncbitaxon_edges.tsv
+          - /Volumes/Seagate Por/data/transformed/ontologies/taxslim_nodes.tsv
+          - /Volumes/Seagate Por/data/transformed/ontologies/taxslim_edges.tsv
 
   operations:
     - name: kgx.operations.summarize_graph.generate_graph_stats

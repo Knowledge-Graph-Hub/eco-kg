@@ -24,7 +24,7 @@ class PlanteomeTransform(Transform):
         source_name = "Planteome"
         super().__init__(source_name, input_dir, output_dir)  # set some variables
         self.node_header = ['id', 'name', 'category', 'provided_by']
-        self.edge_header = ['subject', 'edge_label', 'object', 'relation', 'provided_by']
+        self.edge_header = ['subject', 'edge_label', 'object', 'predicate', 'provided_by']
 
     def run(self, data_files: List[str] = None):
         source_name = 'Planteome'#how do I pull this from the top?
@@ -203,16 +203,10 @@ class PlanteomeTransform(Transform):
                                 node_type = process_node_type
                                 if isinstance(label, float):
                                     label = 'Need GO label'
-                                write_node_edge_item(fh=node,
-                                                     header=self.node_header,
-                                                     data=[ontology_id,
-                                                           label,
-                                                           node_type,
-                                                           provided_by])
-                                seen_node[ontology_id] += 1
                             else:
                                 print('Error. New Aspect.')
                                 print(row['Aspect'])
+
                         if 'ortholog' in data_file:
                             orth = row['With_or_From'].split(':')[1]
                             if orth not in seen_node:
