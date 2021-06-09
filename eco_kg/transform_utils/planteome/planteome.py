@@ -108,6 +108,8 @@ class PlanteomeTransform(Transform):
                     gene_to_growth_stage_edge_relation = 'RO:0002206'
                     gene_to_trait_edge_label = 'biolink:has_phenotype'
                     gene_to_trait_edge_relation = 'RO:0002200'
+                    gene_to_orth_edge_label = 'biolink:orthologous_to'
+                    gene_to_orth_edge_relation = 'RO:HOM0000017'
                     trait_to_org_edge_label = 'biolink:phenotype_of'
                     trait_to_org_edge_relation = 'RO:0002201'
 
@@ -211,6 +213,18 @@ class PlanteomeTransform(Transform):
                             else:
                                 print('Error. New Aspect.')
                                 print(row['Aspect'])
+                        if 'ortholog' in data_file:
+                            orth = row['With_or_From'].split(':')[1]
+                            if orth not in seen_node:
+                                gene_name = 'none'
+                                write_node_edge_item(fh=node,
+                                                     header=self.node_header,
+                                                     data=[orth,
+                                                           gene_name,
+                                                           gene_node_type,
+                                                           provided_by])
+                                seen_node[g] += 1
+
                     # Write Edge
                         # gene to org edge
                         if isinstance(gene_id, str):
@@ -254,6 +268,18 @@ class PlanteomeTransform(Transform):
                                                             edge_relation,
                                                             provided_by])
                                 seen_edge[str(g)+ontology_id] += 1
+                        #ortholog edges
+                        if 'ortholog' in data_file:
+                            for g in genes:
+                                if str(g)+str(orth) not in seen_edge:
+                                    write_node_edge_item(fh=edge,
+                                                            header=self.edge_header,
+                                                            data=[g,
+                                                                gene_to_orth_edge_label,
+                                                                orth,
+                                                                gene_to_orth_edge_relation,
+                                                                provided_by])
+                                    seen_edge[str(g)+str(tax_id)] += 1
 
                         # trait to org edge
                         if 'TO' in ontology_id:
