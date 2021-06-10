@@ -67,8 +67,8 @@ setup(
         'click==7.1.2',
         'pyyaml',
         'biolinkml==1.5.8',
-        'bmt==0.4.0',
-        'kgx==0.4.0',
+        'bmt==0.6.0',
+        'kgx==1.1.0',
         'sphinx',
         'sphinx_rtd_theme',
         'recommonmark',
@@ -93,7 +93,8 @@ setup(
         'pystache==0.5.4',
         'jsonlines==1.2.0',
         'neo4jrestclient==2.1.1',
-        'validators==0.18.1'
+        'validators==0.18.1',
+        'linkml_model'
     ],
     extras_require=extras,
 )

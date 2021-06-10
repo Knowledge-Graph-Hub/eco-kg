@@ -4,15 +4,6 @@ configuration:
   output_directory: /Volumes/Seagate Por/data/merged
   checkpoint: false
 
-  curie_map:
-    # define non-canonical CURIE to IRI mappings (for RDF)
-  node_properties:
-    # define predicates that are to be treated as direct node properties (for RDF)
-  predicate_mappings:
-    # map non-canonical predicates to a property name (for RDF)
-  property_types:
-    # define the type for non-canonical properties for RDF export
-
 merged_graph:
   name: Eco-KG Graph
   source:
@@ -23,22 +14,34 @@ merged_graph:
         filename:
         - /Volumes/Seagate Por/data/transformed/Planteome/nodes.tsv
         - /Volumes/Seagate Por/data/transformed/Planteome/edges.tsv
-
-#      operations:
-#        - name: kgx.utils.graph_utils.remap_node_identifier
-#          args:
-#            category: biolink:Protein
-#            alternative_property: xrefs
-#            prefix: UniProtKB
- 
     ncbi-ontology:
       input:
         name: "NCBISlim Ontology"
         format: tsv
         filename:
-          - /Volumes/Seagate Por/data/transformed/ontologies/taxslim_nodes.tsv
-          - /Volumes/Seagate Por/data/transformed/ontologies/taxslim_edges.tsv
-
+        - /Volumes/Seagate Por/data/transformed/ontologies/taxslim_nodes.tsv
+        - /Volumes/Seagate Por/data/transformed/ontologies/taxslim_edges.tsv
+    go-ontology:
+      input:
+        name: "Gene Ontology"
+        format: tsv
+        filename:
+        - /Volumes/Seagate Por/data/transformed/ontologies/go-basic_nodes.tsv
+        - /Volumes/Seagate Por/data/transformed/ontologies/go-basic_edges.tsv
+    to-ontology:
+      input:
+        name: "Plant Trait Ontology"
+        format: tsv
+        filename:
+        - /Volumes/Seagate Por/data/transformed/ontologies/to_nodes.tsv
+        - /Volumes/Seagate Por/data/transformed/ontologies/to_edges.tsv
+    po-ontology:
+      input:
+        name: "Plant Ontology"
+        format: tsv
+        filename:
+        - /Volumes/Seagate Por/data/transformed/ontologies/po_nodes.tsv
+        - /Volumes/Seagate Por/data/transformed/ontologies/po_edges.tsv
   operations:
     - name: kgx.operations.summarize_graph.generate_graph_stats
       args:

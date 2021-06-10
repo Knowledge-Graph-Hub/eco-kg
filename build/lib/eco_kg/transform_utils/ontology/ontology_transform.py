@@ -3,18 +3,18 @@ import os
 from typing import Optional
 
 from eco_kg.transform_utils.transform import Transform
-from kgx import PandasTransformer, ObographJsonTransformer
+from kgx.cli.cli_utils import transform
 
 
 ONTOLOGIES = {
     #'HpTransform': 'hp.json',
     'GoTransform': 'go-basic.json',
-    'NCBITransform':  'ncbitaxon.json',
+    'NCBITransform':  'taxslim.owl',
     #'ChebiTransform': 'chebi.json',
     #'EnvoTransform': 'envo.json'
     'ToTransform' : 'to.owl',
     'PoTransform' : 'po.owl',
-    'PecoTransform' : 'peco.owl',
+    #'PecoTransform' : 'peco.owl',
 }
 # Is there a tool for transforming owl to json?
 
@@ -54,7 +54,10 @@ class OntologyTransform(Transform):
              None.
         """
         print(f"Parsing {data_file}")
-        transformer = ObographJsonTransformer()
+        if data_file.endswith('.json'):
+            transformer = ObographJsonTransformer()
+        if data_file.endswith('.owl'):
+            transformer = RdfOwlTransformer()
         compression: Optional[str]
         if data_file.endswith('.gz'):
             compression = 'gz'
