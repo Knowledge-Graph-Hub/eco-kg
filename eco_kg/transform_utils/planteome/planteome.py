@@ -183,8 +183,14 @@ class PlanteomeTransform(Transform):
                             if 'LOC' not in gene_id and gene_id in rice_gene_ids:
                                 gene_id = rice_gene_ids[gene_id].split(',')
                         if tax_id == '381124' or tax_id == '4577':
+                            #print(row)
+                            if isinstance(gene_id, int):
+                                gene_id = row['DB_Object_Synonym']
+                            if isinstance(gene_id, float):
+                                gene_id = row['DB_Object_Symbol']
                             if 'Zm00001eb' not in gene_id and gene_id in corn_gene_ids:
                                 gene_id = corn_gene_ids[gene_id]
+
                         if org_id not in seen_node:
                             write_node_edge_item(fh=node,
                                                  header=self.node_header,
