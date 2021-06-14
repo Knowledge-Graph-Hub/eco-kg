@@ -48,6 +48,26 @@ class PlanteomeTransform(Transform):
                     continue
                 rice_gene_ids[Os] = LOC
 
+        corn_gene_ids = {}
+        with gzip.open(os.path.join(self.input_base_dir, 'corn_map.gz'), 'rt') as cg:
+            for line in cg.readlines():
+                k = []
+                v = []
+                line = line.strip('\n')
+                row = line.split('\t')
+                for g in row:
+                    if g == '':
+                        continue
+                    if 'B73v' in g:
+                        g = re.sub('B73v\d_','',g)
+                    if 'Zm00001eb' in g and g not in v:
+                        v.append(g)
+                    else:
+                        if g not in k:
+                            k.append(g)
+                for i in k:
+                    corn_gene_ids[i] = v
+
         if not data_files: # = if not data_file
             data_files = []
             for file in os.listdir(self.input_base_dir):
@@ -162,6 +182,9 @@ class PlanteomeTransform(Transform):
                         if tax_id == '4530' or tax_id == '39947':#changing Os gene IDs to LOC gene IDs
                             if 'LOC' not in gene_id and gene_id in rice_gene_ids:
                                 gene_id = rice_gene_ids[gene_id].split(',')
+                        if tax_id == '381124' or tax_id == '4577':
+                            if 'Zm00001eb' not in gene_id and gene_id in corn_gene_ids:
+                                gene_id = corn_gene_ids[gene_id]
                         if org_id not in seen_node:
                             write_node_edge_item(fh=node,
                                                  header=self.node_header,
