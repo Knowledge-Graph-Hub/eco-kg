@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: PyShExC
+Version: 0.8.3
+Summary: PyShExC - Python ShEx compiler
+Home-page: https://github.com/shexSpec/grammar-python-antlr
+Author: Harold Solbrig
+Author-email: solbrig@jhu.edu
+License: MIT License
+Keywords: shex,shexc,shexj,shexr,rdf
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Compilers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.7
+Requires-Dist: antlr4-python3-runtime (~=4.9)
+Requires-Dist: jsonasobj (>=1.2.1)
+Requires-Dist: pyjsg (>=0.11.6)
+Requires-Dist: rdflib-jsonld (~=0.5)
+Requires-Dist: rdflib (~=5.0)
+Requires-Dist: shexjsg (>=0.7.1)
+
+UNKNOWN
+
+

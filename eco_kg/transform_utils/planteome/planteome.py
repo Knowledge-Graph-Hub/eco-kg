@@ -185,9 +185,19 @@ class PlanteomeTransform(Transform):
                         if tax_id == '381124' or tax_id == '4577':
                             #print(row)
                             if isinstance(gene_id, int):
-                                gene_id = row['DB_Object_Synonym']
-                            if isinstance(gene_id, float):
-                                gene_id = row['DB_Object_Symbol']
+                                try:
+                                    gene_id = row['DB_Object_Synonym'].split('|')[0]
+                                    if 'GRMZM' not in gene_id:
+                                        #print(gene_id)
+                                        if 'GRMZM' in row['DB_Object_Name']:
+                                            gene_id = row['DB_Object_Name']
+                                        else:
+                                            pass
+                                        #print(gene_id)
+                                except AttributeError:
+                                    #print(gene_id)
+                                    gene_id = row['DB_Object_Symbol']
+                            #print(gene_id)
                             if 'Zm00001eb' not in gene_id and gene_id in corn_gene_ids:
                                 gene_id = corn_gene_ids[gene_id]
 
@@ -200,7 +210,7 @@ class PlanteomeTransform(Transform):
                                                        provided_by])
                             seen_node[org_id] += 1
                         #create gene node
-                        if isinstance(gene_id, str) or isinstance(gene_id, int):
+                        if isinstance(gene_id, str):
                             genes = [gene_id]
                         if isinstance(gene_id, int):
                             gi = str(gene_id)
@@ -237,17 +247,23 @@ class PlanteomeTransform(Transform):
                                 print(row['Aspect'])
 
                         if 'ortholog' in data_file:
-                            orth = row['With_or_From'].split(':')[1]
-                            if orth not in seen_node:
-                                gene_name = 'none'
-                                write_node_edge_item(fh=node,
-                                                     header=self.node_header,
-                                                     data=[orth,
-                                                           gene_name,
-                                                           gene_node_type,
-                                                           provided_by])
-                                seen_node[g] += 1
-
+                            orth = row['With_or_From']
+                            if '|' in orth:
+                                orth = orth.split('|')
+                            else:
+                                orth = orth.split(':')[1]
+                                orth = [orth]
+                            #print(orth)
+                            for o in orth:
+                                if o not in seen_node:
+                                    gene_name = 'none'
+                                    write_node_edge_item(fh=node,
+                                                         header=self.node_header,
+                                                         data=[o,
+                                                               gene_name,
+                                                               gene_node_type,
+                                                               provided_by])
+                                    seen_node[g] += 1
                     # Write Edge
                         # gene to org edge
                         if isinstance(gene_id, str):
@@ -294,15 +310,16 @@ class PlanteomeTransform(Transform):
                         #ortholog edges
                         if 'ortholog' in data_file:
                             for g in genes:
-                                if str(g)+str(orth) not in seen_edge:
-                                    write_node_edge_item(fh=edge,
-                                                            header=self.edge_header,
-                                                            data=[g,
-                                                                gene_to_orth_edge_label,
-                                                                orth,
-                                                                gene_to_orth_edge_relation,
-                                                                provided_by])
-                                    seen_edge[str(g)+str(tax_id)] += 1
+                                for o in orth:
+                                    if str(g)+str(o) not in seen_edge:
+                                        write_node_edge_item(fh=edge,
+                                                                header=self.edge_header,
+                                                                data=[g,
+                                                                    gene_to_orth_edge_label,
+                                                                    o,
+                                                                    gene_to_orth_edge_relation,
+                                                                    provided_by])
+                                        seen_edge[str(g)+str(tax_id)] += 1
 
                         # trait to org edge
                         if 'TO' in ontology_id:

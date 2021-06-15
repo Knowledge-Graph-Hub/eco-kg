@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: PyJSG
+Version: 0.11.6
+Summary: Python JSON Schema Grammar interpreter
+Home-page: https://github.com/hsolbrig/pyjsg
+Author: Harold Solbrig
+Author-email: solbrig@jhu.edu
+License: CC0 1.0 Universal
+Keywords: JSG,Javascript,Schema,Python,Code Generator
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Dist: antlr4-python3-runtime (~=4.9)
+Requires-Dist: jsonasobj (>=1.2.1)
+
+Python JSON Schema Grammar interpreter
+
+

@@ -1,0 +1,3 @@
+[console_scripts]
+shexeval = PyShEx.shex_evaluator:evaluate_cli
+

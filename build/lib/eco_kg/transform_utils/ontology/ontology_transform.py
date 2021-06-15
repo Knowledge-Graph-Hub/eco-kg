@@ -12,8 +12,8 @@ ONTOLOGIES = {
     'NCBITransform':  'taxslim.owl',
     #'ChebiTransform': 'chebi.json',
     #'EnvoTransform': 'envo.json'
-    'ToTransform' : 'to.owl',
-    'PoTransform' : 'po.owl',
+    'ToTransform' : 'to_remove.owl',
+    'PoTransform' : 'po_remove.owl',
     #'PecoTransform' : 'peco.owl',
 }
 # Is there a tool for transforming owl to json?
@@ -54,15 +54,7 @@ class OntologyTransform(Transform):
              None.
         """
         print(f"Parsing {data_file}")
-        if data_file.endswith('.json'):
-            transformer = ObographJsonTransformer()
-        if data_file.endswith('.owl'):
-            transformer = RdfOwlTransformer()
-        compression: Optional[str]
-        if data_file.endswith('.gz'):
-            compression = 'gz'
-        else:
-            compression = None
-        transformer.parse(data_file, compression=compression, provided_by=source)
-        output_transformer = PandasTransformer(transformer.graph)
-        output_transformer.save(filename=os.path.join(self.output_dir, f'{name}'), output_format='tsv', mode=None)
+        if '.json' in data_file:
+            transform(inputs=[data_file], input_format='obojson', output= os.path.join(self.output_dir, name), output_format='tsv')
+        if '.owl' in data_file:
+            transform(inputs=[data_file], input_format='owl', output= os.path.join(self.output_dir, name), output_format='tsv')

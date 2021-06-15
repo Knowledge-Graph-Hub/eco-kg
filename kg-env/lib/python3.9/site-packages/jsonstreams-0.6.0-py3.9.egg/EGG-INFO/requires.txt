@@ -1,0 +1,7 @@
+six
+
+[recomended]
+simplejson
+
+[test]
+tox

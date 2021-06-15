@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: ShExJSG
+Version: 0.7.1
+Summary: ShExJSG - Astract Syntax Tree for the ShEx 2.0 language
+Home-page: https://github.com/hsolbrig/ShExJSG
+Author: Harold Solbrig
+Author-email: solbrig@jhu.edu
+License: CC0 1.0 Universal
+Keywords: shex,jsg,rdf
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Compilers
+Classifier: License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Dist: pyjsg (>=0.11.5)
+
+ShExJSG - Astract Syntax Tree Definition for the ShEx 2.0 language
+
+

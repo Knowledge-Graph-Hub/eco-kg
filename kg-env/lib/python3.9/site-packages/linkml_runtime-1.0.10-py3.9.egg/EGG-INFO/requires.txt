@@ -1,0 +1,12 @@
+click
+deprecated
+hbreader
+jsonasobj2>=1.0.4,~=1.0
+prefixcommons
+pyldmod
+pyyaml~=5.1
+rdflib-jsonld~=0.5
+rdflib-pyldmod-compat
+rdflib~=5.0
+requests
+shexjsg~=0.7
