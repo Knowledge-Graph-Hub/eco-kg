@@ -1,0 +1,37 @@
+Metadata-Version: 2.1
+Name: linkml-runtime
+Version: 1.0.10
+Summary: LinkML Runtime Environment
+Home-page: http://linkml.github.io/linkml-runtime
+Author: Harold Solbrig
+Author-email: solbrig@jhu.edu
+License: CC0 1.0 Universal
+Keywords: linkml,lod,rdf,owl,yaml,model,metamodel
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Healthcare Industry
+Classifier: License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Python: >=3.7
+Requires-Dist: click
+Requires-Dist: deprecated
+Requires-Dist: hbreader
+Requires-Dist: jsonasobj2 (>=1.0.4,~=1.0)
+Requires-Dist: prefixcommons
+Requires-Dist: pyldmod
+Requires-Dist: pyyaml (~=5.1)
+Requires-Dist: rdflib-jsonld (~=0.5)
+Requires-Dist: rdflib-pyldmod-compat
+Requires-Dist: rdflib (~=5.0)
+Requires-Dist: requests
+Requires-Dist: shexjsg (~=0.7)
+
+Runtime Environment for the Linked Open Data Modeling Language
+
+

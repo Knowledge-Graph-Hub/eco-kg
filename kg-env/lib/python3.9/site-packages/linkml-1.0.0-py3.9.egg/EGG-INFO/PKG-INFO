@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: linkml
+Version: 1.0.0
+Summary: Linked Open Data Modeling Language
+Home-page: http://linkml.github.io/linkml
+Author: Harold Solbrig
+Author-email: solbrig@jhu.edu
+License: CC0 1.0 Universal
+Keywords: biolink,metamodel
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Healthcare Industry
+Classifier: License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Python: >=3.7
+Requires-Dist: argparse (>=1.4.0)
+Requires-Dist: click (~=7.0)
+Requires-Dist: graphviz (>=0.10.1)
+Requires-Dist: hbreader
+Requires-Dist: isodate (>=0.6.0)
+Requires-Dist: jsonasobj2 (>=1.0.3,~=1.0)
+Requires-Dist: jsonschema (>=3.0.1)
+Requires-Dist: linkml-runtime (>=1.0.8,~=1.0)
+Requires-Dist: parse
+Requires-Dist: prefixcommons (>=0.1.7)
+Requires-Dist: prologterms (>=0.0.6)
+Requires-Dist: pyjsg (>=0.11.6)
+Requires-Dist: pyldmod
+Requires-Dist: pyshex (>=0.7.20)
+Requires-Dist: pyshexc (>=0.8.3)
+Requires-Dist: python-dateutil
+Requires-Dist: pyyaml (~=5.1)
+Requires-Dist: rdflib-jsonld (>=0.5.0)
+Requires-Dist: rdflib-pyldmod-compat
+Requires-Dist: rdflib (~=5.0)
+Requires-Dist: requests (>=2.22)
+Requires-Dist: sqlalchemy
+Requires-Dist: watchdog (>=0.9.0)
+
+UNKNOWN
+
+

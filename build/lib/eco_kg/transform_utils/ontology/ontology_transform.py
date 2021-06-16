@@ -3,18 +3,18 @@ import os
 from typing import Optional
 
 from eco_kg.transform_utils.transform import Transform
-from kgx import PandasTransformer, ObographJsonTransformer
+from kgx.cli.cli_utils import transform
 
 
 ONTOLOGIES = {
     #'HpTransform': 'hp.json',
     'GoTransform': 'go-basic.json',
-    'NCBITransform':  'ncbitaxon.json',
+    'NCBITransform':  'taxslim.owl',
     #'ChebiTransform': 'chebi.json',
     #'EnvoTransform': 'envo.json'
-    'ToTransform' : 'to.owl',
-    'PoTransform' : 'po.owl',
-    'PecoTransform' : 'peco.owl',
+    'ToTransform' : 'to_remove.owl',
+    'PoTransform' : 'po_remove.owl',
+    #'PecoTransform' : 'peco.owl',
 }
 # Is there a tool for transforming owl to json?
 
@@ -54,12 +54,7 @@ class OntologyTransform(Transform):
              None.
         """
         print(f"Parsing {data_file}")
-        transformer = ObographJsonTransformer()
-        compression: Optional[str]
-        if data_file.endswith('.gz'):
-            compression = 'gz'
-        else:
-            compression = None
-        transformer.parse(data_file, compression=compression, provided_by=source)
-        output_transformer = PandasTransformer(transformer.graph)
-        output_transformer.save(filename=os.path.join(self.output_dir, f'{name}'), output_format='tsv', mode=None)
+        if '.json' in data_file:
+            transform(inputs=[data_file], input_format='obojson', output= os.path.join(self.output_dir, name), output_format='tsv')
+        if '.owl' in data_file:
+            transform(inputs=[data_file], input_format='owl', output= os.path.join(self.output_dir, name), output_format='tsv')

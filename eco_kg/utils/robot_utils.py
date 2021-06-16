@@ -38,7 +38,6 @@ def convert_to_json(path:str, ont:str):
 def extract_convert_to_json(path:str, ont_name:str, terms:str, mode:str):
     """
     This method extracts all children of provided CURIE
-    USE THIS ONE TO EXTRACT ALL PLANTS FROM NCBI TAXON
     """
     robot_file, env = initialize_robot(path)
     input_owl = os.path.join(path, ont_name.lower()+'.owl')
@@ -66,4 +65,14 @@ def extract_convert_to_json(path:str, ont_name:str, terms:str, mode:str):
 
         subprocess.call(call, env=env)
 
+    return None
+
+def remove_axiom(path:str, ont_name:str, structuraltautologies):
+    robot_file, env = initialize_robot(path)
+    input_owl = os.path.join(path, ont_name.lower()+'.owl')
+    output_owl = os.path.join(path, ont_name.lower()+'_reduced.owl')
+    call = ['bash', robot_file, 'remove', \
+                                '--input', input_owl, \
+                                '--axioms', structuraltautologies, \
+                                '--output', output_owl]
     return None

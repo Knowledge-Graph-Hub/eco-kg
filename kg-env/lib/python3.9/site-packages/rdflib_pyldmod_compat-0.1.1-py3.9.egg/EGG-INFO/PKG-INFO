@@ -1,0 +1,65 @@
+Metadata-Version: 2.1
+Name: rdflib-pyldmod-compat
+Version: 0.1.1
+Summary: Conversion between rdflib and PyLD data formats for compatibility
+Home-page: http://github.com/zimeon/rdflib-pyld-compat
+Author: Simeon Warner
+Author-email: simeon.warner@cornell.edu
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: rdflib (>=4.2.0)
+Requires-Dist: pyld
+Requires-Dist: testfixtures
+
+rdflib-pyld-compat
+==================
+.. image:: https://travis-ci.org/zimeon/rdflib-pyld-compat.svg?branch=master
+   :target: https://travis-ci.org/zimeon/rdflib-pyld-compat
+.. image:: https://coveralls.io/repos/github/zimeon/rdflib-pyld-compat/badge.svg?branch=master
+   :target: https://coveralls.io/github/zimeon/rdflib-pyld-compat?branch=master
+
+Support (some) data conversion between `rdflib` and `pyld` Python libraries.
+
+The `rdflib
+<http://rdflib.readthedocs.io/en/stable/apidocs/>`_
+and `PyLD
+<https://github.com/digitalbazaar/pyld>`_ libraries use different in-memory data structures so it
+is not trivial to use the powerful RDF support of rdflib in conjuction with the JSON-LD processor
+implementation of PyLD. This code is designed to provide a bridge between rdflib and PyLD in-memory
+formats, avoiding the need to serialize and then re-parse the data.
+
+Requires Python 3.6 or higher because of dependencies.
+
+Limitations
+-----------
+
+This code was developed to support a particular application and then pulled out as I needed it a
+second time. I haven't thought hard about the general case and am sure that are additional
+limitations beyond those I know about. Known limitations:
+
+* assumes the URIRefs in an rdflib graph do not need expansion with a NamespaceManager
+
+History
+-------
+
+Last version to work with Python 2.7 was `v0.0.2
+<https://github.com/zimeon/rdflib-pyld-compat/releases/tag/v0.0.2>`_, install with
+`pip install rdflib-pyld-compat==0.0.2
+<https://pypi.org/project/rdflib-pyld-compat/0.0.2/>`_
+
+Contributing
+------------
+
+I'd be happy to hear of other problems/limitations and/or suggestions for improvement.
+
+

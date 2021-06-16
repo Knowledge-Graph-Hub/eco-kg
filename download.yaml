@@ -794,7 +794,7 @@
   url: https://github.com/ontodev/robot/releases/download/v1.7.2/robot.jar
   local_name: robot.jar
 -
-  url: https://raw.githubusercontent.com/ontodev/robot/master/bin/robot 
+  url: https://raw.githubusercontent.com/ontodev/robot/master/bin/robot
   local_name: robot
 
 # #**** Ontology files****
@@ -814,3 +814,9 @@
 -
   url: http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.owl
   local_name: taxslim.owl
+-
+  url: https://kg-hub.berkeleybop.io/frozen_incoming_data/to_remove.owl
+  local_name: to_remove.owl
+-
+  url: https://kg-hub.berkeleybop.io/frozen_incoming_data/po_remove.owl
+  local_name: po_remove.owl

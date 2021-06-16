@@ -1,0 +1,4 @@
+#!/Users/annethessen/eco-kg/kg-env/bin/python3
+# EASY-INSTALL-SCRIPT: 'antlr4-python3-runtime==4.9.2','pygrun'
+__requires__ = 'antlr4-python3-runtime==4.9.2'
+__import__('pkg_resources').run_script('antlr4-python3-runtime==4.9.2', 'pygrun')

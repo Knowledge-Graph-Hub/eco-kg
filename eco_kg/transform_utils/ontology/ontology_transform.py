@@ -3,20 +3,23 @@ import os
 from typing import Optional
 
 from eco_kg.transform_utils.transform import Transform
-from kgx import PandasTransformer, ObographJsonTransformer, RdfOwlTransformer
+from kgx.cli.cli_utils import transform
+from eco_kg.utils.robot_utils import *
+#from kgx import PandasTransformer, ObographJsonTransformer, OwlSource
 
 
 ONTOLOGIES = {
     #'HpTransform': 'hp.json',
     'GoTransform': 'go-basic.json',
-    'NCBITransform':  'taxslim.owl',
+    'NCBITransform':  'taxslim.json',
     #'ChebiTransform': 'chebi.json',
     #'EnvoTransform': 'envo.json'
-    'ToTransform' : 'to.owl',
-    'PoTransform' : 'po.owl',
+    'ToTransform' : 'to_remove.json',
+    'PoTransform' : 'po_remove.json',
     #'PecoTransform' : 'peco.owl',
 }
-# Is there a tool for transforming owl to json?
+# Is there a tool for transforming owl to json? Yes, robot convert. I did this outside
+#of this function just to get something working.
 
 class OntologyTransform(Transform):
     """
@@ -54,15 +57,11 @@ class OntologyTransform(Transform):
              None.
         """
         print(f"Parsing {data_file}")
-        if data_file.endswith('.json'):
-            transformer = ObographJsonTransformer()
-        if data_file.endswith('.owl'):
-            transformer = RdfOwlTransformer()
-        compression: Optional[str]
-        if data_file.endswith('.gz'):
-            compression = 'gz'
-        else:
-            compression = None
-        transformer.parse(data_file, compression=compression, provided_by=source)
-        output_transformer = PandasTransformer(transformer.graph)
-        output_transformer.save(filename=os.path.join(self.output_dir, f'{name}'), output_format='tsv', mode=None)
+        transform(inputs=[data_file], input_format='obojson', output= os.path.join(self.output_dir, name), output_format='tsv')
+#        if '.owl' in data_file:
+#            m = convert_to_json(data_file, name)
+#            transform(inputs=[m], input_format='obojson', output= os.path.join(self.output_dir, name), output_format='tsv')
+#        if '.json' in data_file:
+#            transform(inputs=[data_file], input_format='obojson', output= os.path.join(self.output_dir, name), output_format='tsv')
+#        if '.owl' in data_file:
+#            transform(inputs=[data_file], input_format='owl', output= os.path.join(self.output_dir, name), output_format='tsv')
