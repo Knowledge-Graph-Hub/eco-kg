@@ -83,6 +83,7 @@ def parse_header(elements) -> dict:
 
 
 def write_line(elements, OUTSTREAM) -> None:
+    print('made it to write')
     """
     Write line to OUTSTREAM.
     Parameters
