@@ -197,7 +197,7 @@ class PlanteomeTransform(Transform):
                                 except AttributeError:
                                     #print(gene_id)
                                     gene_id = row['DB_Object_Symbol']
-                            #print(gene_id)
+                            print(gene_id)
                             if 'Zm00001eb' not in gene_id and gene_id in corn_gene_ids:
                                 gene_id = corn_gene_ids[gene_id]
 
@@ -217,6 +217,8 @@ class PlanteomeTransform(Transform):
                             genes = [gi]
                         #print(genes)
                         for g in genes:
+                            if 'AGI_LocusCode' in g:
+                                g = g.split(':')[1]
                             if g not in seen_node:
                                 g = str(g)
                                 write_node_edge_item(fh=node,
