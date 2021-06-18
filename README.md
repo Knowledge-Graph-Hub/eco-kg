@@ -1,12 +1,15 @@
 eco-KG
 ================================================
 -- UNDER DEVELOPMENT --
+
 Based on the KGH [template](https://github.com/Knowledge-Graph-Hub/kg-dtm-template/generate). 
 
 Documentation
 ------------------------------------------------
 
 Starting with Planteome - hope to include Monarch Initiative, EOL TraitBank, and more
+
+Currently only contains data from Arabidopsis thaliana, Zea mays, Oryza sativa, Sorghum bicolor, and Populus trichocarpa.
 
 **Components**
 
