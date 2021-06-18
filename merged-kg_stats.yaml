@@ -1,21 +1,21 @@
 edge_stats:
   count_by_predicates:
     RO:0002162:
-      count: 227970
+      count: 183572
     RO:0002200:
-      count: 2803
+      count: 2675
     RO:0002201:
       count: 642
     RO:0002205:
-      count: 195568
+      count: 165451
     RO:0002206:
-      count: 222745
+      count: 284555
     RO:0002327:
-      count: 394163
+      count: 301243
     RO:0011002:
-      count: 306842
+      count: 251882
     RO:HOM0000017:
-      count: 77671
+      count: 95654
     biolink:causes:
       count: 2
     biolink:coexists_with:
@@ -76,29 +76,35 @@ edge_stats:
     biolink:CellularComponent-biolink:subclass_of-biolink:CellularComponent:
       count: 4845
     biolink:GenomicEntity-RO:0002162-unknown:
-      count: 227970
-    biolink:GenomicEntity-RO:0002200-unknown:
-      count: 2803
+      count: 183572
+    biolink:GenomicEntity-RO:0002200-biolink:PhenotypicFeature:
+      count: 2675
     biolink:GenomicEntity-RO:0002205-biolink:CellularComponent:
-      count: 194491
-    biolink:GenomicEntity-RO:0002205-biolink:OntologyClass:
-      count: 1077
-    biolink:GenomicEntity-RO:0002206-unknown:
-      count: 222745
-    biolink:GenomicEntity-RO:0002327-biolink:MolecularActivity:
-      count: 389084
-    biolink:GenomicEntity-RO:0002327-biolink:OntologyClass:
-      count: 5079
+      count: 165451
+    biolink:GenomicEntity-RO:0002206-biolink:AnatomicalEntity:
+      count: 38334
+    biolink:GenomicEntity-RO:0002206-biolink:LifeStage:
+      count: 246221
+    biolink:GenomicEntity-RO:0002327-biolink:MolecularFunction:
+      count: 301243
     biolink:GenomicEntity-RO:0011002-biolink:BiologicalProcess:
-      count: 305103
-    biolink:GenomicEntity-RO:0011002-biolink:OntologyClass:
-      count: 1739
+      count: 251882
     biolink:GenomicEntity-RO:HOM0000017-biolink:GenomicEntity:
-      count: 77671
+      count: 95654
     biolink:MolecularActivity-biolink:related_to-biolink:MolecularActivity:
-      count: 11
+      count: 6
+    biolink:MolecularActivity-biolink:related_to-biolink:MolecularFunction:
+      count: 3
     biolink:MolecularActivity-biolink:subclass_of-biolink:MolecularActivity:
-      count: 13574
+      count: 3437
+    biolink:MolecularActivity-biolink:subclass_of-biolink:MolecularFunction:
+      count: 6500
+    biolink:MolecularFunction-biolink:related_to-biolink:MolecularFunction:
+      count: 2
+    biolink:MolecularFunction-biolink:subclass_of-biolink:MolecularActivity:
+      count: 984
+    biolink:MolecularFunction-biolink:subclass_of-biolink:MolecularFunction:
+      count: 2653
     biolink:NamedThing-biolink:causes-biolink:NamedThing:
       count: 2
     biolink:NamedThing-biolink:coexists_with-biolink:NamedThing:
@@ -161,7 +167,7 @@ edge_stats:
       count: 24
     biolink:OrganismalEntity-biolink:subclass_of-biolink:OrganismalEntity:
       count: 14325
-    unknown-RO:0002201-biolink:OrganismTaxon:
+    biolink:PhenotypicFeature-RO:0002201-biolink:OrganismTaxon:
       count: 642
   predicates:
   - RO:0002162
@@ -196,18 +202,24 @@ edge_stats:
   - rdfs:domain
   - rdfs:isDefinedBy
   - rdfs:range
-  total_edges: 1539986
+  total_edges: 1397256
 graph_name: Merged Graph
 node_stats:
   count_by_category:
+    biolink:AnatomicalEntity:
+      count: 251
     biolink:BiologicalProcess:
-      count: 30459
+      count: 30493
     biolink:CellularComponent:
-      count: 4459
+      count: 4476
     biolink:GenomicEntity:
-      count: 234618
+      count: 183523
+    biolink:LifeStage:
+      count: 144
     biolink:MolecularActivity:
       count: 12281
+    biolink:MolecularFunction:
+      count: 2921
     biolink:NamedThing:
       count: 5404
     biolink:OntologyClass:
@@ -216,15 +228,21 @@ node_stats:
       count: 14
     biolink:OrganismalEntity:
       count: 14532
+    biolink:PhenotypicFeature:
+      count: 391
     unknown:
-      count: 800
+      count: 14
   node_categories:
+  - biolink:AnatomicalEntity
   - biolink:BiologicalProcess
   - biolink:CellularComponent
   - biolink:GenomicEntity
+  - biolink:LifeStage
   - biolink:MolecularActivity
+  - biolink:MolecularFunction
   - biolink:NamedThing
   - biolink:OntologyClass
   - biolink:OrganismTaxon
   - biolink:OrganismalEntity
-  total_nodes: 305986
+  - biolink:PhenotypicFeature
+  total_nodes: 254891
