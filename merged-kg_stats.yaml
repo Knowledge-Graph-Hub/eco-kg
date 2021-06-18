@@ -1,21 +1,21 @@
 edge_stats:
   count_by_predicates:
     RO:0002162:
-      count: 227970
+      count: 165463
     RO:0002200:
-      count: 2803
+      count: 2733
     RO:0002201:
       count: 642
     RO:0002205:
-      count: 195568
+      count: 165421
     RO:0002206:
-      count: 222745
+      count: 237711
     RO:0002327:
-      count: 394163
+      count: 301226
     RO:0011002:
-      count: 306842
+      count: 251845
     RO:HOM0000017:
-      count: 77671
+      count: 115668
     biolink:causes:
       count: 2
     biolink:coexists_with:
@@ -76,25 +76,25 @@ edge_stats:
     biolink:CellularComponent-biolink:subclass_of-biolink:CellularComponent:
       count: 4845
     biolink:GenomicEntity-RO:0002162-unknown:
-      count: 227970
+      count: 165463
     biolink:GenomicEntity-RO:0002200-unknown:
-      count: 2803
+      count: 2733
     biolink:GenomicEntity-RO:0002205-biolink:CellularComponent:
-      count: 194491
+      count: 164369
     biolink:GenomicEntity-RO:0002205-biolink:OntologyClass:
-      count: 1077
+      count: 1052
     biolink:GenomicEntity-RO:0002206-unknown:
-      count: 222745
+      count: 237711
     biolink:GenomicEntity-RO:0002327-biolink:MolecularActivity:
-      count: 389084
+      count: 297439
     biolink:GenomicEntity-RO:0002327-biolink:OntologyClass:
-      count: 5079
+      count: 3787
     biolink:GenomicEntity-RO:0011002-biolink:BiologicalProcess:
-      count: 305103
+      count: 250146
     biolink:GenomicEntity-RO:0011002-biolink:OntologyClass:
-      count: 1739
+      count: 1699
     biolink:GenomicEntity-RO:HOM0000017-biolink:GenomicEntity:
-      count: 77671
+      count: 115668
     biolink:MolecularActivity-biolink:related_to-biolink:MolecularActivity:
       count: 11
     biolink:MolecularActivity-biolink:subclass_of-biolink:MolecularActivity:
@@ -196,7 +196,7 @@ edge_stats:
   - rdfs:domain
   - rdfs:isDefinedBy
   - rdfs:range
-  total_edges: 1539986
+  total_edges: 1352291
 graph_name: Merged Graph
 node_stats:
   count_by_category:
@@ -205,7 +205,7 @@ node_stats:
     biolink:CellularComponent:
       count: 4459
     biolink:GenomicEntity:
-      count: 234618
+      count: 172073
     biolink:MolecularActivity:
       count: 12281
     biolink:NamedThing:
@@ -227,4 +227,4 @@ node_stats:
   - biolink:OntologyClass
   - biolink:OrganismTaxon
   - biolink:OrganismalEntity
-  total_nodes: 305986
+  total_nodes: 243441

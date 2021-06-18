@@ -43,10 +43,15 @@ class PlanteomeTransform(Transform):
                 line = line.strip('\n')
                 row = line.split('\t')
                 Os = row[0]
-                LOC = row[1]
+                LOC = [row[1]]
                 if Os == 'None' or LOC == 'None':
                     continue
-                rice_gene_ids[Os] = LOC
+                OC = []
+                for x in LOC:
+                    x = x.split('.')[0]
+                    if x not in OC:
+                        OC.append(x)
+                rice_gene_ids[Os] = OC
 
         corn_gene_ids = {}
         with gzip.open(os.path.join(self.input_base_dir, 'corn_map.gz'), 'rt') as cg:
@@ -180,24 +185,28 @@ class PlanteomeTransform(Transform):
                         #create organism node
                         org_id = org_prefix + str(tax_id)
                         if tax_id == '4530' or tax_id == '39947':#changing Os gene IDs to LOC gene IDs
+                            if 'LOC' not in gene_id:
+                                gene_id = row['DB_Object_Name']
                             if 'LOC' not in gene_id and gene_id in rice_gene_ids:
-                                gene_id = rice_gene_ids[gene_id].split(',')
+                                print(gene_id)
+                                gid = rice_gene_ids[gene_id]
+                                print(gid)
                         if tax_id == '381124' or tax_id == '4577':
                             #print(row)
                             if isinstance(gene_id, int):
                                 try:
                                     gene_id = row['DB_Object_Synonym'].split('|')[0]
                                     if 'GRMZM' not in gene_id:
-                                        #print(gene_id)
-                                        if 'GRMZM' in row['DB_Object_Name']:
-                                            gene_id = row['DB_Object_Name']
-                                        else:
-                                            pass
-                                        #print(gene_id)
+                                        gene_id = row['DB_Object_Name']
+                                        if 'GRMZM' not in gene_id:
+                                            gene_id = row['DB_Object_Symbol']
+                                        print(gene_id)
                                 except AttributeError:
                                     #print(gene_id)
                                     gene_id = row['DB_Object_Symbol']
-                            print(gene_id)
+                            #print(gene_id)
+                            if '_' in gene_id:
+                                gene_id = gene_id.split('_')[0]
                             if 'Zm00001eb' not in gene_id and gene_id in corn_gene_ids:
                                 gene_id = corn_gene_ids[gene_id]
 
