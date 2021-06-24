@@ -1,174 +1,178 @@
 edge_stats:
   count_by_predicates:
     RO:0002162:
-      count: 183572
+      count: 179773
     RO:0002200:
-      count: 2675
+      count: 2651
     RO:0002201:
       count: 642
     RO:0002205:
-      count: 165451
+      count: 163942
     RO:0002206:
-      count: 284555
+      count: 283316
     RO:0002327:
-      count: 301243
+      count: 296823
     RO:0011002:
-      count: 251882
+      count: 248001
     RO:HOM0000017:
       count: 95654
-    biolink:causes:
-      count: 2
-    biolink:coexists_with:
-      count: 13
-    biolink:develops_from:
-      count: 133
-    biolink:has_attribute:
-      count: 277
-    biolink:has_part:
-      count: 126
-    biolink:has_participant:
-      count: 19
-    biolink:in_taxon:
-      count: 2
-    biolink:located_in:
-      count: 4
-    biolink:occurs_in:
-      count: 1
-    biolink:part_of:
-      count: 852
-    biolink:participates_in:
-      count: 30
-    biolink:preceded_by:
-      count: 20
-    biolink:precedes:
-      count: 3
-    biolink:regulates_process_to_process:
-      count: 50
-    biolink:related_to:
-      count: 17615
-    biolink:subPropertyOf:
-      count: 2
-    biolink:subclass_of:
-      count: 92272
-    owl:disjointWith:
-      count: 42
-    owl:imports:
-      count: 10
-    owl:inverseOf:
+    biolink:inverseOf:
       count: 31
-    owl:versionIRI:
-      count: 2
-    rdfs:domain:
-      count: 36
-    rdfs:isDefinedBy:
-      count: 2
-    rdfs:range:
-      count: 38
+    biolink:related_to:
+      count: 17497
+    biolink:subPropertyOf:
+      count: 145
+    biolink:subclass_of:
+      count: 91780
     unknown:
       count: 0
   count_by_spo:
+    biolink:AnatomicalEntity-biolink:related_to-biolink:AnatomicalEntity:
+      count: 140
+    biolink:AnatomicalEntity-biolink:related_to-biolink:LifeStage:
+      count: 4
+    biolink:AnatomicalEntity-biolink:related_to-biolink:OntologyClass:
+      count: 64
+    biolink:AnatomicalEntity-biolink:related_to-biolink:OrganismalEntity:
+      count: 1
+    biolink:AnatomicalEntity-biolink:subclass_of-biolink:AnatomicalEntity:
+      count: 133
+    biolink:AnatomicalEntity-biolink:subclass_of-biolink:OntologyClass:
+      count: 176
     biolink:BiologicalProcess-biolink:related_to-biolink:BiologicalProcess:
-      count: 13845
+      count: 13847
+    biolink:BiologicalProcess-biolink:related_to-biolink:MolecularFunction:
+      count: 8
     biolink:BiologicalProcess-biolink:subclass_of-biolink:BiologicalProcess:
       count: 52886
+    biolink:BiologicalProcess-biolink:subclass_of-biolink:OntologyClass:
+      count: 1
     biolink:CellularComponent-biolink:related_to-biolink:CellularComponent:
-      count: 1973
+      count: 1976
     biolink:CellularComponent-biolink:subclass_of-biolink:CellularComponent:
-      count: 4845
-    biolink:GenomicEntity-RO:0002162-unknown:
-      count: 183572
+      count: 4846
+    biolink:CellularComponent-biolink:subclass_of-biolink:NamedThing:
+      count: 1
+    biolink:ChemicalSubstance-biolink:related_to-biolink:ChemicalSubstance:
+      count: 587
+    biolink:ChemicalSubstance-biolink:subclass_of-biolink:ChemicalSubstance:
+      count: 1305
+    biolink:ChemicalSubstance-biolink:subclass_of-biolink:NamedThing:
+      count: 2
+    biolink:ChemicalSubstance-biolink:subclass_of-biolink:OntologyClass:
+      count: 4
+    biolink:GenomicEntity-RO:0002162-biolink:OrganismTaxon:
+      count: 179773
     biolink:GenomicEntity-RO:0002200-biolink:PhenotypicFeature:
-      count: 2675
+      count: 2651
     biolink:GenomicEntity-RO:0002205-biolink:CellularComponent:
-      count: 165451
+      count: 163942
     biolink:GenomicEntity-RO:0002206-biolink:AnatomicalEntity:
-      count: 38334
+      count: 37429
     biolink:GenomicEntity-RO:0002206-biolink:LifeStage:
-      count: 246221
+      count: 245887
     biolink:GenomicEntity-RO:0002327-biolink:MolecularFunction:
-      count: 301243
+      count: 296823
     biolink:GenomicEntity-RO:0011002-biolink:BiologicalProcess:
-      count: 251882
+      count: 248001
     biolink:GenomicEntity-RO:HOM0000017-biolink:GenomicEntity:
       count: 95654
+    biolink:LifeStage-biolink:related_to-biolink:AnatomicalEntity:
+      count: 3
+    biolink:LifeStage-biolink:related_to-biolink:LifeStage:
+      count: 29
+    biolink:LifeStage-biolink:related_to-biolink:OntologyClass:
+      count: 6
+    biolink:LifeStage-biolink:subclass_of-biolink:LifeStage:
+      count: 116
+    biolink:LifeStage-biolink:subclass_of-biolink:NamedThing:
+      count: 1
+    biolink:LifeStage-biolink:subclass_of-biolink:OntologyClass:
+      count: 41
+    biolink:MolecularActivity-biolink:related_to-biolink:BiologicalProcess:
+      count: 2
     biolink:MolecularActivity-biolink:related_to-biolink:MolecularActivity:
       count: 6
     biolink:MolecularActivity-biolink:related_to-biolink:MolecularFunction:
       count: 3
     biolink:MolecularActivity-biolink:subclass_of-biolink:MolecularActivity:
-      count: 3437
+      count: 3438
     biolink:MolecularActivity-biolink:subclass_of-biolink:MolecularFunction:
       count: 6500
+    biolink:MolecularFunction-biolink:related_to-biolink:BiologicalProcess:
+      count: 1
     biolink:MolecularFunction-biolink:related_to-biolink:MolecularFunction:
       count: 2
     biolink:MolecularFunction-biolink:subclass_of-biolink:MolecularActivity:
       count: 984
     biolink:MolecularFunction-biolink:subclass_of-biolink:MolecularFunction:
       count: 2653
-    biolink:NamedThing-biolink:causes-biolink:NamedThing:
-      count: 2
-    biolink:NamedThing-biolink:coexists_with-biolink:NamedThing:
-      count: 13
-    biolink:NamedThing-biolink:develops_from-biolink:NamedThing:
-      count: 133
-    biolink:NamedThing-biolink:has_attribute-biolink:NamedThing:
-      count: 277
-    biolink:NamedThing-biolink:has_part-biolink:NamedThing:
-      count: 126
-    biolink:NamedThing-biolink:has_participant-biolink:NamedThing:
-      count: 19
-    biolink:NamedThing-biolink:in_taxon-biolink:NamedThing:
-      count: 2
-    biolink:NamedThing-biolink:located_in-biolink:NamedThing:
-      count: 4
-    biolink:NamedThing-biolink:occurs_in-biolink:NamedThing:
+    biolink:MolecularFunction-biolink:subclass_of-biolink:NamedThing:
       count: 1
-    biolink:NamedThing-biolink:part_of-biolink:NamedThing:
-      count: 852
-    biolink:NamedThing-biolink:participates_in-biolink:NamedThing:
-      count: 30
-    biolink:NamedThing-biolink:preceded_by-biolink:NamedThing:
-      count: 20
-    biolink:NamedThing-biolink:precedes-biolink:NamedThing:
-      count: 3
-    biolink:NamedThing-biolink:regulates_process_to_process-biolink:NamedThing:
-      count: 50
-    biolink:NamedThing-biolink:related_to-biolink:NamedThing:
-      count: 1783
-    biolink:NamedThing-biolink:related_to-biolink:OntologyClass:
-      count: 3
+    biolink:MolecularFunction-biolink:subclass_of-biolink:OntologyClass:
+      count: 1
+    biolink:NamedThing-biolink:inverseOf-biolink:NamedThing:
+      count: 7
+    biolink:NamedThing-biolink:subPropertyOf-biolink:NamedThing:
+      count: 6
+    biolink:NamedThing-biolink:subPropertyOf-biolink:OntologyClass:
+      count: 11
+    biolink:NamedThing-biolink:subPropertyOf-biolink:PhenotypicFeature:
+      count: 2
+    biolink:NamedThing-biolink:subclass_of-biolink:ChemicalSubstance:
+      count: 2
     biolink:NamedThing-biolink:subclass_of-biolink:NamedThing:
-      count: 6575
+      count: 7
     biolink:NamedThing-biolink:subclass_of-biolink:OntologyClass:
+      count: 9
+    biolink:OntologyClass-biolink:inverseOf-biolink:OntologyClass:
+      count: 23
+    biolink:OntologyClass-biolink:related_to-biolink:AnatomicalEntity:
+      count: 308
+    biolink:OntologyClass-biolink:related_to-biolink:ChemicalSubstance:
+      count: 2
+    biolink:OntologyClass-biolink:related_to-biolink:LifeStage:
       count: 27
-    biolink:NamedThing-owl:disjointWith-biolink:NamedThing:
-      count: 42
-    biolink:NamedThing-owl:imports-biolink:NamedThing:
-      count: 10
-    biolink:NamedThing-owl:inverseOf-biolink:NamedThing:
-      count: 31
-    biolink:NamedThing-owl:versionIRI-biolink:NamedThing:
+    biolink:OntologyClass-biolink:related_to-biolink:OntologyClass:
+      count: 455
+    biolink:OntologyClass-biolink:related_to-biolink:OrganismalEntity:
       count: 2
-    biolink:NamedThing-rdfs:domain-biolink:NamedThing:
-      count: 36
-    biolink:NamedThing-rdfs:isDefinedBy-biolink:NamedThing:
+    biolink:OntologyClass-biolink:subPropertyOf-biolink:NamedThing:
       count: 2
-    biolink:NamedThing-rdfs:range-biolink:NamedThing:
-      count: 38
     biolink:OntologyClass-biolink:subPropertyOf-biolink:OntologyClass:
-      count: 2
+      count: 123
+    biolink:OntologyClass-biolink:subclass_of-biolink:AnatomicalEntity:
+      count: 420
+    biolink:OntologyClass-biolink:subclass_of-biolink:LifeStage:
+      count: 105
+    biolink:OntologyClass-biolink:subclass_of-biolink:NamedThing:
+      count: 390
     biolink:OntologyClass-biolink:subclass_of-biolink:OntologyClass:
-      count: 2
+      count: 1275
     biolink:OrganismTaxon-biolink:subclass_of-biolink:OrganismTaxon:
       count: 3
     biolink:OrganismTaxon-biolink:subclass_of-biolink:OrganismalEntity:
       count: 11
     biolink:OrganismalEntity-biolink:subclass_of-biolink:OntologyClass:
-      count: 24
+      count: 29
     biolink:OrganismalEntity-biolink:subclass_of-biolink:OrganismalEntity:
-      count: 14325
+      count: 14347
     biolink:PhenotypicFeature-RO:0002201-biolink:OrganismTaxon:
       count: 642
+    biolink:PhenotypicFeature-biolink:inverseOf-biolink:NamedThing:
+      count: 1
+    biolink:PhenotypicFeature-biolink:related_to-biolink:AnatomicalEntity:
+      count: 14
+    biolink:PhenotypicFeature-biolink:related_to-biolink:OntologyClass:
+      count: 10
+    biolink:PhenotypicFeature-biolink:subPropertyOf-biolink:NamedThing:
+      count: 1
+    biolink:PhenotypicFeature-biolink:subclass_of-biolink:NamedThing:
+      count: 30
+    biolink:PhenotypicFeature-biolink:subclass_of-biolink:OntologyClass:
+      count: 314
+    biolink:PhenotypicFeature-biolink:subclass_of-biolink:PhenotypicFeature:
+      count: 1749
   predicates:
   - RO:0002162
   - RO:0002200
@@ -178,64 +182,47 @@ edge_stats:
   - RO:0002327
   - RO:0011002
   - RO:HOM0000017
-  - biolink:causes
-  - biolink:coexists_with
-  - biolink:develops_from
-  - biolink:has_attribute
-  - biolink:has_part
-  - biolink:has_participant
-  - biolink:in_taxon
-  - biolink:located_in
-  - biolink:occurs_in
-  - biolink:part_of
-  - biolink:participates_in
-  - biolink:preceded_by
-  - biolink:precedes
-  - biolink:regulates_process_to_process
+  - biolink:inverseOf
   - biolink:related_to
   - biolink:subPropertyOf
   - biolink:subclass_of
-  - owl:disjointWith
-  - owl:imports
-  - owl:inverseOf
-  - owl:versionIRI
-  - rdfs:domain
-  - rdfs:isDefinedBy
-  - rdfs:range
-  total_edges: 1397256
+  total_edges: 1380255
 graph_name: Merged Graph
 node_stats:
   count_by_category:
     biolink:AnatomicalEntity:
-      count: 251
+      count: 1450
     biolink:BiologicalProcess:
       count: 30493
     biolink:CellularComponent:
       count: 4476
+    biolink:ChemicalSubstance:
+      count: 916
     biolink:GenomicEntity:
-      count: 183523
+      count: 179723
     biolink:LifeStage:
-      count: 144
+      count: 338
     biolink:MolecularActivity:
       count: 12281
     biolink:MolecularFunction:
       count: 2921
     biolink:NamedThing:
-      count: 5404
+      count: 44
     biolink:OntologyClass:
-      count: 3448
+      count: 6109
     biolink:OrganismTaxon:
       count: 14
     biolink:OrganismalEntity:
-      count: 14532
+      count: 14547
     biolink:PhenotypicFeature:
-      count: 391
+      count: 1547
     unknown:
-      count: 14
+      count: 0
   node_categories:
   - biolink:AnatomicalEntity
   - biolink:BiologicalProcess
   - biolink:CellularComponent
+  - biolink:ChemicalSubstance
   - biolink:GenomicEntity
   - biolink:LifeStage
   - biolink:MolecularActivity
@@ -245,4 +232,4 @@ node_stats:
   - biolink:OrganismTaxon
   - biolink:OrganismalEntity
   - biolink:PhenotypicFeature
-  total_nodes: 254891
+  total_nodes: 249892
