@@ -33,15 +33,15 @@ merged_graph:
         name: "Plant Trait Ontology"
         format: tsv
         filename:
-        - /Volumes/Seagate Por/data/transformed/ontologies/to_nodes.tsv
-        - /Volumes/Seagate Por/data/transformed/ontologies/to_edges.tsv
+        - /Volumes/Seagate Por/data/transformed/ontologies/to_remove_nodes.tsv
+        - /Volumes/Seagate Por/data/transformed/ontologies/to_remove_edges.tsv
     po-ontology:
       input:
         name: "Plant Ontology"
         format: tsv
         filename:
-        - /Volumes/Seagate Por/data/transformed/ontologies/po_nodes.tsv
-        - /Volumes/Seagate Por/data/transformed/ontologies/po_edges.tsv
+        - /Volumes/Seagate Por/data/transformed/ontologies/po_remove_nodes.tsv
+        - /Volumes/Seagate Por/data/transformed/ontologies/po_remove_edges.tsv
   operations:
     - name: kgx.graph_operations.summarize_graph.generate_graph_stats
       args:

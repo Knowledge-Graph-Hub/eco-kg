@@ -85,6 +85,9 @@
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_anatomy_gene_zea_MaizeGDB.assoc
   local_name: po_anatomy_gene_zea_MaizeGDB.assoc
 -
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_anatomy_gene_model_zea_MaizeGDB.assoc
+  local_name: po_anatomy_gene_model_zea_MaizeGDB.assoc
+-
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/po-associations/po_gene_Arabidopsis_PPPP.assoc
   local_name: po_gene_Arabidopsis_PPPP.assoc
 -

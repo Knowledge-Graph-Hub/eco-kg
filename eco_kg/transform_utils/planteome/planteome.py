@@ -190,6 +190,8 @@ class PlanteomeTransform(Transform):
                                 gene_id = row['DB_Object_Name']
                             if 'LOC' not in gene_id:
                                 gene_id = row['DB_Object_Symbol']
+                            if '-' in gene_id:
+                                gene_id = gene_id.split('-')[0]
                             if 'LOC' not in gene_id and gene_id in rice_gene_ids:
                                 #print(gene_id)
                                 gid = rice_gene_ids[gene_id]
@@ -248,19 +250,19 @@ class PlanteomeTransform(Transform):
                                 label = row['DB_Object_Name']
                             elif row['Aspect'] == 'A':
                                 node_type = anatomy_node_type
-                                label = 'Need PO label'
+                                label = ''
                             elif row['Aspect'] == 'G':
                                 node_type = growth_stage_node_type
-                                label = 'Need PO label'
+                                label = ''
                             elif row['Aspect'] == 'C':
                                 node_type = cellular_component_node_type
-                                label = 'Need GO label'
+                                label = ''
                             elif row['Aspect'] == 'F':
                                 node_type = molecular_function_node_type
-                                label = 'Need GO label'
+                                label = ''
                             elif row['Aspect'] == 'P':
                                 node_type = process_node_type
-                                label = 'Need GO label'
+                                label = ''
                             else:
                                 print('Error. New Aspect.')
                                 print(row['Aspect'])
@@ -270,7 +272,7 @@ class PlanteomeTransform(Transform):
                                                        label,
                                                        node_type,
                                                        provided_by])
-                            seen_node[g] += 1
+                            seen_node[ontology_id] += 1
 
                         #create additional nodes for orthologs
                         if 'ortholog' in data_file:
@@ -312,7 +314,7 @@ class PlanteomeTransform(Transform):
                                                         header=self.edge_header,
                                                         data=[g,
                                                             gene_to_org_edge_label,
-                                                            tax_id,
+                                                            org_id,
                                                             gene_to_org_edge_relation,
                                                             provided_by])
                                 seen_edge[str(g)+str(tax_id)] += 1

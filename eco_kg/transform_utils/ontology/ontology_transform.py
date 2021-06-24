@@ -5,7 +5,6 @@ from typing import Optional
 from eco_kg.transform_utils.transform import Transform
 from kgx.cli.cli_utils import transform
 from eco_kg.utils.robot_utils import *
-#from kgx import PandasTransformer, ObographJsonTransformer, OwlSource
 
 
 ONTOLOGIES = {
@@ -18,7 +17,7 @@ ONTOLOGIES = {
     'PoTransform' : 'po_remove.json',
     #'PecoTransform' : 'peco.owl',
 }
-# Is there a tool for transforming owl to json? Yes, robot convert. I did this outside
+# I converted owl files to json outside
 #of this function just to get something working.
 
 class OntologyTransform(Transform):
@@ -58,10 +57,3 @@ class OntologyTransform(Transform):
         """
         print(f"Parsing {data_file}")
         transform(inputs=[data_file], input_format='obojson', output= os.path.join(self.output_dir, name), output_format='tsv')
-#        if '.owl' in data_file:
-#            m = convert_to_json(data_file, name)
-#            transform(inputs=[m], input_format='obojson', output= os.path.join(self.output_dir, name), output_format='tsv')
-#        if '.json' in data_file:
-#            transform(inputs=[data_file], input_format='obojson', output= os.path.join(self.output_dir, name), output_format='tsv')
-#        if '.owl' in data_file:
-#            transform(inputs=[data_file], input_format='owl', output= os.path.join(self.output_dir, name), output_format='tsv')
