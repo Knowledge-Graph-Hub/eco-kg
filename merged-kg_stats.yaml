@@ -1,23 +1,23 @@
 edge_stats:
   count_by_predicates:
-    RO:0002162:
-      count: 179773
-    RO:0002200:
-      count: 2651
-    RO:0002201:
-      count: 642
-    RO:0002205:
-      count: 163942
-    RO:0002206:
-      count: 283316
-    RO:0002327:
+    biolink:enables:
       count: 296823
-    RO:0011002:
-      count: 248001
-    RO:HOM0000017:
-      count: 95654
+    biolink:expressed_in:
+      count: 293915
+    biolink:has_gene_product:
+      count: 163942
+    biolink:has_phenotype:
+      count: 2651
+    biolink:in_taxon:
+      count: 177803
     biolink:inverseOf:
       count: 31
+    biolink:orthologous_to:
+      count: 95654
+    biolink:phenotype_of:
+      count: 642
+    biolink:regulates:
+      count: 248001
     biolink:related_to:
       count: 17497
     biolink:subPropertyOf:
@@ -28,17 +28,17 @@ edge_stats:
       count: 0
   count_by_spo:
     biolink:AnatomicalEntity-biolink:related_to-biolink:AnatomicalEntity:
-      count: 140
+      count: 142
     biolink:AnatomicalEntity-biolink:related_to-biolink:LifeStage:
-      count: 4
+      count: 5
     biolink:AnatomicalEntity-biolink:related_to-biolink:OntologyClass:
       count: 64
     biolink:AnatomicalEntity-biolink:related_to-biolink:OrganismalEntity:
       count: 1
     biolink:AnatomicalEntity-biolink:subclass_of-biolink:AnatomicalEntity:
-      count: 133
+      count: 135
     biolink:AnatomicalEntity-biolink:subclass_of-biolink:OntologyClass:
-      count: 176
+      count: 178
     biolink:BiologicalProcess-biolink:related_to-biolink:BiologicalProcess:
       count: 13847
     biolink:BiologicalProcess-biolink:related_to-biolink:MolecularFunction:
@@ -61,22 +61,22 @@ edge_stats:
       count: 2
     biolink:ChemicalSubstance-biolink:subclass_of-biolink:OntologyClass:
       count: 4
-    biolink:GenomicEntity-RO:0002162-biolink:OrganismTaxon:
-      count: 179773
-    biolink:GenomicEntity-RO:0002200-biolink:PhenotypicFeature:
-      count: 2651
-    biolink:GenomicEntity-RO:0002205-biolink:CellularComponent:
-      count: 163942
-    biolink:GenomicEntity-RO:0002206-biolink:AnatomicalEntity:
-      count: 37429
-    biolink:GenomicEntity-RO:0002206-biolink:LifeStage:
-      count: 245887
-    biolink:GenomicEntity-RO:0002327-biolink:MolecularFunction:
+    biolink:GenomicEntity-biolink:enables-biolink:MolecularFunction:
       count: 296823
-    biolink:GenomicEntity-RO:0011002-biolink:BiologicalProcess:
-      count: 248001
-    biolink:GenomicEntity-RO:HOM0000017-biolink:GenomicEntity:
+    biolink:GenomicEntity-biolink:expressed_in-biolink:AnatomicalEntity:
+      count: 48028
+    biolink:GenomicEntity-biolink:expressed_in-biolink:LifeStage:
+      count: 245887
+    biolink:GenomicEntity-biolink:has_gene_product-biolink:CellularComponent:
+      count: 163942
+    biolink:GenomicEntity-biolink:has_phenotype-biolink:PhenotypicFeature:
+      count: 2651
+    biolink:GenomicEntity-biolink:in_taxon-biolink:OrganismTaxon:
+      count: 177803
+    biolink:GenomicEntity-biolink:orthologous_to-biolink:GenomicEntity:
       count: 95654
+    biolink:GenomicEntity-biolink:regulates-biolink:BiologicalProcess:
+      count: 248001
     biolink:LifeStage-biolink:related_to-biolink:AnatomicalEntity:
       count: 3
     biolink:LifeStage-biolink:related_to-biolink:LifeStage:
@@ -128,11 +128,11 @@ edge_stats:
     biolink:OntologyClass-biolink:inverseOf-biolink:OntologyClass:
       count: 23
     biolink:OntologyClass-biolink:related_to-biolink:AnatomicalEntity:
-      count: 308
+      count: 306
     biolink:OntologyClass-biolink:related_to-biolink:ChemicalSubstance:
       count: 2
     biolink:OntologyClass-biolink:related_to-biolink:LifeStage:
-      count: 27
+      count: 26
     biolink:OntologyClass-biolink:related_to-biolink:OntologyClass:
       count: 455
     biolink:OntologyClass-biolink:related_to-biolink:OrganismalEntity:
@@ -148,7 +148,7 @@ edge_stats:
     biolink:OntologyClass-biolink:subclass_of-biolink:NamedThing:
       count: 390
     biolink:OntologyClass-biolink:subclass_of-biolink:OntologyClass:
-      count: 1275
+      count: 1271
     biolink:OrganismTaxon-biolink:subclass_of-biolink:OrganismTaxon:
       count: 3
     biolink:OrganismTaxon-biolink:subclass_of-biolink:OrganismalEntity:
@@ -157,10 +157,10 @@ edge_stats:
       count: 29
     biolink:OrganismalEntity-biolink:subclass_of-biolink:OrganismalEntity:
       count: 14347
-    biolink:PhenotypicFeature-RO:0002201-biolink:OrganismTaxon:
-      count: 642
     biolink:PhenotypicFeature-biolink:inverseOf-biolink:NamedThing:
       count: 1
+    biolink:PhenotypicFeature-biolink:phenotype_of-biolink:OrganismTaxon:
+      count: 642
     biolink:PhenotypicFeature-biolink:related_to-biolink:AnatomicalEntity:
       count: 14
     biolink:PhenotypicFeature-biolink:related_to-biolink:OntologyClass:
@@ -174,19 +174,19 @@ edge_stats:
     biolink:PhenotypicFeature-biolink:subclass_of-biolink:PhenotypicFeature:
       count: 1749
   predicates:
-  - RO:0002162
-  - RO:0002200
-  - RO:0002201
-  - RO:0002205
-  - RO:0002206
-  - RO:0002327
-  - RO:0011002
-  - RO:HOM0000017
+  - biolink:enables
+  - biolink:expressed_in
+  - biolink:has_gene_product
+  - biolink:has_phenotype
+  - biolink:in_taxon
   - biolink:inverseOf
+  - biolink:orthologous_to
+  - biolink:phenotype_of
+  - biolink:regulates
   - biolink:related_to
   - biolink:subPropertyOf
   - biolink:subclass_of
-  total_edges: 1380255
+  total_edges: 1388884
 graph_name: Merged Graph
 node_stats:
   count_by_category:
@@ -199,7 +199,7 @@ node_stats:
     biolink:ChemicalSubstance:
       count: 916
     biolink:GenomicEntity:
-      count: 179723
+      count: 177752
     biolink:LifeStage:
       count: 338
     biolink:MolecularActivity:
@@ -232,4 +232,4 @@ node_stats:
   - biolink:OrganismTaxon
   - biolink:OrganismalEntity
   - biolink:PhenotypicFeature
-  total_nodes: 249892
+  total_nodes: 247921
