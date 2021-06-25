@@ -35,6 +35,8 @@ Starting with Planteome - hope to include Monarch Initiative, EOL TraitBank, and
 
 Currently only contains data from Arabidopsis thaliana, Zea mays, Oryza sativa, Sorghum bicolor, and Populus trichocarpa.
 
+Currently unable to transform PO and TO fully within this workflow. I have to separately use ROBOT to transform the OWL file to JSON, remove the inheres_in relations, and change the OBONamespace. 
+
 **Components**
 
 - Download: The [download.yaml](download.yaml) contains all the URLs for the source data.
