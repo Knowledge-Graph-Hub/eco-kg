@@ -35,7 +35,14 @@ Starting with Planteome - hope to include Monarch Initiative, EOL TraitBank, and
 
 Currently only contains data from Arabidopsis thaliana, Zea mays, Oryza sativa, Sorghum bicolor, and Populus trichocarpa.
 
-Currently unable to transform PO and TO fully within this workflow. I have to separately use ROBOT to transform the OWL file to JSON, remove the inheres_in relations, and change the OBONamespace. 
+Currently unable to transform PO and TO fully within this workflow. I have to separately use ROBOT to transform the OWL file to JSON and change the OBONamespace.
+
+Outside of the virtual environment started above, use robot to convert the owl file (in the data/raw diretory) to json.
+
+```
+./robot convert --input path/to.owl --format json --output path/to.json
+```
+Then, using find and replace change plant_anatomy to anatomical_entity. Change plant_structure_development_stage to life_stage. Change plant_trait_ontology to phenotypic_feature.
 
 **Components**
 
