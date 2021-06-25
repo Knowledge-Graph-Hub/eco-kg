@@ -120,6 +120,9 @@
 -
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_protein_Oryza_Gramene.assoc
   local_name: to_protein_Oryza_Gramene.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_qtl_Gramene.assoc
+  local_name: to_qtl_Gramene.assoc
 
 #saving for later
 #-
