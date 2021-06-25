@@ -13,8 +13,8 @@ ONTOLOGIES = {
     'NCBITransform':  'taxslim.json',
     #'ChebiTransform': 'chebi.json',
     #'EnvoTransform': 'envo.json'
-    'ToTransform' : 'to_remove.json',
-    'PoTransform' : 'po_remove.json',
+    'ToTransform' : 'to.json',
+    'PoTransform' : 'po.json',
     #'PecoTransform' : 'peco.owl',
 }
 # I converted owl files to json outside

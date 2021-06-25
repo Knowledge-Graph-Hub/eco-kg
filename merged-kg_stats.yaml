@@ -7,15 +7,15 @@ edge_stats:
     biolink:has_gene_product:
       count: 163942
     biolink:has_phenotype:
-      count: 2651
+      count: 5866
     biolink:in_taxon:
-      count: 177803
+      count: 181017
     biolink:inverseOf:
       count: 31
     biolink:orthologous_to:
       count: 95654
     biolink:phenotype_of:
-      count: 642
+      count: 947
     biolink:regulates:
       count: 248001
     biolink:related_to:
@@ -70,9 +70,9 @@ edge_stats:
     biolink:GenomicEntity-biolink:has_gene_product-biolink:CellularComponent:
       count: 163942
     biolink:GenomicEntity-biolink:has_phenotype-biolink:PhenotypicFeature:
-      count: 2651
+      count: 5866
     biolink:GenomicEntity-biolink:in_taxon-biolink:OrganismTaxon:
-      count: 177803
+      count: 181017
     biolink:GenomicEntity-biolink:orthologous_to-biolink:GenomicEntity:
       count: 95654
     biolink:GenomicEntity-biolink:regulates-biolink:BiologicalProcess:
@@ -152,15 +152,17 @@ edge_stats:
     biolink:OrganismTaxon-biolink:subclass_of-biolink:OrganismTaxon:
       count: 3
     biolink:OrganismTaxon-biolink:subclass_of-biolink:OrganismalEntity:
-      count: 11
+      count: 15
     biolink:OrganismalEntity-biolink:subclass_of-biolink:OntologyClass:
       count: 29
+    biolink:OrganismalEntity-biolink:subclass_of-biolink:OrganismTaxon:
+      count: 1
     biolink:OrganismalEntity-biolink:subclass_of-biolink:OrganismalEntity:
-      count: 14347
+      count: 14342
     biolink:PhenotypicFeature-biolink:inverseOf-biolink:NamedThing:
       count: 1
     biolink:PhenotypicFeature-biolink:phenotype_of-biolink:OrganismTaxon:
-      count: 642
+      count: 947
     biolink:PhenotypicFeature-biolink:related_to-biolink:AnatomicalEntity:
       count: 14
     biolink:PhenotypicFeature-biolink:related_to-biolink:OntologyClass:
@@ -186,7 +188,7 @@ edge_stats:
   - biolink:related_to
   - biolink:subPropertyOf
   - biolink:subclass_of
-  total_edges: 1388884
+  total_edges: 1395618
 graph_name: Merged Graph
 node_stats:
   count_by_category:
@@ -199,7 +201,7 @@ node_stats:
     biolink:ChemicalSubstance:
       count: 916
     biolink:GenomicEntity:
-      count: 177752
+      count: 180966
     biolink:LifeStage:
       count: 338
     biolink:MolecularActivity:
@@ -211,7 +213,7 @@ node_stats:
     biolink:OntologyClass:
       count: 6109
     biolink:OrganismTaxon:
-      count: 14
+      count: 21
     biolink:OrganismalEntity:
       count: 14547
     biolink:PhenotypicFeature:
@@ -232,4 +234,4 @@ node_stats:
   - biolink:OrganismTaxon
   - biolink:OrganismalEntity
   - biolink:PhenotypicFeature
-  total_nodes: 247921
+  total_nodes: 251138
