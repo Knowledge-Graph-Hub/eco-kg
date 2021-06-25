@@ -160,6 +160,8 @@ class PlanteomeTransform(Transform):
                                 gene_id = str(row['DB_Object_Synonym']).split('|')[0]
                                 if 'AT' not in gene_id:
                                     gene_id = row['DB_Object_ID']
+                            if 'At' in gene_id:
+                                gene_id = gene_id.upper()
                         elif tax_id == '4530':
                             gene_id = row['DB_Object_ID']
                             org_name = 'Oryza sativa'
