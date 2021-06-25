@@ -39,10 +39,14 @@ Currently unable to transform PO and TO fully within this workflow. I have to se
 
 Outside of the virtual environment started above, use robot to convert the owl file (in the data/raw diretory) to json.
 
+Do this after the download step.
+
 ```
 ./robot convert --input path/to.owl --format json --output path/to.json
 ```
 Then, using find and replace change plant_anatomy to anatomical_entity. Change plant_structure_development_stage to life_stage. Change plant_trait_ontology to phenotypic_feature.
+
+Now you can do the transform step.
 
 **Components**
 
