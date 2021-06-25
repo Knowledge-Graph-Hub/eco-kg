@@ -4,6 +4,30 @@ eco-KG
 
 Based on the KGH [template](https://github.com/Knowledge-Graph-Hub/kg-dtm-template/generate). 
 
+To Use
+------------------------------------------------
+
+```
+  #Clone the repository
+  git clone https://github.com/diatomsRcool/eco-kg
+  cd eco-kg
+  
+  #Set up a virtual environment and install the requirements
+  python -m venv kg-env
+  source kg-env/bin/activate
+  pip install -r requirements.txt
+  python setup.py install
+  
+  #Download the data - Use -o to set a path for the download if you don't like the default
+  python run.py download
+  
+  #Transform the data - Use -o and -i to change the default path if you want
+  python run.py transform
+  
+  #Merge the transformed data into a single KG
+  python run.py merge
+```
+
 Documentation
 ------------------------------------------------
 
