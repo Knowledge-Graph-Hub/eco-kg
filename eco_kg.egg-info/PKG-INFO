@@ -8,12 +8,53 @@ Author-email: annethessen@gmail.com
 License: BSD-3
 Description: eco-KG
         ================================================
-        experimenting with the Knowledge-Graph-Hub dtm template for the moment
+        -- UNDER DEVELOPMENT --
+        
+        Based on the KGH [template](https://github.com/Knowledge-Graph-Hub/kg-dtm-template/generate). 
+        
+        To Use
+        ------------------------------------------------
+        
+        ```
+          #Clone the repository
+          git clone https://github.com/diatomsRcool/eco-kg
+          cd eco-kg
+          
+          #Set up a virtual environment and install the requirements
+          python -m venv kg-env
+          source kg-env/bin/activate
+          pip install -r requirements.txt
+          python setup.py install
+          
+          #Download the data - Use -o to set a path for the download if you don't like the default
+          python run.py download
+          
+          #Transform the data - Use -o and -i to change the default path if you want
+          python run.py transform
+          
+          #Merge the transformed data into a single KG
+          python run.py merge
+        ```
         
         Documentation
         ------------------------------------------------
         
-        Starting with Monarch, Planteome, and EOL
+        Starting with Planteome - hope to include Monarch Initiative, EOL TraitBank, and more
+        
+        Currently only contains data from Arabidopsis thaliana, Zea mays, Oryza sativa, Sorghum bicolor, and Populus trichocarpa.
+        
+        Currently unable to transform PO and TO fully within this workflow. I have to separately use ROBOT to transform the OWL file to JSON and change the OBONamespace.
+        
+        Outside of the virtual environment started above, use robot to convert the owl file (in the data/raw diretory) to json.
+        
+        Do this after the download step.
+        
+        ```
+        ./robot convert --input path/to.owl --format json --output path/to.json
+        ```
+        Then, using find and replace change plant_anatomy to anatomical_entity. Change plant_structure_development_stage to life_stage. Change plant_trait_ontology to phenotypic_feature.
+        
+        Now you can do the transform step.
         
         **Components**
         
@@ -25,23 +66,7 @@ Description: eco-KG
         
         The code for these are found in the [utils](project_name/utils) folder.
         
-        - NLP using [OGER](https://github.com/OntoGene/OGER)
         - [ROBOT](https://github.com/ontodev/robot) for transforming ontology.OWL to ontology.JSON
-        
-        **Examples Included**
-        
-        Thes examples have download links and transform codes from other projects.
-        
-        - Drug Central: Sampled from [kg-covid-19](https://github.com/Knowledge-Graph-Hub/kg-covid-19). Code located [here](project_name/transform_utils/drug_central)
-        - Ontology: Sampled from [kg-covid-19](https://github.com/Knowledge-Graph-Hub/kg-covid-19). Code located [here](project_name/transform_utils/ontology)
-        - Traits: Sampled from [kg-microbe](https://github.com/Knowledge-Graph-Hub/kg-microbe). Code located [here](project_name/transform_utils/traits)
-        - Example Transform: Boilerplate code for transforms. Code located [here](project_name/example_transform).
-        
-        The [merge.yaml](merge.yaml) shows merging of the various KGs. In this example we have ENVO, CHEBI, NCBITaxon and the Traits KGs merged.
-        
-        **Implementation**
-        
-        [Use this template](https://github.com/Knowledge-Graph-Hub/kg-dtm-template/generate) to generate a template in the desired repository and then refactor the string `project_name` in the project to the desired project name. 
         
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Beta
