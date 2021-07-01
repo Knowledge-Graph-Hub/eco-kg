@@ -11,7 +11,7 @@ sphinx_rtd_theme
 recommonmark
 parameterized
 validate_version_code
-pandas
+pandas==1.2.5
 six
 ordered-set
 requests

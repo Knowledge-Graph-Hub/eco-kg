@@ -123,7 +123,40 @@
 -
   url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_qtl_Gramene.assoc
   local_name: to_qtl_Gramene.assoc
-
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI3K.assoc
+  local_name: to_germplasm_O.sativa_IRRI3K.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_A-traits.assoc
+  local_name: to_germplasm_O.sativa_IRRI_GRIMS_A-traits.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_B-traits.assoc
+  local_name: to_germplasm_O.sativa_IRRI_GRIMS_B-traits.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_C-traits.assoc
+  local_name: to_germplasm_O.sativa_IRRI_GRIMS_C-traits.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_FG-traits.assoc
+  local_name: to_germplasm_O.sativa_IRRI_GRIMS_FG-traits.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_L-traits.assoc
+  local_name: to_germplasm_O.sativa_IRRI_GRIMS_L-traits.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_PR-traits.assoc
+  local_name: to_germplasm_O.sativa_IRRI_GRIMS_PR-traits.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_O.sativa_IRRI_GRIMS_S-traits.assoc
+  local_name: to_germplasm_O.sativa_IRRI_GRIMS_S-traits.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_Sorghum_GRIN.assoc
+  local_name: to_germplasm_Sorghum_GRIN.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_maize_GRIN.assoc
+  local_name: to_germplasm_maize_GRIN.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/to-associations/to_germplasm_rice_GRIN.assoc
+  local_name: to_germplasm_rice_GRIN.assoc
+ 
 #saving for later
 #-
 #  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_gene_Prunus_yedoensis_var.nudiflora.assoc
