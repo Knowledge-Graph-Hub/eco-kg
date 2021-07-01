@@ -6,6 +6,7 @@ data/nlp/input/*
 data/nlp/output/*
 data/nlp/terms/*
 data/merged/*
+kg-env/*
 __pycache__
 kg_microbe/__pycache__/
 .DS_Store
