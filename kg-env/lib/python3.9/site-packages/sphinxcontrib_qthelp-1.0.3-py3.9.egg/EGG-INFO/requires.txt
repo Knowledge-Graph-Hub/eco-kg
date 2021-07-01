@@ -1,8 +1,0 @@
-
-[lint]
-docutils-stubs
-flake8
-mypy
-
-[test]
-pytest

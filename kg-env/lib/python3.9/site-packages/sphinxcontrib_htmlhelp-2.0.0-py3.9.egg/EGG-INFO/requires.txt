@@ -1,9 +1,0 @@
-
-[lint]
-docutils-stubs
-flake8
-mypy
-
-[test]
-html5lib
-pytest
