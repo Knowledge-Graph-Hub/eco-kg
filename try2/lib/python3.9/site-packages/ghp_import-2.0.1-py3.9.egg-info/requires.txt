@@ -1,0 +1,6 @@
+python-dateutil>=2.8.1
+
+[dev]
+twine
+markdown
+flake8

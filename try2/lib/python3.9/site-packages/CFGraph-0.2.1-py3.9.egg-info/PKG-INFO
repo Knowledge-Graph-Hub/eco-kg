@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: CFGraph
+Version: 0.2.1
+Summary: rdflib collections flattening graph
+Home-page: http://github.com/hsolbrig/CFGraph
+Author: Harold Solbrig
+Author-email: solbrig@solbrig-informatics.com
+License: Apache 2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7

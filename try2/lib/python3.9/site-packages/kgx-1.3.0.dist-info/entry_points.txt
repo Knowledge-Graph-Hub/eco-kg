@@ -1,0 +1,3 @@
+[console_scripts]
+kgx = kgx.cli:cli
+

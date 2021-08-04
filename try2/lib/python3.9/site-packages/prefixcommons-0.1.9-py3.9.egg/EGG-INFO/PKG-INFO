@@ -1,0 +1,57 @@
+Metadata-Version: 2.1
+Name: prefixcommons
+Version: 0.1.9
+Summary: Library for working prefixcommons.org CURIEs
+Home-page: https://github.com/prefixcommons/prefixcommons
+Author: Chris Mungall
+Author-email: cmungall@gmail.com
+License: BSD3
+Keywords: ontology graph obo owl sparql networkx network
+Platform: UNKNOWN
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: pyyaml
+Requires-Dist: requests
+Provides-Extra: test
+Requires-Dist: pytest ; extra == 'test'
+
+prefixcommons
+=============
+
+A python API for working with ID prefixes in the context of
+`prefixcommons <http://prefixcommons.org>`__
+
+Current functionality: Uses JSON-LD contexts to expand and contract
+CURIEs to URIs
+
+E.g. GO:0008150 <=> http://purl.obolibrary.org/obo/GO\_0008150
+
+Example
+=======
+
+::
+
+   >>> from prefixcommons import contract_uri
+   >>> print(contract_uri('http://purl.obolibrary.org/obo/GO_0008150'))
+   GO:0008150
+
+   >>> from prefixcommons import expand_uri
+   >>> print(expand_uri('GOL0008150'))
+   http://purl.obolibrary.org/obo/GO_0008150
+
+The above uses standard JSON-LD context files from 
+`prefixcommons/biocontext <https://github.com/prefixcommons/biocontext>`__
+
+You can pass your own
+
+::
+
+   >>> cmaps = [{'GO': 'http://purl.obolibrary.org/obo/GO_'}]
+   >>> print(contract_uri('http://purl.obolibrary.org/obo/GO_0008150'), cmaps)
+   GO:0008150
+
+
+
