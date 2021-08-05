@@ -441,10 +441,8 @@ edge_stats:
       count: 176
     biolink:PhenotypicQuality-biolink:subclass_of-biolink:PhenotypicFeature:
       count: 160
-    biolink:QuantityValue-biolink:has_numeric_value-biolink:OrganismalEntity:
-      count: 514390
     biolink:QuantityValue-biolink:has_numeric_value-unknown:
-      count: 236836
+      count: 751226
     biolink:QuantityValue-biolink:has_unit-biolink:GenomicEntity:
       count: 413
     biolink:QuantityValue-biolink:has_unit-unknown:
@@ -529,7 +527,7 @@ node_stats:
     biolink:QuantityValue:
       count: 751226
     unknown:
-      count: 2206
+      count: 2774
   count_by_id_prefixes:
     BFO: 26
     BSPO: 13
@@ -539,6 +537,7 @@ node_stats:
     ECO: 751226
     ENVO: 59
     FOODON: 5
+    GERMPLASM: 116160
     GO: 53838
     GR: 8
     IAO: 22
@@ -614,6 +613,7 @@ node_stats:
     biolink:OrganismTaxon:
       NCBITaxon: 28
     biolink:OrganismalEntity:
+      GERMPLASM: 116104
       NCBITaxon: 14612
     biolink:PhenotypicFeature:
       TO: 599
@@ -621,7 +621,8 @@ node_stats:
       TO: 168
     biolink:QuantityValue:
       ECO: 751226
-    unknown: {}
+    unknown:
+      GERMPLASM: 56
   node_categories:
   - biolink:AnatomicalEntity
   - biolink:BiologicalProcess
@@ -648,6 +649,7 @@ node_stats:
     ECO: null
     ENVO: null
     FOODON: null
+    GERMPLASM: null
     GO: null
     GR: null
     IAO: null
@@ -723,6 +725,7 @@ node_stats:
     biolink:OrganismTaxon: !!set
       NCBITaxon: null
     biolink:OrganismalEntity: !!set
+      GERMPLASM: null
       NCBITaxon: null
     biolink:PhenotypicFeature: !!set
       TO: null
@@ -730,5 +733,6 @@ node_stats:
       TO: null
     biolink:QuantityValue: !!set
       ECO: null
-    unknown: !!set {}
-  total_nodes: 1164514
+    unknown: !!set
+      GERMPLASM: null
+  total_nodes: 1165082
