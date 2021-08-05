@@ -1,0 +1,8 @@
+wrapt<2,>=1.10
+
+[dev]
+PyTest
+PyTest-Cov
+bump2version<1
+sphinx<2
+tox

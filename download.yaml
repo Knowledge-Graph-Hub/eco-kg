@@ -848,11 +848,11 @@
   url: http://purl.obolibrary.org/obo/po.owl
   local_name: po.owl
 -
-  url: http://purl.obolibrary.org/obo/go/go-basic.json #which GO?
+  url: http://purl.obolibrary.org/obo/go/go-basic.json
   local_name: go-basic.json
 -
-  url: http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.owl
-  local_name: taxslim.owl
+  url: http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.json
+  local_name: taxslim.json
 -
   url: https://kg-hub.berkeleybop.io/frozen_incoming_data/to_remove.owl
   local_name: to_remove.owl

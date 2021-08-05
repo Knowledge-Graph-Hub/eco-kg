@@ -1,0 +1,3 @@
+[console_scripts]
+comparefiles = linkml_runtime.utils.comparefiles:cli
+

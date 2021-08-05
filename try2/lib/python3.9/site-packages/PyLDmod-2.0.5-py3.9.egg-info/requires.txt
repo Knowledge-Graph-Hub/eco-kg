@@ -1,0 +1,15 @@
+cachetools
+frozendict
+lxml
+
+[aiohttp]
+aiohttp
+
+[cachetools]
+cachetools
+
+[frozendict]
+frozendict
+
+[requests]
+requests

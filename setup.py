@@ -74,7 +74,8 @@ setup(
         'recommonmark',
         'parameterized',
         'validate_version_code',
-        'pandas',
+        'numpy',
+        'pandas==1.2.5',
         # Extra packages added
         'six', # needed by rdflib
         'ordered-set', #needed by kgx

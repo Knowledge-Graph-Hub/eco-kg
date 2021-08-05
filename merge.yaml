@@ -1,7 +1,7 @@
 # Sourced from: https://github.com/biolink/kgx/tree/master/examples
 ---
 configuration:
-  output_directory: /Volumes/Seagate Por/data/merged
+  output_directory: data/merged
   checkpoint: false
 
 merged_graph:
@@ -12,36 +12,36 @@ merged_graph:
         name: "planteome"
         format: tsv
         filename:
-        - /Volumes/Seagate Por/data/transformed/Planteome/nodes.tsv
-        - /Volumes/Seagate Por/data/transformed/Planteome/edges.tsv
+        - data/transformed/Planteome/nodes.tsv
+        - data/transformed/Planteome/edges.tsv
     ncbi-ontology:
       input:
         name: "NCBISlim Ontology"
         format: tsv
         filename:
-        - /Volumes/Seagate Por/data/transformed/ontologies/taxslim_nodes.tsv
-        - /Volumes/Seagate Por/data/transformed/ontologies/taxslim_edges.tsv
+        - data/transformed/ontologies/taxslim_nodes.tsv
+        - data/transformed/ontologies/taxslim_edges.tsv
     go-ontology:
       input:
         name: "Gene Ontology"
         format: tsv
         filename:
-        - /Volumes/Seagate Por/data/transformed/ontologies/go-basic_nodes.tsv
-        - /Volumes/Seagate Por/data/transformed/ontologies/go-basic_edges.tsv
+        - data/transformed/ontologies/go-basic_nodes.tsv
+        - data/transformed/ontologies/go-basic_edges.tsv
     to-ontology:
       input:
         name: "Plant Trait Ontology"
         format: tsv
         filename:
-        - /Volumes/Seagate Por/data/transformed/ontologies/to_remove_nodes.tsv
-        - /Volumes/Seagate Por/data/transformed/ontologies/to_remove_edges.tsv
+        - data/transformed/ontologies/to_nodes.tsv
+        - data/transformed/ontologies/to_edges.tsv
     po-ontology:
       input:
         name: "Plant Ontology"
         format: tsv
         filename:
-        - /Volumes/Seagate Por/data/transformed/ontologies/po_remove_nodes.tsv
-        - /Volumes/Seagate Por/data/transformed/ontologies/po_remove_edges.tsv
+        - data/transformed/ontologies/po_nodes.tsv
+        - data/transformed/ontologies/po_edges.tsv
   operations:
     - name: kgx.graph_operations.summarize_graph.generate_graph_stats
       args:
