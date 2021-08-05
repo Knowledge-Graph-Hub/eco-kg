@@ -7,6 +7,8 @@ kgx
 sphinx
 docutils==0.16
 decorator
+sphinx_rtd_theme
+recommonmark
 parameterized
 validate_version_code
 numpy

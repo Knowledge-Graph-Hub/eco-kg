@@ -367,7 +367,7 @@ class PlanteomeTransform(Transform):
                                     print(pheno)
                                     print(pheno_label)
                             if trait_type == 'numerical':
-                                r = str(row['DB_Object_ID'])+'|'+str(row['Ontology_ID'])+'|'+str(pheno)
+                                r = str(row['DB_Object_ID'])+'-'+str(row['Ontology_ID'])+'-'+str(pheno)
                                 if ontology_id not in seen_node:
                                     label = plant_traits_num[ontology_id]['label']
                                     write_node_edge_item(fh=node,
