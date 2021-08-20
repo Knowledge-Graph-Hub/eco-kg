@@ -19,8 +19,8 @@ DATA_SOURCES = {
     #'ToTransform' : OntologyTransform,
     #'PoTransform' : OntologyTransform,
     #'PecoTransform' : OntologyTransform,
-    'EOLTraitsTransform': EOLTraitsTransform,
-    #'PlanteomeTransform': PlanteomeTransform
+    #'EOLTraitsTransform': EOLTraitsTransform,
+    'PlanteomeTransform': PlanteomeTransform
 }
 
 

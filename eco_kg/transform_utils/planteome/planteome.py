@@ -25,7 +25,7 @@ class PlanteomeTransform(Transform):
         source_name = "Planteome"
         super().__init__(source_name, input_dir, output_dir)  # set some variables
         self.node_header = ['id', 'name', 'category', 'provided_by']
-        self.edge_header = ['subject', 'predicate', 'object', 'relation', 'provided_by']
+        self.edge_header = ['subject','predicate','object','relation','has_attribute','has_attribute_type','has_quantitative_value','has_unit','has_qualitative_value','provided_by']
 
     def run(self, data_files: List[str] = None):
         source_name = 'Planteome'
@@ -124,8 +124,6 @@ class PlanteomeTransform(Transform):
                     growth_stage_node_type = 'biolink:LifeStage' #Aspect = G
                     qtl_node_type = 'biolink:GenomicEntity'
                     germplasm_node_type = 'biolink:OrganismalEntity'
-                    trait_value_node_type = 'biolink:PhenotypicQuality'
-                    value_node_type = 'biolink:QuantityValue'
             
                     #Prefixes - may not need this - only if I'm missing the first part of the CURIE
                     org_prefix = "NCBITaxon:"
@@ -155,16 +153,16 @@ class PlanteomeTransform(Transform):
                     qtl_to_org_edge_relation = "RO:0002162"
                     germplasm_to_org_edge_label = "biolink:in_taxon"
                     germplasm_to_org_edge_relation = "RO:0002162"
-                    germplasm_to_trait_edge_label = 'biolink:has_attribute'
+                    germplasm_to_trait_edge_label = 'biolink:has_phenotype'
                     germplasm_to_trait_edge_relation = 'RO:0002200'
                     qtl_to_trait_edge_label = 'biolink:has_phenotype'
                     qtl_to_trait_edge_relation = 'RO:0002200'
-                    trait_to_value_edge_label = 'biolink:has_quantitative_value'
-                    trait_to_value_edge_relation = 'SIO:000629'
-                    value_to_number_edge_label = 'biolink:has_numeric_value'
-                    value_to_number_edge_relation = 'OBI:0001938'
-                    value_to_unit_edge_label = 'biolink:has_unit'
-                    value_to_unit_edge_relation = 'RO:0002536'
+#                    trait_to_value_edge_label = 'biolink:has_quantitative_value'
+#                    trait_to_value_edge_relation = 'SIO:000629'
+#                    value_to_number_edge_label = 'biolink:has_numeric_value'
+#                    value_to_number_edge_relation = 'OBI:0001938'
+#                    value_to_unit_edge_label = 'biolink:has_unit'
+#                    value_to_unit_edge_relation = 'RO:0002536'
 
                     # iterate over each dataframe to do the transform
                     for index, row in gaf_df.iterrows():
@@ -335,40 +333,39 @@ class PlanteomeTransform(Transform):
                             if trait_type == 'categorical':
                                 try:
                                     pheno_id = plant_trait_ids[ontology_id]['pheno'][pheno]
-                                    pheno_label = ''
-                                    if pheno_id not in seen_node:
+                                    pheno_label = plant_trait_ids[ontology_id]['label']
+                                    if ontology_id not in seen_node:
                                         write_node_edge_item(fh=node,
                                                              header=self.node_header,
-                                                             data=[pheno_id,
+                                                             data=[ontology_id,
                                                                    pheno_label,
-                                                                   trait_value_node_type,
+                                                                   trait_node_type,
                                                                    provided_by])
-                                        seen_node[pheno_id] += 1
+                                        seen_node[ontology_id] += 1
                                 except KeyError:
                                     print('Phenotype missing from category json')
                                     print(ontology_id)
                                     print(pheno)
-                                    print(pheno_label)
                             if trait_type == 'numerical':
                                 r = measurement_prefix + str(row['DB_Object_ID'])+'-'+str(row['Ontology_ID'].split(':')[1])+'-'+str(pheno)
                                 if ontology_id not in seen_node:
-                                    label = plant_traits_num[ontology_id]['label']
+                                    pheno_label = plant_traits_num[ontology_id]['label']
                                     write_node_edge_item(fh=node,
                                                          header=self.node_header,
                                                          data=[ontology_id,
-                                                               label,
-                                                               trait_value_node_type,
+                                                               pheno_label,
+                                                               trait_node_type,
                                                                provided_by])
                                     seen_node[ontology_id] += 1
-                                if r not in seen_node:
-                                    label = plant_traits_num[ontology_id]['label'] + ' measurement'
-                                    write_node_edge_item(fh=node,
-                                                         header=self.node_header,
-                                                         data=[r,
-                                                               label,
-                                                               value_node_type,
-                                                               provided_by])
-                                    seen_node[r] += 1
+#                                if r not in seen_node:
+#                                    label = plant_traits_num[ontology_id]['label'] + ' measurement'
+#                                    write_node_edge_item(fh=node,
+#                                                         header=self.node_header,
+#                                                         data=[r,
+#                                                               label,
+#                                                               value_node_type,
+#                                                               provided_by])
+#                                    seen_node[r] += 1
                         #create qtl nodes
                         elif file_type == 'qtl':
                             for g in genes:
@@ -396,24 +393,19 @@ class PlanteomeTransform(Transform):
                                     seen_node[g] += 1
                         #create all other node types
                         if ontology_id not in seen_node:
+                            label = ''
                             if row['Aspect'] == 'T':
                                 node_type = trait_node_type
-                                label = row['DB_Object_Name']
                             elif row['Aspect'] == 'A':
                                 node_type = anatomy_node_type
-                                label = ''
                             elif row['Aspect'] == 'G':
                                 node_type = growth_stage_node_type
-                                label = ''
                             elif row['Aspect'] == 'C':
                                 node_type = cellular_component_node_type
-                                label = ''
                             elif row['Aspect'] == 'F':
                                 node_type = molecular_function_node_type
-                                label = ''
                             elif row['Aspect'] == 'P':
                                 node_type = process_node_type
-                                label = ''
                             else:
                                 print('Error. New Aspect.')
                                 print(row['Aspect'])
@@ -427,6 +419,7 @@ class PlanteomeTransform(Transform):
 
                         #create additional nodes for orthologs
                         if 'ortholog' in data_file:
+                            label = ''
                             orth = row['With_or_From']
                             if '|' in orth:
                                 orth = orth.split('|')
@@ -441,7 +434,6 @@ class PlanteomeTransform(Transform):
                                 orth = [orth]
                             for o in orth:
                                 if o not in seen_node:
-                                    gene_name = 'none'
                                     write_node_edge_item(fh=node,
                                                          header=self.node_header,
                                                          data=[o,
@@ -451,6 +443,11 @@ class PlanteomeTransform(Transform):
                                     seen_node[o] += 1
                     # Write Edge
                         #for the germplasm files
+                        has_attribute = ''
+                        has_attribute_type = ''
+                        has_quantitative_value = ''
+                        has_unit = ''
+                        has_qualitative_value = ''
                         if file_type == 'germplasm':
                             if str(germplasm_id)+str(org_id) not in seen_edge:
                                 write_node_edge_item(fh=edge,
@@ -459,6 +456,11 @@ class PlanteomeTransform(Transform):
                                                             germplasm_to_org_edge_label,
                                                             org_id,
                                                             germplasm_to_org_edge_relation,
+                                                            has_attribute,
+                                                            has_attribute_type,
+                                                            has_quantitative_value,
+                                                            has_unit,
+                                                            has_qualitative_value,
                                                             provided_by])
                                 seen_edge[str(germplasm_id)+str(org_id)] += 1
                             if trait_type == 'categorical':
@@ -467,8 +469,13 @@ class PlanteomeTransform(Transform):
                                                             header=self.edge_header,
                                                             data=[germplasm_id,
                                                                 germplasm_to_trait_edge_label,
-                                                                pheno_id,
+                                                                ontology_id,
                                                                 germplasm_to_trait_edge_relation,
+                                                                has_attribute,
+                                                                pheno_id,
+                                                                has_quantitative_value,
+                                                                has_unit,
+                                                                has_qualitative_value,
                                                                 provided_by])
                                     seen_edge[str(germplasm_id)+str(pheno_id)] += 1
                             if trait_type == 'numerical':
@@ -480,27 +487,11 @@ class PlanteomeTransform(Transform):
                                                                 germplasm_to_trait_edge_label,
                                                                 ontology_id,
                                                                 germplasm_to_trait_edge_relation,
-                                                                provided_by])
-                                    write_node_edge_item(fh=edge,
-                                                            header=self.edge_header,
-                                                            data=[ontology_id,
-                                                                trait_to_value_edge_label,
-                                                                r,
-                                                                trait_to_value_edge_relation,
-                                                                provided_by])
-                                    write_node_edge_item(fh=edge,
-                                                            header=self.edge_header,
-                                                            data=[r,
-                                                                value_to_number_edge_label,
+                                                                pheno_label,
+                                                                ontology_id,
                                                                 pheno,
-                                                                value_to_number_edge_relation,
-                                                                provided_by])
-                                    write_node_edge_item(fh=edge,
-                                                            header=self.edge_header,
-                                                            data=[r,
-                                                                value_to_unit_edge_label,
                                                                 unit,
-                                                                value_to_unit_edge_relation,
+                                                                has_qualitative_value,
                                                                 provided_by])
                                     seen_edge[r] += 1
 
@@ -515,6 +506,11 @@ class PlanteomeTransform(Transform):
                                                                     gene_to_orth_edge_label,
                                                                     o,
                                                                     gene_to_orth_edge_relation,
+                                                                    has_attribute,
+                                                                    has_attribute_type,
+                                                                    has_quantitative_value,
+                                                                    has_unit,
+                                                                    has_qualitative_value,
                                                                     provided_by])
                                         seen_edge[str(g)+str(o)] += 1
                         #for the qtl files
@@ -526,6 +522,11 @@ class PlanteomeTransform(Transform):
                                                             qtl_to_org_edge_label,
                                                             org_id,
                                                             qtl_to_org_edge_relation,
+                                                            has_attribute,
+                                                            has_attribute_type,
+                                                            has_quantitative_value,
+                                                            has_unit,
+                                                            has_qualitative_value,
                                                             provided_by])
                                 seen_edge[gene_id + org_id] += 1
                             if g + ontology_id not in seen_edge:
@@ -535,6 +536,11 @@ class PlanteomeTransform(Transform):
                                                             qtl_to_trait_edge_label,
                                                             ontology_id,
                                                             qtl_to_trait_edge_relation,
+                                                            has_attribute,
+                                                            has_attribute_type,
+                                                            has_quantitative_value,
+                                                            has_unit,
+                                                            has_qualitative_value,
                                                             provided_by])
                                 seen_edge[g + ontology_id] += 1
 
@@ -548,6 +554,11 @@ class PlanteomeTransform(Transform):
                                                                 gene_to_org_edge_label,
                                                                 org_id,
                                                                 gene_to_org_edge_relation,
+                                                                has_attribute,
+                                                                has_attribute_type,
+                                                                has_quantitative_value,
+                                                                has_unit,
+                                                                has_qualitative_value,
                                                                 provided_by])
                                     seen_edge[str(g)+str(org_id)] += 1
 
@@ -574,6 +585,11 @@ class PlanteomeTransform(Transform):
                                                             edge_label,
                                                             ontology_id,
                                                             edge_relation,
+                                                            has_attribute,
+                                                            has_attribute_type,
+                                                            has_quantitative_value,
+                                                            has_unit,
+                                                            has_qualitative_value,
                                                             provided_by])
                                 seen_edge[str(g)+ontology_id] += 1
                         # trait to org edge
@@ -585,6 +601,11 @@ class PlanteomeTransform(Transform):
                                                             trait_to_org_edge_label,
                                                             org_id,
                                                             trait_to_org_edge_relation,
+                                                            has_attribute,
+                                                            has_attribute_type,
+                                                            has_quantitative_value,
+                                                            has_unit,
+                                                            has_qualitative_value,
                                                             provided_by])
                                 seen_edge[ontology_id+org_id] += 1
                 # Files write ends
