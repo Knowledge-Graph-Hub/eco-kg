@@ -9,12 +9,12 @@ from eco_kg.utils.robot_utils import *
 
 ONTOLOGIES = {
     #'HpTransform': 'hp.json',
-    'GoTransform': 'go-basic.json',
-    'NCBITransform':  'taxslim.json',
+    #'GoTransform': 'go-basic.json',
+    #'NCBITransform':  'taxslim.json',
     #'ChebiTransform': 'chebi.json',
     #'EnvoTransform': 'envo.json'
-    'ToTransform' : 'to.json',
-    'PoTransform' : 'po.json',
+    #'ToTransform' : 'to.json',
+    #'PoTransform' : 'po.json',
     #'PecoTransform' : 'peco.owl',
 }
 # I converted owl files to json outside
