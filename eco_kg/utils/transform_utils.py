@@ -77,7 +77,6 @@ def write_node_edge_item(fh: Any, header: List, data: List, sep: str = '\t'):
     except IOError:
         logging.warning("Can't write data for {}".format(data))
     except TypeError:
-        print(type(data))
         print(str(data))
 
 

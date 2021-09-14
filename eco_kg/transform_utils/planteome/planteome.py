@@ -130,6 +130,7 @@ class PlanteomeTransform(Transform):
                     org_prefix = "NCBITaxon:"
                     measurement_prefix = 'ECO:'
                     germplasm_prefix = 'GERMPLASM:'
+                    gene_prefix = 'GENE:'
 
                     # Edges
                     gene_to_org_edge_label = "biolink:in_taxon"
@@ -473,6 +474,7 @@ class PlanteomeTransform(Transform):
                                 if 'AGI_LocusCode' in g:
                                     g = g.split(':')[1]
                                 #create gene node
+                                g = gene_prefix + g
                                 if g not in seen_node:
                                     g = str(g)
                                     write_node_edge_item(fh=node,
@@ -600,6 +602,7 @@ class PlanteomeTransform(Transform):
                                 orth = orth.split(':')[1]
                                 orth = [orth]
                             for o in orth:
+                                o = gene_prefix + o
                                 if o not in seen_node:
                                     write_node_edge_item(fh=node,
                                                          header=self.node_header,

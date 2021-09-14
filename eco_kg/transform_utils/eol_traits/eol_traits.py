@@ -251,6 +251,19 @@ class EOLTraitsTransform(Transform):
                                                has_attribute_type,
                                                provided_by])
                     seen_node[org_id] += 1
+                if parent_id not in seen_node:
+                    label = ''
+                    has_attribute = ''
+                    has_attribute_type = ''
+                    write_node_edge_item(fh=node,
+                                         header=self.node_header,
+                                         data=[parent_id,
+                                               label,
+                                               org_node_type,
+                                               has_attribute,
+                                               has_attribute_type,
+                                               provided_by])
+                    seen_node[parent_id] += 1
                 #write parent/child edges
                 if org_id+parent_id not in seen_edge:
                     has_attribute = ''
@@ -320,7 +333,7 @@ class EOLTraitsTransform(Transform):
                                                  header=self.edge_header,
                                                  data=[org_id,
                                                        org_to_chem_edge_label,
-                                                       trait_uri,
+                                                       trait_curie,
                                                        org_to_chem_edge_relation,
                                                        trait_label,
                                                        has_attribute_type,
@@ -398,6 +411,27 @@ class EOLTraitsTransform(Transform):
                     has_unit = ''
                     has_qualitative_value = ''
                     provided_by = ''
+                    label = ''
+                    if parent not in seen_node:
+                        write_node_edge_item(fh=node,
+                                             header=self.node_header,
+                                             data=[parent,
+                                                   label,
+                                                   trait_node_type,
+                                                   has_attribute,
+                                                   has_attribute_type,
+                                                   provided_by])
+                        seen_node[parent] += 1
+                    if child not in seen_node:
+                        write_node_edge_item(fh=node,
+                                             header=self.node_header,
+                                             data=[child,
+                                                   label,
+                                                   trait_node_type,
+                                                   has_attribute,
+                                                   has_attribute_type,
+                                                   provided_by])
+                        seen_node[parent] += 1
                     write_node_edge_item(fh=edge,
                                          header=self.edge_header,
                                          data=[parent,
