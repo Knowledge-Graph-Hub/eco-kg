@@ -35,9 +35,9 @@ To Use
 Documentation
 ------------------------------------------------
 
-Starting with Planteome - hope to include Monarch Initiative, EOL TraitBank, and more
+Starting with Planteome and EOL TraitBank
 
-Currently only contains data from Arabidopsis thaliana, Zea mays, Oryza sativa, Sorghum bicolor, and Populus trichocarpa.
+Currently only contains data from Arabidopsis, Zea, Oryza, Sorghum, and Populus.
 
 Currently unable to transform PO and TO fully within this workflow. I am also using a modified version of TO with added terms.
 
@@ -53,6 +53,17 @@ Then, using find and replace in PO and TO json files:
 * Change plant_anatomy to anatomical_entity. 
 * Change plant_structure_development_stage to life_stage. 
 * Change plant_trait_ontology to phenotypic_feature.
+
+IMPORTANT NOTE ABOUT EOL TRAITBANK
+The only way to get the full data file is to go to the command line and grab the zip file using
+```
+wget https://editors.eol.org/other_files/SDR/traits_all.zip
+```
+and then use
+```
+unzip traits_all.zip
+```
+Be sure that traits.csv is at least 6GB
 
 Now you can do the transform step.
 

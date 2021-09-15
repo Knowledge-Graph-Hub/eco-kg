@@ -14,6 +14,13 @@ merged_graph:
         filename:
         - data/transformed/Planteome/nodes.tsv
         - data/transformed/Planteome/edges.tsv
+    eoltraitbank:
+      input:
+        name: "EOLTraitBank"
+        format: tsv
+        filename:
+        - data/transformed/EOLTraitBank/nodes.tsv
+        - data/transformed/EOLTraitBank/edges.tsv
     ncbi-ontology:
       input:
         name: "NCBISlim Ontology"

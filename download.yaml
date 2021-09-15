@@ -23,9 +23,9 @@
 
 # Lifewide-traits
 #   link: https://opendata.eol.org/dataset/all-trait-data-large
-#-
-#  url: https://editors.eol.org/other_files/SDR/traits_all.zip
-#  local_name: EOLTraitbank.zip
+-
+  url: https://editors.eol.org/other_files/SDR/traits_all.zip
+  local_name: EOLTraitbank.zip
 #
 # Lifewide-hierarchy
 #   link: https://opendata.eol.org/dataset/identifier-map
@@ -359,15 +359,15 @@
 #-
 #  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_iprscan_Oryza_rufipogon.assoc
 #  local_name: go_iprscan_Oryza_rufipogon.assoc
-#-
-#  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_iprscan_Oryza_sativa.AUS.kasalath.assoc
-#  local_name: go_iprscan_Oryza_sativa.AUS.kasalath.assoc
-#-
-#  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_iprscan_Oryza_sativa.AUS.N22.assoc
-#  local_name: go_iprscan_Oryza_sativa.AUS.N22.assoc
-#-
-#  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_iprscan_Oryza_sativa.indica.assoc
-#  local_name: go_iprscan_Oryza_sativa.indica.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_iprscan_Oryza_sativa.AUS.kasalath.assoc
+  local_name: go_iprscan_Oryza_sativa.AUS.kasalath.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_iprscan_Oryza_sativa.AUS.N22.assoc
+  local_name: go_iprscan_Oryza_sativa.AUS.N22.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_iprscan_Oryza_sativa.indica.assoc
+  local_name: go_iprscan_Oryza_sativa.indica.assoc
 #-
 #  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_iprscan_Phaseolus_vulgaris.assoc
 #  local_name: go_iprscan_Phaseolus_vulgaris.assoc
@@ -638,15 +638,15 @@
 #-
 #  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_ortholog_gene_Oryza_rufipogon.assoc
 #  local_name: go_ortholog_gene_Oryza_rufipogon.assoc
-#-
-#  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_ortholog_gene_Oryza_sativa.AUS.kasalath.assoc
-#  local_name: go_ortholog_gene_Oryza_sativa.AUS.kasalath.assoc
-#-
-#  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_ortholog_gene_Oryza_sativa.AUS.N22.assoc
-#  local_name: go_ortholog_gene_Oryza_sativa.AUS.N22.assoc
-#-
-#  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_ortholog_gene_Oryza_sativa.indica.assoc
-#  local_name: go_ortholog_gene_Oryza_sativa.indica.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_ortholog_gene_Oryza_sativa.AUS.kasalath.assoc
+  local_name: go_ortholog_gene_Oryza_sativa.AUS.kasalath.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_ortholog_gene_Oryza_sativa.AUS.N22.assoc
+  local_name: go_ortholog_gene_Oryza_sativa.AUS.N22.assoc
+-
+  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_ortholog_gene_Oryza_sativa.indica.assoc
+  local_name: go_ortholog_gene_Oryza_sativa.indica.assoc
 #-
 #  url: http://palea.cgrb.oregonstate.edu/viewsvn/associations/go-associations/go_ortholog_gene_Phaseolus_vulgaris.assoc
 #  local_name: go_ortholog_gene_Phaseolus_vulgaris.assoc
@@ -826,6 +826,9 @@
 -
   url: https://download.maizegdb.org/Pan-genes/MaizeGDB_B73_pangene_2020_11.tsv.gz
   local_name: corn_map.gz
+#-
+#  url: http://download.geonames.org/export/dump/hierarchy.zip
+#  local_name: hierarchy.zip
 
 # #**** ROBOT ****
 #
@@ -842,8 +845,8 @@
 #  url: http://purl.obolibrary.org/obo/envo.json
 #  local_name: envo.json
 -
-  url: http://purl.obolibrary.org/obo/to.owl
-  local_name: to.owl
+  url: https://raw.githubusercontent.com/diatomsRcool/plant-trait-ontology/master/to.json
+  local_name: to.json
 -
   url: http://purl.obolibrary.org/obo/po.owl
   local_name: po.owl
@@ -853,9 +856,12 @@
 -
   url: http://purl.obolibrary.org/obo/ncbitaxon/subsets/taxslim.json
   local_name: taxslim.json
--
-  url: https://kg-hub.berkeleybop.io/frozen_incoming_data/to_remove.owl
-  local_name: to_remove.owl
--
-  url: https://kg-hub.berkeleybop.io/frozen_incoming_data/po_remove.owl
-  local_name: po_remove.owl
+#-
+#  url: http://purl.obolibrary.org/obo/pato.json
+#  local_name: pato.json
+#-
+#  url: https://kg-hub.berkeleybop.io/frozen_incoming_data/to_remove.owl
+#  local_name: to_remove.owl
+#-
+#  url: https://kg-hub.berkeleybop.io/frozen_incoming_data/po_remove.owl
+#  local_name: po_remove.owl
