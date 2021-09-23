@@ -78,8 +78,8 @@ class PlanteomeTransform(Transform):
         #Get categorical traits mapped_keys
         with open(os.path.join(self.input_base_dir, 'plant_traits.txt'), 'r') as pt:
             plant_trait_ids = json.load(pt)
-        ignore_traits = ['TO:0000439','TO:0020010','TO:0000261','TO:0000664','TO:0000273','TO:0000468','TO:0000315','TO:0000148']
-        compound_traits = ['TO:0000969','TO:0002629','TO:0000068']
+        ignore_traits = []
+        compound_traits = ['TO:0000969','TO:0002629','TO:0000068','TO:0000439']
         #Get numerical traits mapped keys
         with open(os.path.join(self.input_base_dir, 'plant_numerical_traits.txt'), 'r') as pc:
             plant_traits_num = json.load(pc)
@@ -149,8 +149,8 @@ class PlanteomeTransform(Transform):
                     gene_to_trait_edge_relation = 'RO:0002200'
                     gene_to_orth_edge_label = 'biolink:orthologous_to'
                     gene_to_orth_edge_relation = 'RO:HOM0000017'
-                    trait_to_org_edge_label = 'biolink:phenotype_of'
-                    trait_to_org_edge_relation = 'RO:0002201'
+                    org_to_trait_edge_label = 'biolink:has_phenotype'
+                    org_to_trait_edge_relation = 'RO:0002200'
                     qtl_to_org_edge_label = "biolink:in_taxon"
                     qtl_to_org_edge_relation = "RO:0002162"
                     germplasm_to_org_edge_label = "biolink:in_taxon"
@@ -338,6 +338,18 @@ class PlanteomeTransform(Transform):
                                     ontology_id = 'TO:2000158'
                                 if 'STALK_LODGING' in row['Annotation_Extension']:
                                     ontology_id = 'TO:2000159'
+                                if 'DIPLODIA_STALK_ROT' in row['Annotation_Extension']:
+                                    ontology_id = 'TO:2000398'
+                                if 'GRAY_LEAF_SPOT' in row['Annotation_Extension']:
+                                    ontology_id = 'TO:2000399'
+                                if 'COMMON_RUST' in row['Annotation_Extension']:
+                                    ontology_id = 'TO:2000400'
+                                if 'COMMON_SMUT' in row['Annotation_Extension']:
+                                    ontology_id = 'TO:2000401'
+                                if 'NORTHERN_LEAF_BLIGHT' in row['Annotation_Extension']:
+                                    ontology_id = 'TO:0000691'
+                                if 'ECB2STLK' in row['Annotation_Extension']:
+                                    ontology_id = 'TO:0005009'
                             z = ['(cm)','(count)','(mm)','(gm)']
                             #parse out the traits that have categorical and numerical values
                             if ontology_id in plant_trait_ids:
@@ -350,13 +362,41 @@ class PlanteomeTransform(Transform):
                                             trait_type = 'numerical'
                             if ontology_id in plant_traits_num:
                                 trait_type = 'numerical'
+                                cat_val = ['1','2','3','4','5','6','7','8','9']
+                                val_344 = {'1':'TO:2000431','2':'TO:2000431',
+                                '3':'TO:2000431','4':'TO:2000432','5':'TO:2000432',
+                                '6':'TO:2000432','7':'TO:2000430','8':'TO:2000430','9':'TO:2000430'}
+                                val_207 = {'1':'TO:2000434','2':'TO:2000434','3':'TO:2000434','4':'TO:2000435',
+                                '5':'TO:2000435','6':'TO:2000435','7':'TO:2000433','8':'TO:2000433',
+                                '9':'TO:2000433'}
+                                if ontology_id == 'TO:0000344' or ontology_id == 'TO:0000207':
+                                    if pheno in cat_val:
+                                        if ontology_id == 'TO:0000344':
+                                            pheno_id = val_344[pheno]
+                                        if ontology_id == 'TO:0000207':
+                                            pheno_id = val_207[pheno]
+                                        if str(germplasm_id)+str(pheno_id) not in seen_edge:
+                                            write_node_edge_item(fh=edge,
+                                                                    header=self.edge_header,
+                                                                    data=[germplasm_id,
+                                                                        germplasm_to_trait_edge_label,
+                                                                        ontology_id,
+                                                                        germplasm_to_trait_edge_relation,
+                                                                        has_attribute,
+                                                                        pheno_id,
+                                                                        has_quantitative_value,
+                                                                        has_unit,
+                                                                        has_qualitative_value,
+                                                                        provided_by])
+                                            seen_edge[str(germplasm_id)+str(pheno_id)] += 1
+                                        continue
                             #ignore the traits we are not interested in
                             if ontology_id in ignore_traits:
                                 trait_type = 'ignore'
                             if trait_type == None:
                                 print('missed a trait type' + ' ' + ontology_id + ' ' + row['Annotation_Extension'])
                             #remove lines with no data
-                            if pheno == '999':
+                            if pheno == '999' or pheno == '' or pheno == '99' or pheno == 'MX' or pheno == 'Mixture':
                                continue
                             #add trait node for categorical traits
                             if trait_type == 'categorical':
@@ -375,6 +415,7 @@ class PlanteomeTransform(Transform):
                                     print('Phenotype missing from category json')
                                     print(ontology_id)
                                     print(pheno)
+                                    print(row)
                                 # add trait to germplasm edge for categorical traits
                                 try:
                                     if str(germplasm_id)+str(pheno_id) not in seen_edge:
@@ -474,7 +515,6 @@ class PlanteomeTransform(Transform):
                                 if 'AGI_LocusCode' in g:
                                     g = g.split(':')[1]
                                 #create gene node
-                                g = gene_prefix + g
                                 if g not in seen_node:
                                     g = str(g)
                                     write_node_edge_item(fh=node,
@@ -566,8 +606,8 @@ class PlanteomeTransform(Transform):
                                 seen_edge[str(g)+ontology_id] += 1
                         # trait to org edge
                         if 'TO' in ontology_id:
-                            #create trait to species edge
-                            if ontology_id+org_id not in seen_edge:
+                            #create species to trait edge
+                            if org_id+ontology_id not in seen_edge:
                                 has_attribute = ''
                                 has_attribute_type = ''
                                 has_quantitative_value = ''
@@ -575,17 +615,17 @@ class PlanteomeTransform(Transform):
                                 has_qualitative_value = ''
                                 write_node_edge_item(fh=edge,
                                                         header=self.edge_header,
-                                                        data=[ontology_id,
-                                                            trait_to_org_edge_label,
-                                                            org_id,
-                                                            trait_to_org_edge_relation,
+                                                        data=[org_id,
+                                                            org_to_trait_edge_label,
+                                                            ontology_id,
+                                                            org_to_trait_edge_relation,
                                                             has_attribute,
                                                             has_attribute_type,
                                                             has_quantitative_value,
                                                             has_unit,
                                                             has_qualitative_value,
                                                             provided_by])
-                                seen_edge[ontology_id+org_id] += 1
+                                seen_edge[org_id+ontology_id] += 1
                         #create additional nodes for orthologs
                         if 'ortholog' in data_file:
                             label = ''
@@ -602,7 +642,6 @@ class PlanteomeTransform(Transform):
                                 orth = orth.split(':')[1]
                                 orth = [orth]
                             for o in orth:
-                                o = gene_prefix + o
                                 if o not in seen_node:
                                     write_node_edge_item(fh=node,
                                                          header=self.node_header,
