@@ -19,9 +19,11 @@ edge_stats:
     biolink:has_participant:
       count: 19
     biolink:has_phenotype:
-      count: 2775073
+      count: 2791446
     biolink:in_taxon:
       count: 358777
+    biolink:interacts_with:
+      count: 103
     biolink:located_in:
       count: 4
     biolink:negatively_regulates:
@@ -34,8 +36,6 @@ edge_stats:
       count: 7921
     biolink:participates_in:
       count: 30
-    biolink:phenotype_of:
-      count: 971
     biolink:positively_regulates:
       count: 2766
     biolink:preceded_by:
@@ -49,7 +49,7 @@ edge_stats:
     biolink:related_to:
       count: 287
     biolink:subclass_of:
-      count: 92130
+      count: 97010
     unknown:
       count: 0
   count_by_spo:
@@ -117,14 +117,10 @@ edge_stats:
       count: 9
     biolink:BiologicalProcess-biolink:regulates-biolink:OntologyClass:
       count: 55
-    biolink:BiologicalProcess-biolink:regulates-biolink:PhenotypicFeature:
-      count: 1
     biolink:BiologicalProcess-biolink:subclass_of-biolink:BiologicalProcess:
       count: 52608
     biolink:BiologicalProcess-biolink:subclass_of-biolink:OntologyClass:
       count: 4176
-    biolink:BiologicalProcess-biolink:subclass_of-biolink:PhenotypicFeature:
-      count: 3
     biolink:CellularComponent-biolink:has_part-biolink:CellularComponent:
       count: 2
     biolink:CellularComponent-biolink:has_part-biolink:OntologyClass:
@@ -174,7 +170,7 @@ edge_stats:
     biolink:GenomicEntity-biolink:has_phenotype-biolink:OntologyClass:
       count: 243137
     biolink:GenomicEntity-biolink:has_phenotype-biolink:PhenotypicFeature:
-      count: 11249
+      count: 11260
     biolink:GenomicEntity-biolink:in_taxon-biolink:OrganismTaxon:
       count: 242615
     biolink:GenomicEntity-biolink:in_taxon-biolink:OrganismalEntity:
@@ -185,8 +181,6 @@ edge_stats:
       count: 301942
     biolink:GenomicEntity-biolink:regulates-biolink:OntologyClass:
       count: 36204
-    biolink:GenomicEntity-biolink:regulates-biolink:PhenotypicFeature:
-      count: 4
     biolink:LifeStage-biolink:has_part-biolink:LifeStage:
       count: 1
     biolink:LifeStage-biolink:has_part-biolink:OntologyClass:
@@ -344,15 +338,11 @@ edge_stats:
     biolink:OntologyClass-biolink:part_of-biolink:OntologyClass:
       count: 857
     biolink:OntologyClass-biolink:part_of-biolink:PhenotypicFeature:
-      count: 37
+      count: 41
     biolink:OntologyClass-biolink:participates_in-biolink:LifeStage:
       count: 30
     biolink:OntologyClass-biolink:participates_in-biolink:OntologyClass:
       count: 30
-    biolink:OntologyClass-biolink:phenotype_of-biolink:OrganismTaxon:
-      count: 971
-    biolink:OntologyClass-biolink:phenotype_of-biolink:OrganismalEntity:
-      count: 942
     biolink:OntologyClass-biolink:positively_regulates-biolink:BiologicalProcess:
       count: 32
     biolink:OntologyClass-biolink:positively_regulates-biolink:MolecularActivity:
@@ -396,25 +386,25 @@ edge_stats:
     biolink:OntologyClass-biolink:subclass_of-biolink:NamedThing:
       count: 421
     biolink:OntologyClass-biolink:subclass_of-biolink:OntologyClass:
-      count: 4906
+      count: 5158
     biolink:OntologyClass-biolink:subclass_of-biolink:PhenotypicFeature:
-      count: 1156
-    biolink:OrganismTaxon-biolink:has_phenotype-biolink:BiologicalProcess:
-      count: 53
+      count: 1221
     biolink:OrganismTaxon-biolink:has_phenotype-biolink:OntologyClass:
-      count: 418
+      count: 2104
     biolink:OrganismTaxon-biolink:has_phenotype-biolink:PhenotypicFeature:
-      count: 1225
+      count: 1948
+    biolink:OrganismTaxon-biolink:interacts_with-biolink:OrganismTaxon:
+      count: 103
     biolink:OrganismTaxon-biolink:produces-biolink:ChemicalEntity:
       count: 1
     biolink:OrganismTaxon-biolink:subclass_of-biolink:OrganismTaxon:
-      count: 274
+      count: 4949
     biolink:OrganismTaxon-biolink:subclass_of-biolink:OrganismalEntity:
       count: 8
     biolink:OrganismalEntity-biolink:has_phenotype-biolink:OntologyClass:
-      count: 2530711
+      count: 2547142
     biolink:OrganismalEntity-biolink:has_phenotype-biolink:PhenotypicFeature:
-      count: 2530711
+      count: 2546975
     biolink:OrganismalEntity-biolink:in_taxon-biolink:OrganismTaxon:
       count: 116160
     biolink:OrganismalEntity-biolink:in_taxon-biolink:OrganismalEntity:
@@ -428,29 +418,19 @@ edge_stats:
     biolink:OrganismalEntity-biolink:subclass_of-biolink:OrganismalEntity:
       count: 14416
     biolink:PhenotypicFeature-biolink:has_part-biolink:OntologyClass:
-      count: 4
-    biolink:PhenotypicFeature-biolink:has_part-biolink:PhenotypicFeature:
-      count: 2
-    biolink:PhenotypicFeature-biolink:part_of-biolink:BiologicalProcess:
       count: 1
     biolink:PhenotypicFeature-biolink:part_of-biolink:OntologyClass:
       count: 34
     biolink:PhenotypicFeature-biolink:part_of-biolink:PhenotypicFeature:
       count: 18
-    biolink:PhenotypicFeature-biolink:phenotype_of-biolink:OrganismTaxon:
-      count: 799
-    biolink:PhenotypicFeature-biolink:phenotype_of-biolink:OrganismalEntity:
-      count: 770
     biolink:PhenotypicFeature-biolink:related_to-biolink:AnatomicalEntity:
-      count: 9
+      count: 10
     biolink:PhenotypicFeature-biolink:related_to-biolink:OntologyClass:
-      count: 9
-    biolink:PhenotypicFeature-biolink:subclass_of-biolink:BiologicalProcess:
-      count: 1
+      count: 10
     biolink:PhenotypicFeature-biolink:subclass_of-biolink:OntologyClass:
-      count: 652
+      count: 690
     biolink:PhenotypicFeature-biolink:subclass_of-biolink:PhenotypicFeature:
-      count: 408
+      count: 340
   predicates:
   - biolink:causes
   - biolink:coexists_with
@@ -463,13 +443,13 @@ edge_stats:
   - biolink:has_participant
   - biolink:has_phenotype
   - biolink:in_taxon
+  - biolink:interacts_with
   - biolink:located_in
   - biolink:negatively_regulates
   - biolink:occurs_in
   - biolink:orthologous_to
   - biolink:part_of
   - biolink:participates_in
-  - biolink:phenotype_of
   - biolink:positively_regulates
   - biolink:preceded_by
   - biolink:precedes
@@ -477,7 +457,7 @@ edge_stats:
   - biolink:regulates
   - biolink:related_to
   - biolink:subclass_of
-  total_edges: 5359657
+  total_edges: 5380042
 graph_name: Merged Graph
 node_stats:
   count_by_category:
@@ -502,13 +482,13 @@ node_stats:
     biolink:NamedThing:
       count: 47
     biolink:OntologyClass:
-      count: 7924
+      count: 8176
     biolink:OrganismTaxon:
-      count: 289
+      count: 5050
     biolink:OrganismalEntity:
       count: 130772
     biolink:PhenotypicFeature:
-      count: 501
+      count: 486
     unknown:
       count: 0
   count_by_id_prefixes:
@@ -516,25 +496,25 @@ node_stats:
     CARO: 3
     CHEBI: 921
     ENVO: 58
-    EOL: 277
-    EOLT: 44
-    FLOPO: 3
+    EOL: 5038
     FOODON: 5
-    GENE: 229600
     GERMPLASM: 116160
-    GO: 53953
+    GO: 53952
+    GR: 8
     IAO: 4
     NCBITaxon: 14628
-    OBA: 1
     OBI: 1
     OBO: 43
     OIO: 17
-    PATO: 143
+    OsAMT1: 2
+    PATO: 137
     PECO: 114
     PO: 3779
     RO: 127
-    TO: 2216
-    TOP: 4
+    TO: 2514
+    UniProtKB: 124
+    gene: 1
+    locus: 2165
     owl: 2
   count_by_id_prefixes_by_category:
     biolink:AnatomicalEntity:
@@ -548,7 +528,11 @@ node_stats:
     biolink:ChemicalSubstance:
       CHEBI: 919
     biolink:GenomicEntity:
-      GENE: 229600
+      GR: 8
+      OsAMT1: 2
+      UniProtKB: 124
+      gene: 1
+      locus: 2165
     biolink:LifeStage:
       PO: 338
     biolink:MolecularActivity:
@@ -577,21 +561,15 @@ node_stats:
       PECO: 114
       PO: 1991
       RO: 107
-      TO: 1776
+      TO: 2028
     biolink:OrganismTaxon:
-      EOL: 277
+      EOL: 5038
       NCBITaxon: 12
     biolink:OrganismalEntity:
       GERMPLASM: 116160
       NCBITaxon: 14612
     biolink:PhenotypicFeature:
-      EOLT: 44
-      FLOPO: 3
-      GO: 1
-      OBA: 1
-      PATO: 6
-      TO: 440
-      TOP: 4
+      TO: 486
     unknown: {}
   node_categories:
   - biolink:AnatomicalEntity
@@ -614,24 +592,24 @@ node_stats:
     CHEBI: null
     ENVO: null
     EOL: null
-    EOLT: null
-    FLOPO: null
     FOODON: null
-    GENE: null
     GERMPLASM: null
     GO: null
+    GR: null
     IAO: null
     NCBITaxon: null
-    OBA: null
     OBI: null
     OBO: null
     OIO: null
+    OsAMT1: null
     PATO: null
     PECO: null
     PO: null
     RO: null
     TO: null
-    TOP: null
+    UniProtKB: null
+    gene: null
+    locus: null
     owl: null
   node_id_prefixes_by_category:
     biolink:AnatomicalEntity: !!set
@@ -645,7 +623,11 @@ node_stats:
     biolink:ChemicalSubstance: !!set
       CHEBI: null
     biolink:GenomicEntity: !!set
-      GENE: null
+      GR: null
+      OsAMT1: null
+      UniProtKB: null
+      gene: null
+      locus: null
     biolink:LifeStage: !!set
       PO: null
     biolink:MolecularActivity: !!set
@@ -682,12 +664,6 @@ node_stats:
       GERMPLASM: null
       NCBITaxon: null
     biolink:PhenotypicFeature: !!set
-      EOLT: null
-      FLOPO: null
-      GO: null
-      OBA: null
-      PATO: null
       TO: null
-      TOP: null
     unknown: !!set {}
-  total_nodes: 429540
+  total_nodes: 434497
