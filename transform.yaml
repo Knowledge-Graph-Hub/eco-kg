@@ -1,0 +1,17 @@
+configuration:
+  output_directory: data/merged
+  checkpoint: false
+transform:
+  source:
+    eco-kg:
+      input:
+        name: "eco-kg"
+        format: tsv
+        compression: tar.gz
+        filename:
+          - data/merged/merged-kg.tar.gz
+      output:
+        format: neo4j
+        uri: http://localhost:7474
+        username: neo4j
+        password: admin

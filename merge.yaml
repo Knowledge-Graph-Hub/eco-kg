@@ -62,3 +62,13 @@ merged_graph:
       compression: tar.gz
       filename:
         - merged-kg
+    merged-kg-nt:
+      format: nt
+      compression: gz
+      filename:
+        - merged-kg.nt.gz
+#    merged-kg-neo4j:
+#      format: neo4j
+#      uri: http://localhost:7474
+#      username: neo4j
+#      password: admin

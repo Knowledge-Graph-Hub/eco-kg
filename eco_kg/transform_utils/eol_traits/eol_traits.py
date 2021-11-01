@@ -332,8 +332,6 @@ class EOLTraitsTransform(Transform):
                 org_id = org_prefix + row['page_id']
                 value = row['value_uri']
                 provided_by = row['resource_id'] + '-EOL'
-                if trait_uri == 'http://eol.org/schema/terms/BloomPeriod':
-                    print(row)
                 if trait_uri not in location_uris and trait_uri not in skip and trait_labels[trait_uri]['type'] == 'measurement':
                     try:
                         trait_type = eol_trait_ids[trait_uri]['data_type']

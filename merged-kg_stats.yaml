@@ -9,17 +9,17 @@ edge_stats:
     biolink:enables:
       count: 359551
     biolink:expressed_in:
-      count: 561682
+      count: 1409287
     biolink:has_attribute:
       count: 279
     biolink:has_gene_product:
-      count: 819775
+      count: 202112
     biolink:has_part:
       count: 129
     biolink:has_participant:
       count: 19
     biolink:has_phenotype:
-      count: 2791446
+      count: 2561504
     biolink:in_taxon:
       count: 358777
     biolink:interacts_with:
@@ -156,19 +156,15 @@ edge_stats:
     biolink:GenomicEntity-biolink:expressed_in-biolink:AnatomicalEntity:
       count: 558627
     biolink:GenomicEntity-biolink:expressed_in-biolink:LifeStage:
-      count: 3055
+      count: 850660
     biolink:GenomicEntity-biolink:expressed_in-biolink:OntologyClass:
-      count: 561682
+      count: 1409287
     biolink:GenomicEntity-biolink:has_gene_product-biolink:CellularComponent:
       count: 202112
-    biolink:GenomicEntity-biolink:has_gene_product-biolink:LifeStage:
-      count: 617663
     biolink:GenomicEntity-biolink:has_gene_product-biolink:OntologyClass:
-      count: 663613
-    biolink:GenomicEntity-biolink:has_phenotype-biolink:LifeStage:
-      count: 229942
+      count: 45950
     biolink:GenomicEntity-biolink:has_phenotype-biolink:OntologyClass:
-      count: 243137
+      count: 13195
     biolink:GenomicEntity-biolink:has_phenotype-biolink:PhenotypicFeature:
       count: 11260
     biolink:GenomicEntity-biolink:in_taxon-biolink:OrganismTaxon:

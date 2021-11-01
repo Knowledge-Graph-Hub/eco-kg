@@ -135,8 +135,8 @@ class PlanteomeTransform(Transform):
                     # Edges
                     gene_to_org_edge_label = "biolink:in_taxon"
                     gene_to_org_edge_relation = "RO:0002162"
-                    gene_to_cellular_component_edge_label = "biolink:has_gene_product"
-                    gene_to_cellular_component_edge_relation = "RO:0002205"
+                    gene_to_cellular_component_edge_label = "biolink:active_in"
+                    gene_to_cellular_component_edge_relation = "RO:0002432"
                     gene_to_process_edge_label = "biolink:regulates"
                     gene_to_process_edge_relation = "RO:0011002"
                     gene_to_molecular_function_edge_label = 'biolink:enables'
@@ -591,6 +591,9 @@ class PlanteomeTransform(Transform):
                                 elif row['Aspect'] == 'F':
                                     edge_label = gene_to_molecular_function_edge_label
                                     edge_relation = gene_to_molecular_function_edge_relation
+                                elif row['Aspect'] == 'G':
+                                    edge_label = gene_to_growth_stage_edge_label
+                                    edge_relation = gene_to_growth_stage_edge_relation
                                 write_node_edge_item(fh=edge,
                                                         header=self.edge_header,
                                                         data=[g,
