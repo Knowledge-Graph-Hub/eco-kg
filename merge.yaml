@@ -21,6 +21,13 @@ merged_graph:
         filename:
         - data/transformed/EOLTraitBank/nodes.tsv
         - data/transformed/EOLTraitBank/edges.tsv
+    geneexpressionatlas:
+      input:
+        name: "Gene Expression Atlas"
+        format: tsv
+        filename:
+        - data/transformed/Gene Expression Atlas/nodes.tsv
+        - data/transformed/Gene Expression Atlas/edges.tsv
     ncbi-ontology:
       input:
         name: "NCBISlim Ontology"
@@ -62,11 +69,11 @@ merged_graph:
       compression: tar.gz
       filename:
         - merged-kg
-    merged-kg-nt:
-      format: nt
-      compression: gz
-      filename:
-        - merged-kg.nt.gz
+#    merged-kg-nt:
+#      format: nt
+#      compression: gz
+#      filename:
+#        - merged-kg.nt.gz
 #    merged-kg-neo4j:
 #      format: neo4j
 #      uri: http://localhost:7474

@@ -74,7 +74,16 @@ class PlanteomeTransform(Transform):
                             k.append(g)
                 for i in k:
                     corn_gene_ids[i] = v
-                    
+        #get cottonwood gene ids
+        pop_gene_ids = {}
+        with open(os.path.join(self.input_base_dir, 'Poplar_mapping.txt'),'r') as p:
+            for line in p.readlines():
+                line = line.strip('\n')
+                row = line.split(' ')
+                k = row[1]
+                v = row[0]
+                pop_gene_ids[k] = v
+
         #Get categorical traits mapped_keys
         with open(os.path.join(self.input_base_dir, 'plant_traits.txt'), 'r') as pt:
             plant_trait_ids = json.load(pt)
@@ -250,6 +259,9 @@ class PlanteomeTransform(Transform):
                                         gene_id = row['DB_Object_ID']
                                 if 'At' in gene_id:
                                     gene_id = gene_id.upper()
+                            #if the data are from Populus
+                            if tax_id == '3694':
+                                gene_id = pop_gene_ids[gene_id]
                         #create the organism node
                         if org_id not in seen_node:
                             write_node_edge_item(fh=node,
