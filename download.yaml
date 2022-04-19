@@ -826,6 +826,18 @@
 -
   url: https://download.maizegdb.org/Pan-genes/MaizeGDB_B73_pangene_2020_11.tsv.gz
   local_name: corn_map.gz
+-
+  url: https://github.com/diatomsRcool/kg-mapping/blob/427295474ff74717c4e18a9f14dbca92e870864d/Poplar_mapping.txt
+  local_name: Poplar_mapping.txt
+-
+  url: https://github.com/diatomsRcool/kg-mapping/blob/427295474ff74717c4e18a9f14dbca92e870864d/eol_trait_ids.txt
+  local_name: eol_trait_ids.txt
+-
+  url: https://github.com/diatomsRcool/kg-mapping/blob/427295474ff74717c4e18a9f14dbca92e870864d/plant_numerical_traits.txt
+  local_name: plant_numerical_traits.txt
+-
+  url: https://github.com/diatomsRcool/kg-mapping/blob/427295474ff74717c4e18a9f14dbca92e870864d/plant_traits.txt
+  local_name: plant_traits.txt
 #-
 #  url: http://download.geonames.org/export/dump/hierarchy.zip
 #  local_name: hierarchy.zip
