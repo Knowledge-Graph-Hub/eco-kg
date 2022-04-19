@@ -72,7 +72,7 @@ class GeneExpressionAtlasTransform(Transform):
                 for i in k:
                     corn_gene_ids[i] = v
 
-        data_files = ['drought_salt_gene_expression.txt']
+        data_files = ['drought_salt_gene_expression.txt','cold_heat_gene_expression.txt']
 
         seen_node: dict = defaultdict(int)
         seen_edge: dict = defaultdict(int)
