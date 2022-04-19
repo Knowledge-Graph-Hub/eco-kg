@@ -17,8 +17,10 @@ To Use
   source kg-env/bin/activate
   pip install -r requirements.txt
   python setup.py install
+  ```
   
   If the above setup.py install command doesn't work, try:
+  ```
   
   python -m pipinstall.
   
@@ -35,13 +37,14 @@ To Use
 Documentation
 ------------------------------------------------
 
-Starting with Planteome and EOL TraitBank
+Starting with Planteome, EOL TraitBank, and the Gene Expression Atlas
 
 Currently only contains data from Arabidopsis, Zea, Oryza, Sorghum, and Populus.
 
-Currently unable to transform PO and TO fully within this workflow. I am also using a modified version of TO with added terms.
+IMPORTANT NOTE ABOUT PO AND TO
+Currently unable to transform PO and TO fully within this workflow. I am also using a modified version of TO with added terms. Links to these specific versions are available in download.yaml.
 
-Use ROBOT to transform the OWL files to JSON (you need robot for this):
+I used ROBOT to transform the PO and TO OWL files to JSON:
 * Open a new terminal
 * cd to the bin directory in your robot folder
 * Run the code below
