@@ -7,7 +7,7 @@ edge_stats:
     biolink:coexists_with:
       count: 13
     biolink:decreases_expression_of:
-      count: 1873
+      count: 4960
     biolink:develops_from:
       count: 133
     biolink:enables:
@@ -25,7 +25,7 @@ edge_stats:
     biolink:in_taxon:
       count: 340298
     biolink:increases_expression_of:
-      count: 2141
+      count: 5562
     biolink:interacts_with:
       count: 103
     biolink:located_in:
@@ -151,14 +151,16 @@ edge_stats:
       count: 2
     biolink:ChemicalSubstance-biolink:subclass_of-biolink:OntologyClass:
       count: 4
+    biolink:EnvironmentalExposure-None-biolink:GenomicEntity:
+      count: 1
     biolink:EnvironmentalExposure-biolink:decreases_expression_of-biolink:GenomicEntity:
-      count: 1873
+      count: 4960
     biolink:EnvironmentalExposure-biolink:increases_expression_of-biolink:GenomicEntity:
-      count: 2141
+      count: 5562
     biolink:EnvironmentalExposure-biolink:subclass_of-biolink:NamedThing:
       count: 1
     biolink:EnvironmentalExposure-biolink:subclass_of-biolink:OntologyClass:
-      count: 2
+      count: 4
     biolink:GenomicEntity-biolink:active_in-biolink:CellularComponent:
       count: 196960
     biolink:GenomicEntity-biolink:active_in-biolink:OntologyClass:
@@ -298,7 +300,7 @@ edge_stats:
     biolink:OntologyClass-biolink:coexists_with-biolink:OntologyClass:
       count: 13
     biolink:OntologyClass-biolink:decreases_expression_of-biolink:GenomicEntity:
-      count: 1873
+      count: 4960
     biolink:OntologyClass-biolink:develops_from-biolink:AnatomicalEntity:
       count: 133
     biolink:OntologyClass-biolink:develops_from-biolink:OntologyClass:
@@ -332,7 +334,7 @@ edge_stats:
     biolink:OntologyClass-biolink:in_taxon-biolink:OrganismalEntity:
       count: 2
     biolink:OntologyClass-biolink:increases_expression_of-biolink:GenomicEntity:
-      count: 2141
+      count: 5562
     biolink:OntologyClass-biolink:located_in-biolink:AnatomicalEntity:
       count: 4
     biolink:OntologyClass-biolink:located_in-biolink:OntologyClass:
@@ -471,7 +473,7 @@ edge_stats:
   - biolink:regulates
   - biolink:related_to
   - biolink:subclass_of
-  total_edges: 5318978
+  total_edges: 5325487
 graph_name: Merged Graph
 node_stats:
   count_by_category:
@@ -486,9 +488,9 @@ node_stats:
     biolink:ChemicalSubstance:
       count: 919
     biolink:EnvironmentalExposure:
-      count: 2
+      count: 5
     biolink:GenomicEntity:
-      count: 224629
+      count: 224751
     biolink:LifeStage:
       count: 338
     biolink:MolecularActivity:
@@ -524,7 +526,7 @@ node_stats:
     OIO: 17
     OsAMT1: 2
     PATO: 137
-    PECO: 116
+    PECO: 118
     PO: 3779
     RO: 127
     TO: 2514
@@ -544,7 +546,7 @@ node_stats:
     biolink:ChemicalSubstance:
       CHEBI: 919
     biolink:EnvironmentalExposure:
-      PECO: 2
+      PECO: 4
     biolink:GenomicEntity:
       GR: 8
       OsAMT1: 2
@@ -687,4 +689,4 @@ node_stats:
     biolink:PhenotypicFeature: !!set
       TO: null
     unknown: !!set {}
-  total_nodes: 416568
+  total_nodes: 416691

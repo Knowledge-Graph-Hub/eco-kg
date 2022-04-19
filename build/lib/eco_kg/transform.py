@@ -8,6 +8,7 @@ from eco_kg.transform_utils.ontology import OntologyTransform
 from eco_kg.transform_utils.ontology.ontology_transform import ONTOLOGIES
 from eco_kg.transform_utils.eol_traits.eol_traits import EOLTraitsTransform
 from eco_kg.transform_utils.planteome.planteome import PlanteomeTransform
+from eco_kg.transform_utils.gene_expression_atlas.gene_expression_atlas import GeneExpressionAtlasTransform
 
 
 DATA_SOURCES = {
@@ -20,7 +21,8 @@ DATA_SOURCES = {
     'PoTransform' : OntologyTransform,
     #'PecoTransform' : OntologyTransform,
     'EOLTraitsTransform': EOLTraitsTransform,
-    'PlanteomeTransform': PlanteomeTransform
+    'PlanteomeTransform': PlanteomeTransform,
+    'GeneExpressionAtlasTransform':GeneExpressionAtlasTransform
 }
 
 
