@@ -33,6 +33,13 @@
 #  url: https://eol.org/data/provider_ids.csv.gz
 #  local_name: EOLhierarchy.tsv.gz
 
+#Gene expression data
+-
+  url: https://github.com/diatomsRcool/gene_expression_atlas_data/blob/f7b782e5ed916db338bcdfcf4eeb2080ef22e6a6/cold_heat_gene_expression.txt
+  local_name: cold_heat_gene_expression.txt
+-
+  url: https://github.com/diatomsRcool/gene_expression_atlas_data/blob/f7b782e5ed916db338bcdfcf4eeb2080ef22e6a6/drought_salt_gene_expression.txt
+  local_name: drought_salt_gene_expression.txt
 #
 # Plant traits and genes
 #   link: http://palea.cgrb.oregonstate.edu/viewsvn/associations/
@@ -860,8 +867,8 @@
   url: https://raw.githubusercontent.com/diatomsRcool/plant-trait-ontology/master/to.json
   local_name: to.json
 -
-  url: http://purl.obolibrary.org/obo/po.owl
-  local_name: po.owl
+  url: https://github.com/diatomsRcool/kg-mapping/blob/bdd93499321890cab68b0681e5e8ede9b7449ea0/po.json
+  local_name: po.json
 -
   url: http://purl.obolibrary.org/obo/go/go-basic.json
   local_name: go-basic.json
